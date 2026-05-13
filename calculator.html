@@ -74,8 +74,8 @@
   <div class="page-hero">
     <div class="container page-hero-inner">
       <div class="eyebrow reveal">Cost Calculator</div>
-      <h1 class="reveal reveal-d1">See exactly how much<br><em>you could save</em></h1>
-      <p class="reveal reveal-d2">Select your country, role, and seniority level. Get a real side-by-side comparison of local hiring costs versus a LisBom Filipino hire — instantly.</p>
+      <h1 class="reveal reveal-d1">See your monthly cost<br><em>vs hiring locally</em></h1>
+      <p class="reveal reveal-d2">Select your country, role, and seniority. Get a clear side-by-side comparison of what a local hire costs per month versus a LisBom managed remote hire — all-in, no hidden extras.</p>
     </div>
   </div>
 
@@ -175,44 +175,44 @@
 
         <div class="calc-result reveal reveal-d1">
           <div class="cr-col">
-            <div class="cr-header"><div class="cr-flag" id="localFlag">🇬🇧</div><div class="cr-header-text"><strong id="localName">UK Local Hire</strong><span>Annual all-in cost</span></div></div>
-            <div class="cr-total" id="localTotal">£42,000</div>
-            <div class="cr-total-label">Total annual employer cost</div>
+            <div class="cr-header"><div class="cr-flag" id="localFlag">🇬🇧</div><div class="cr-header-text"><strong id="localName">UK Local Hire</strong><span>Monthly all-in cost</span></div></div>
+            <div class="cr-total" id="localTotal">£3,500</div>
+            <div class="cr-total-label">Total monthly employer cost</div>
             <div class="cr-breakdown">
-              <div class="cr-line"><span>Base salary</span><span id="lBase">£36,000</span></div>
-              <div class="cr-line"><span id="lTaxLabel">Employer NI & tax</span><span id="lTax">£4,320</span></div>
-              <div class="cr-line"><span>Benefits & pension</span><span id="lBen">£1,800</span></div>
-              <div class="cr-line cr-total-line"><span>Total annual cost</span><span id="lTotalLine">£42,120</span></div>
+              <div class="cr-line"><span>Base salary</span><span id="lBase">£3,000</span></div>
+              <div class="cr-line"><span id="lTaxLabel">Employer NI & tax</span><span id="lTax">£360</span></div>
+              <div class="cr-line"><span>Benefits & pension</span><span id="lBen">£150</span></div>
+              <div class="cr-line cr-total-line"><span>Total per month</span><span id="lTotalLine">£3,510</span></div>
             </div>
           </div>
           <div class="cr-vs"><div class="cr-vs-text">VS</div></div>
           <div class="cr-col ph-col">
-            <div class="cr-header"><div class="cr-flag">🇵🇭</div><div class="cr-header-text"><strong>LisBom Filipino Hire</strong><span>Annual all-in cost</span></div></div>
-            <div class="cr-total" id="phTotal" style="color:var(--indigo)">£13,200</div>
-            <div class="cr-total-label">All-inclusive — no hidden fees</div>
+            <div class="cr-header"><div class="cr-flag">🇵🇭</div><div class="cr-header-text"><strong>LisBom Monthly Fee</strong><span>All-inclusive monthly cost</span></div></div>
+            <div class="cr-total" id="phTotal" style="color:var(--indigo)">£1,100</div>
+            <div class="cr-total-label">One invoice — staff + management</div>
             <div class="cr-breakdown">
-              <div class="cr-line"><span>Staff compensation</span><span id="phBase">£9,600</span></div>
-              <div class="cr-line"><span>Benefits & compliance</span><span id="phBen">£1,800</span></div>
-              <div class="cr-line"><span>LisBom management fee</span><span id="phFee">£1,800</span></div>
-              <div class="cr-line cr-total-line"><span>Total annual cost</span><span id="phTotalLine">£13,200</span></div>
+              <div class="cr-line"><span>Staff compensation</span><span id="phBase">£800</span></div>
+              <div class="cr-line"><span>Benefits & compliance</span><span id="phBen">£150</span></div>
+              <div class="cr-line"><span>LisBom management fee</span><span id="phFee">£150</span></div>
+              <div class="cr-line cr-total-line"><span>Total per month</span><span id="phTotalLine">£1,100</span></div>
             </div>
           </div>
         </div>
 
         <div class="cr-saving-panel reveal reveal-d2">
-          <div class="csp-label">Your Annual Saving</div>
-          <div class="csp-amount" id="savingAmt">£28,920</div>
+          <div class="csp-label">Your Monthly Saving</div>
+          <div class="csp-amount" id="savingAmt">£2,400</div>
           <div class="csp-pct" id="savingPct">69% less than a local hire</div>
-          <div class="csp-sub">per role, per year — with no reduction in quality</div>
+          <div class="csp-sub">per team member, per month — with no reduction in quality</div>
           <div class="csp-years">
             <div class="csp-year"><strong id="save1y">£29k</strong><span>Year 1 saving</span></div>
             <div class="csp-year"><strong id="save3y">£87k</strong><span>3-year saving</span></div>
             <div class="csp-year"><strong id="save5y">£145k</strong><span>5-year saving</span></div>
           </div>
-          <a href="contact.html" class="btn btn-coral">Get a precise quote for your role →</a>
+          <a href="contact.html" class="btn btn-coral">Get your personalised monthly quote →</a>
         </div>
 
-        <p class="calc-disclaimer reveal">Figures are illustrative estimates based on 2025 market salary data and typical employer costs. Actual costs vary by specific role requirements, experience, and individual negotiation. LisBom provides a precise, personalised cost breakdown on your discovery call.</p>
+        <p class="calc-disclaimer reveal">Figures are illustrative monthly estimates based on 2025 market salary data and typical employer costs. Your LisBom monthly fee has two components: staff compensation and the LisBom management fee. Exact figures are provided on your discovery call — tailored to your specific role, seniority, and requirements.</p>
       </div>
     </div>
   </section>
@@ -449,39 +449,44 @@
                   (c==='de'||c==='fr'||c==='es'||c==='it'||c==='nl'||c==='be'||c==='at'||c==='fi')?'€':
                   (c==='se')?'kr':(c==='ch')?'CHF':(c==='dk')?'kr':(c==='no')?'kr':'£';
 
+      // Annual figures
       const base = cd[r][i];
       const tax  = base * cd.taxR;
       const ben  = base * cd.ben;
-      const lTot = base + tax + ben;
+      const lTotAnnual = base + tax + ben;
 
       const phB  = ph[r][i];
       const phBn = phB * 0.20;
       const phF  = mgmt[r];
-      const phT  = phB + phBn + phF;
+      const phTAnnual = phB + phBn + phF;
 
-      const save = lTot - phT;
-      const pct  = Math.round((save/lTot)*100);
+      // Monthly figures (divide by 12)
+      const lTot  = lTotAnnual / 12;
+      const phT   = phTAnnual / 12;
+      const save  = lTot - phT;
+      const saveA = lTotAnnual - phTAnnual;
+      const pct   = Math.round((save/lTot)*100);
 
       document.getElementById('localFlag').textContent  = cd.flag;
       document.getElementById('localName').textContent  = cd.name;
       document.getElementById('lTaxLabel').textContent  = cd.tax;
       document.getElementById('localTotal').textContent = fmtFull(lTot, sym);
-      document.getElementById('lBase').textContent      = fmtFull(base, sym);
-      document.getElementById('lTax').textContent       = fmtFull(tax, sym);
-      document.getElementById('lBen').textContent       = fmtFull(ben, sym);
+      document.getElementById('lBase').textContent      = fmtFull(base/12, sym);
+      document.getElementById('lTax').textContent       = fmtFull(tax/12, sym);
+      document.getElementById('lBen').textContent       = fmtFull(ben/12, sym);
       document.getElementById('lTotalLine').textContent = fmtFull(lTot, sym);
 
       document.getElementById('phTotal').textContent    = fmtFull(phT, sym);
-      document.getElementById('phBase').textContent     = fmtFull(phB, sym);
-      document.getElementById('phBen').textContent      = fmtFull(phBn, sym);
-      document.getElementById('phFee').textContent      = fmtFull(phF, sym);
+      document.getElementById('phBase').textContent     = fmtFull(phB/12, sym);
+      document.getElementById('phBen').textContent      = fmtFull(phBn/12, sym);
+      document.getElementById('phFee').textContent      = fmtFull(phF/12, sym);
       document.getElementById('phTotalLine').textContent= fmtFull(phT, sym);
 
       document.getElementById('savingAmt').textContent  = fmtFull(save, sym);
       document.getElementById('savingPct').textContent  = pct + '% less than a local hire';
-      document.getElementById('save1y').textContent     = fmt(save, sym);
-      document.getElementById('save3y').textContent     = fmt(save*3, sym);
-      document.getElementById('save5y').textContent     = fmt(save*5, sym);
+      document.getElementById('save1y').textContent     = fmt(saveA, sym);
+      document.getElementById('save3y').textContent     = fmt(saveA*3, sym);
+      document.getElementById('save5y').textContent     = fmt(saveA*5, sym);
     }
 
     document.getElementById('calcCountry').addEventListener('change', update);
