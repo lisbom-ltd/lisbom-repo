@@ -942,3 +942,347 @@ blockquote {
   60%       { transform: translateX(-4px); }
   80%       { transform: translateX(4px); }
 }
+
+/* ===========================
+   PROBLEM STRIP
+   =========================== */
+.problem-strip {
+  background: var(--black);
+  padding: 40px 0;
+}
+
+.strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.strip-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.strip-items {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.strip-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
+}
+
+.strip-x {
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ===========================
+   HOW IT WORKS
+   =========================== */
+.how-it-works { background: var(--off-white); border-top: 1px solid var(--border); }
+
+.section-intro {
+  font-size: 17px;
+  color: var(--slate);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-top: -8px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.step {
+  background: var(--white);
+  padding: 40px 36px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  transition: background 0.2s;
+}
+
+.step:hover { background: #fafaf9; }
+
+.step-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  margin-top: 4px;
+  width: 24px;
+}
+
+.step-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.step-content p {
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.step-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.step-list li {
+  font-size: 13px;
+  color: var(--slate);
+  padding-left: 16px;
+  position: relative;
+}
+
+.step-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 11px;
+  top: 1px;
+}
+
+.guarantee-box {
+  background: var(--white);
+  border: 1px solid rgba(79,70,229,0.2);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.guarantee-icon {
+  width: 44px;
+  height: 44px;
+  background: #EEF2FF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.guarantee-box strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.guarantee-box p {
+  font-size: 14px;
+  color: var(--slate);
+  margin: 0;
+}
+
+/* ===========================
+   WHY PHILIPPINES
+   =========================== */
+.why-ph {
+  background: var(--black);
+  color: var(--white);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.why-ph-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.why-ph-left .section-label { color: rgba(255,255,255,0.5); }
+
+.why-ph-left .section-title { color: var(--white); }
+
+.why-ph-left p {
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 32px;
+  font-size: 16px;
+}
+
+.why-ph-left .btn-outline {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--white);
+}
+
+.why-ph-left .btn-outline:hover {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+.why-ph-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ph-stat {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.ph-stat:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+
+.ph-stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  min-width: 80px;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+  padding-top: 2px;
+}
+
+.ph-stat strong {
+  display: block;
+  font-size: 15px;
+  color: var(--white);
+  margin-bottom: 5px;
+}
+
+.ph-stat span {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+}
+
+/* ===========================
+   FAQ
+   =========================== */
+.faq { background: var(--off-white); border-top: 1px solid var(--border); }
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 40px;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--black);
+  padding: 22px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: color 0.2s;
+}
+
+.faq-q:hover { color: var(--accent); }
+
+.faq-icon {
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--slate);
+  flex-shrink: 0;
+  transition: transform 0.25s var(--ease-out);
+  line-height: 1;
+}
+
+.faq-q[aria-expanded="true"] .faq-icon {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s var(--ease-out);
+}
+
+.faq-a.open { max-height: 300px; }
+
+.faq-a p {
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.7;
+  padding-bottom: 22px;
+}
+
+/* ===========================
+   MISSION FOUNDER
+   =========================== */
+.mission-founder {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.founder-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.founder-info strong {
+  font-size: 15px;
+  color: var(--white);
+}
+
+.founder-info span {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ===========================
+   RESPONSIVE ADDITIONS
+   =========================== */
+@media (max-width: 1024px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .why-ph-inner { grid-template-columns: 1fr; gap: 48px; }
+  .faq-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .strip-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .strip-items { flex-direction: column; gap: 12px; }
+  .step { padding: 28px 24px; }
+  .ph-stat-num { min-width: 60px; font-size: 18px; }
+}
