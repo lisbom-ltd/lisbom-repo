@@ -747,8 +747,6 @@
       document.getElementById('modalForm').style.display = 'block';
       document.getElementById('modalSuccess').classList.remove('show');
       document.getElementById('modalForm').reset();
-      document.getElementById('fileName').style.display = 'none';
-      document.getElementById('fileArea').classList.remove('has-file');
 
       // Update CV email link subject with role name
       const cvLink = document.getElementById('cvEmailLink');
@@ -780,33 +778,12 @@
       return m[cat]||cat;
     }
 
-    // ── File handlers ────────────────────────────────
-    function handleFile(input) {
-      if (input.files && input.files[0]) {
-        const name = input.files[0].name;
-        document.getElementById('fileName').textContent = '✓ ' + name;
-        document.getElementById('fileName').style.display = 'block';
-        document.getElementById('fileArea').classList.add('has-file');
-      }
-    }
-
-    function handleGAFile(input) {
-      if (input.files && input.files[0]) {
-        const name = input.files[0].name;
-        const el = document.getElementById('gaFileName');
-        el.textContent = '✓ ' + name;
-        el.style.display = 'block';
-        document.getElementById('gaFileArea').classList.add('has-file');
-      }
-    }
-
     // ── Modal form submit ────────────────────────────
     document.getElementById('modalForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const email  = document.getElementById('memail').value.trim();
       const fname  = document.getElementById('mfname').value.trim();
       const lname  = document.getElementById('mlname').value.trim();
-      const file   = document.getElementById('mfile').files[0];
       const role   = document.getElementById('modalTitle').textContent;
 
       if (!fname || !lname || !email) {
