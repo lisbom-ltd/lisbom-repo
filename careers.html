@@ -597,11 +597,13 @@
             </div>
             <!-- CV Upload -->
             <div class="form-group">
-              <label>Upload Your CV *</label>
-              <div class="ga-file-area" id="gaFileArea">
-                <input type="file" id="gaFile" accept=".pdf,.doc,.docx" onchange="handleGAFile(this)">
-                <p>📎 <strong>Click to upload</strong> your CV — PDF, DOC, or DOCX</p>
-                <p id="gaFileName" style="color:#6EE7B7;font-size:12px;margin-top:6px;display:none"></p>
+              <label>Your CV</label>
+              <div style="background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;padding:16px 18px;display:flex;align-items:flex-start;gap:12px">
+                <span style="font-size:20px;flex-shrink:0">📎</span>
+                <div>
+                  <p style="font-size:14px;font-weight:600;color:#FFFFFF;margin-bottom:4px">Email your CV after submitting</p>
+                  <p style="font-size:13px;color:rgba(255,255,255,0.55);margin:0">Once you submit this form, please email your CV to <strong style="color:#FF7A5C">support@lisbom-ltd.com</strong> with the subject line: <em>General Application</em></p>
+                </div>
               </div>
             </div>
             <button type="submit" class="btn btn-coral btn-full">Submit Application →</button>
@@ -658,13 +660,13 @@
           <textarea id="mwhy" rows="3" placeholder="Tell us briefly what makes you the right person for this role…"></textarea>
         </div>
         <div class="form-group">
-          <label>Upload Your CV *</label>
-          <div class="file-upload-area" id="fileArea">
-            <input type="file" id="mfile" accept=".pdf,.doc,.docx" onchange="handleFile(this)">
-            <div class="file-icon">📎</div>
-            <p><strong>Click to upload</strong> or drag and drop</p>
-            <p style="font-size:12px;margin-top:4px">PDF, DOC, or DOCX — max 5MB</p>
-            <p class="file-name" id="fileName"></p>
+          <label>Your CV</label>
+          <div style="background:#FEF9EC;border:1.5px solid #E8B84B;border-radius:10px;padding:16px 18px;display:flex;align-items:flex-start;gap:12px">
+            <span style="font-size:20px;flex-shrink:0">📎</span>
+            <div>
+              <p style="font-size:14px;font-weight:600;color:#1A1714;margin-bottom:4px">Email your CV after submitting</p>
+              <p style="font-size:13px;color:#6B7280;margin:0">Once you submit this form, please email your CV to <strong style="color:#1A1714">support@lisbom-ltd.com</strong> with the subject line: <em>Application — [Role Name]</em></p>
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-coral btn-full">Submit Application →</button>
@@ -788,7 +790,7 @@
       const file   = document.getElementById('mfile').files[0];
       const role   = document.getElementById('modalTitle').textContent;
 
-      if (!fname || !lname || !email || !file) {
+      if (!fname || !lname || !email) {
         this.style.animation = 'none';
         requestAnimationFrame(() => { this.style.animation = 'shake 0.4s ease'; });
         return;
@@ -803,14 +805,13 @@
       formData.append('linkedin', document.getElementById('mlinkedin').value);
       formData.append('experience', document.getElementById('mexp').value);
       formData.append('message', document.getElementById('mwhy').value);
-      formData.append('attachment', file);
       formData.append('_subject', 'New Application: ' + role + ' — LisBom Careers');
       formData.append('_replyto', email);
 
       const btn = this.querySelector('button[type="submit"]');
       btn.textContent = 'Sending…'; btn.disabled = true;
 
-      fetch('https://formspree.io/f/mgodbdoz', { method: 'POST', body: formData })
+      fetch('https://formspree.io/f/mgodbdoz', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
         .then(r => {
           if (r.ok) {
             this.style.display = 'none';
@@ -834,7 +835,7 @@
       const lname = document.getElementById('glname').value.trim();
       const file  = document.getElementById('gaFile').files[0];
 
-      if (!fname || !lname || !email || !file) {
+      if (!fname || !lname || !email) {
         this.style.animation = 'none';
         requestAnimationFrame(() => { this.style.animation = 'shake 0.4s ease'; });
         return;
@@ -847,14 +848,13 @@
       formData.append('role', document.getElementById('grole').value);
       formData.append('experience', document.getElementById('gexp').value);
       formData.append('message', document.getElementById('gmessage').value);
-      formData.append('attachment', file);
       formData.append('_subject', 'General Application — LisBom Careers');
       formData.append('_replyto', email);
 
       const btn = this.querySelector('button[type="submit"]');
       btn.textContent = 'Sending…'; btn.disabled = true;
 
-      fetch('https://formspree.io/f/mgodbdoz', { method: 'POST', body: formData })
+      fetch('https://formspree.io/f/mgodbdoz', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
         .then(r => {
           if (r.ok) {
             this.style.display = 'none';
