@@ -147,10 +147,16 @@ if (form && formSuccess) {
     if (settingsLink) {
       settingsLink.addEventListener('click', function(e) {
         e.preventDefault();
-        setCookie(COOKIE_KEY, '', -1);
+        e.stopPropagation();
+        // Clear existing consent
+        document.cookie = COOKIE_KEY + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+        // Remove existing banner if present
         var existing = document.getElementById('cookieBanner');
         if (existing) existing.remove();
+        // Show fresh banner
         showBanner();
+        // Scroll to top so banner is visible
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
       });
     }
   });
