@@ -95,20 +95,22 @@ if (form && formSuccess) {
   var COOKIE_KEY = 'lisbom_cookie_consent';
 
   function getCookie(name) {
-    var v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    var v = document.cookie.match('(^|;)\s*' + name + '\s*=\s*([^;]+)');
     return v ? v.pop() : null;
   }
   function setCookie(name, val, days) {
     var d = new Date(); d.setTime(d.getTime() + days * 864e5);
     document.cookie = name + '=' + val + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
   }
-
-  function loadAnalytics() {
-    // Analytics cookies accepted — you can initialise GA or similar here
-    // e.g. load your Google Analytics script dynamically
+  function clearCookie() {
+    document.cookie = COOKIE_KEY + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
   }
-
+  function loadAnalytics() {
+    // Place your Google Analytics or other analytics init here
+  }
   function showBanner() {
+    var existing = document.getElementById('cookieBanner');
+    if (existing) existing.remove();
     var banner = document.createElement('div');
     banner.className = 'cookie-banner';
     banner.id = 'cookieBanner';
@@ -124,37 +126,35 @@ if (form && formSuccess) {
       '</div>'
     ].join('');
     document.body.appendChild(banner);
-
     document.getElementById('cookieAccept').addEventListener('click', function() {
       setCookie(COOKIE_KEY, 'accepted', 365);
-      banner.classList.add('hidden');
+      banner.remove();
       loadAnalytics();
     });
     document.getElementById('cookieDecline').addEventListener('click', function() {
       setCookie(COOKIE_KEY, 'declined', 365);
-      banner.classList.add('hidden');
+      banner.remove();
     });
   }
 
-  // Cookie settings link (footer)
-  document.addEventListener('DOMContentLoaded', function() {
-    var consent = getCookie(COOKIE_KEY);
-    if (!consent) {
+  // Use event delegation on document so it works regardless of when script runs
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'cookieSettingsFooter') {
+      e.preventDefault();
+      clearCookie();
       showBanner();
-    } else if (consent === 'accepted') {
-      loadAnalytics();
-    }
-
-    // Allow re-opening preferences via footer link
-    var settingsLink = document.getElementById('cookieSettingsFooter');
-    if (settingsLink) {
-      settingsLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        setCookie(COOKIE_KEY, '', -1);
-        var existing = document.getElementById('cookieBanner');
-        if (existing) existing.remove();
-        showBanner();
-      });
     }
   });
+
+  // Init on load
+  var consent = getCookie(COOKIE_KEY);
+  if (!consent) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', showBanner);
+    } else {
+      showBanner();
+    }
+  } else if (consent === 'accepted') {
+    loadAnalytics();
+  }
 })();

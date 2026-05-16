@@ -37,6 +37,62 @@
     .roles-empty { display:none; text-align:center; padding:60px; color:var(--muted); grid-column:1/-1; }
     @media(max-width:1024px){ .roles-grid{grid-template-columns:repeat(2,1fr);} }
     @media(max-width:600px){ .roles-grid{grid-template-columns:1fr;} }
+    /* ── HIRE MODAL ── */
+    .hire-modal-overlay {
+      display:none; position:fixed; inset:0;
+      background:rgba(26,23,20,0.7); z-index:800;
+      align-items:center; justify-content:center; padding:20px;
+    }
+    .hire-modal-overlay.open { display:flex; }
+    .hire-modal {
+      background:var(--white); border-radius:20px;
+      width:100%; max-width:540px; max-height:90vh;
+      overflow-y:auto; padding:40px;
+      position:relative; animation:fadeUp 0.3s var(--ease) both;
+    }
+    .hire-modal-close {
+      position:absolute; top:16px; right:16px;
+      width:32px; height:32px; border-radius:8px;
+      border:none; background:var(--cream2); cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px; color:var(--muted); transition:background 0.2s;
+    }
+    .hire-modal-close:hover { background:var(--border); }
+    .hire-modal-role-tag {
+      display:inline-block; font-size:11px; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase;
+      padding:4px 12px; border-radius:100px;
+      background:#EEF2FF; color:var(--indigo); margin-bottom:12px;
+    }
+    .hire-modal h3 { font-family:var(--body); font-size:22px; font-weight:700; margin-bottom:6px; }
+    .hire-modal-sub { font-size:14px; color:var(--muted); margin-bottom:24px; }
+    .hire-modal .form-group { margin-bottom:16px; }
+    .hire-modal .form-group label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--ink2); }
+    .hire-modal .form-group input,
+    .hire-modal .form-group select,
+    .hire-modal .form-group textarea {
+      width:100%; padding:10px 14px; border:1.5px solid var(--border);
+      border-radius:10px; font-family:var(--body); font-size:14px;
+      color:var(--ink); background:var(--white); transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .hire-modal .form-group input:focus,
+    .hire-modal .form-group select:focus,
+    .hire-modal .form-group textarea:focus {
+      outline:none; border-color:var(--indigo);
+      box-shadow:0 0 0 3px rgba(67,56,202,0.1);
+    }
+    .hire-modal .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .hire-modal-success { display:none; text-align:center; padding:20px 0; }
+    .hire-modal-success .success-circle {
+      width:64px; height:64px; border-radius:50%;
+      background:rgba(45,155,111,0.15); color:var(--green);
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 16px;
+    }
+    .hire-modal-success h3 { font-family:var(--body); font-size:22px; margin-bottom:8px; }
+    .hire-modal-success p { color:var(--muted); font-size:14px; }
+    @media(max-width:540px){ .hire-modal{ padding:28px 20px; } .hire-modal .form-row{ grid-template-columns:1fr; } }
+
   </style>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
@@ -83,43 +139,43 @@
       </div>
       <div class="roles-grid" id="rolesGrid">
         <!-- ADMIN -->
-        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Executive Assistant</h4><p>Calendar management, inbox triage, travel booking, and high-trust support for founders and directors.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Operations Coordinator</h4><p>Process management, reporting, supplier coordination, and keeping daily operations running without constant oversight.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Virtual Assistant</h4><p>General administrative support — scheduling, research, document preparation, and day-to-day business tasks.</p><div class="rc-meta"><span class="rc-time">⏱ ~20 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Data Entry Specialist</h4><p>Accurate, fast data processing, CRM updates, spreadsheet management, and database maintenance.</p><div class="rc-meta"><span class="rc-time">⏱ ~20 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Project Coordinator</h4><p>Task tracking, stakeholder updates, and deadline management across cross-functional teams.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>CRM Administrator</h4><p>Managing and maintaining CRM systems (HubSpot, Salesforce, Pipedrive), data hygiene, and pipeline reporting.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
+        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Executive Assistant</h4><p>Calendar management, inbox triage, travel booking, and high-trust support for founders and directors.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Operations Coordinator</h4><p>Process management, reporting, supplier coordination, and keeping daily operations running without constant oversight.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Virtual Assistant</h4><p>General administrative support — scheduling, research, document preparation, and day-to-day business tasks.</p><div class="rc-meta"><span class="rc-time">⏱ ~20 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Data Entry Specialist</h4><p>Accurate, fast data processing, CRM updates, spreadsheet management, and database maintenance.</p><div class="rc-meta"><span class="rc-time">⏱ ~20 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>Project Coordinator</h4><p>Task tracking, stakeholder updates, and deadline management across cross-functional teams.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="admin"><div class="rc-tag">Admin & Ops</div><h4>CRM Administrator</h4><p>Managing and maintaining CRM systems (HubSpot, Salesforce, Pipedrive), data hygiene, and pipeline reporting.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
         <!-- SUPPORT -->
-        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Customer Support Agent</h4><p>Email, live chat, and ticket management. Brand-aligned communication that lifts response times and customer satisfaction.</p><div class="rc-meta"><span class="rc-time">⏱ ~20 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Customer Success Manager</h4><p>Proactive account management, onboarding new customers, renewals, and reducing churn for growing businesses.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Technical Support Specialist</h4><p>First and second-line troubleshooting, helpdesk management, and escalation handling for software and SaaS products.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Ecommerce Support Agent</h4><p>Order management, returns processing, product queries, and customer communication for online retailers.</p><div class="rc-meta"><span class="rc-time">⏱ ~20 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Helpdesk Coordinator</h4><p>Managing support queues, routing tickets, SLA tracking, and first-response resolution for business clients.</p><div class="rc-meta"><span class="rc-time">⏱ ~22 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
+        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Customer Support Agent</h4><p>Email, live chat, and ticket management. Brand-aligned communication that lifts response times and customer satisfaction.</p><div class="rc-meta"><span class="rc-time">⏱ ~20 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Customer Success Manager</h4><p>Proactive account management, onboarding new customers, renewals, and reducing churn for growing businesses.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Technical Support Specialist</h4><p>First and second-line troubleshooting, helpdesk management, and escalation handling for software and SaaS products.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Ecommerce Support Agent</h4><p>Order management, returns processing, product queries, and customer communication for online retailers.</p><div class="rc-meta"><span class="rc-time">⏱ ~20 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="support"><div class="rc-tag">Customer Support</div><h4>Helpdesk Coordinator</h4><p>Managing support queues, routing tickets, SLA tracking, and first-response resolution for business clients.</p><div class="rc-meta"><span class="rc-time">⏱ ~22 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
         <!-- FINANCE -->
-        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Bookkeeper</h4><p>Day-to-day financial record keeping, bank reconciliations, expense tracking, and support for your accountant.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Accounts Payable / Receivable</h4><p>Invoice processing, payment runs, chasing outstanding invoices, and keeping your cash flow visibility accurate.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Payroll Administrator</h4><p>Processing payroll runs, managing deductions, handling queries, and ensuring pay cycle accuracy.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Financial Reporting Analyst</h4><p>Monthly management accounts, KPI dashboards, budget tracking, and financial analysis to support decisions.</p><div class="rc-meta"><span class="rc-time">⏱ ~35 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Tax & Compliance Support</h4><p>Document preparation, VAT reconciliations, filing support, and regulatory compliance assistance.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
+        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Bookkeeper</h4><p>Day-to-day financial record keeping, bank reconciliations, expense tracking, and support for your accountant.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Accounts Payable / Receivable</h4><p>Invoice processing, payment runs, chasing outstanding invoices, and keeping your cash flow visibility accurate.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Payroll Administrator</h4><p>Processing payroll runs, managing deductions, handling queries, and ensuring pay cycle accuracy.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Financial Reporting Analyst</h4><p>Monthly management accounts, KPI dashboards, budget tracking, and financial analysis to support decisions.</p><div class="rc-meta"><span class="rc-time">⏱ ~35 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="finance"><div class="rc-tag">Finance</div><h4>Tax & Compliance Support</h4><p>Document preparation, VAT reconciliations, filing support, and regulatory compliance assistance.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
         <!-- MARKETING -->
-        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Social Media Manager</h4><p>Content planning, post scheduling, community management, and performance reporting across channels.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Content Writer</h4><p>Blog posts, website copy, email newsletters, and SEO content — in clear, professional English.</p><div class="rc-meta"><span class="rc-time">⏱ ~22 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>SEO Specialist</h4><p>Keyword research, on-page optimisation, technical audits, and link building for organic growth.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Email Marketing Specialist</h4><p>Campaign creation, list management, A/B testing, and performance reporting across email platforms.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Graphic Designer</h4><p>Social assets, marketing collateral, presentation design, and brand-consistent visual content.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Paid Ads Specialist</h4><p>Google Ads, Meta advertising, campaign setup, bid optimisation, and ROAS reporting.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
+        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Social Media Manager</h4><p>Content planning, post scheduling, community management, and performance reporting across channels.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Content Writer</h4><p>Blog posts, website copy, email newsletters, and SEO content — in clear, professional English.</p><div class="rc-meta"><span class="rc-time">⏱ ~22 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>SEO Specialist</h4><p>Keyword research, on-page optimisation, technical audits, and link building for organic growth.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Email Marketing Specialist</h4><p>Campaign creation, list management, A/B testing, and performance reporting across email platforms.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Graphic Designer</h4><p>Social assets, marketing collateral, presentation design, and brand-consistent visual content.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="marketing"><div class="rc-tag">Marketing</div><h4>Paid Ads Specialist</h4><p>Google Ads, Meta advertising, campaign setup, bid optimisation, and ROAS reporting.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
         <!-- TECH -->
-        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>Web Developer</h4><p>Front-end and full-stack development — WordPress, Shopify, React, and custom web builds.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>IT Support Specialist</h4><p>Remote helpdesk, Microsoft 365 and Google Workspace administration, troubleshooting, and user support.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>Data Analyst</h4><p>Data cleaning, reporting, dashboard building (Power BI, Looker, Google Data Studio), and business insights.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>AI & Automation Specialist</h4><p>Workflow automation with Zapier, Make, and AI tools — reducing repetitive tasks across your operations.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>QA Tester</h4><p>Manual and automated testing, bug reporting, test case creation, and release quality assurance.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>Cybersecurity Analyst</h4><p>Security monitoring, vulnerability assessments, incident response, and compliance support for growing businesses.</p><div class="rc-meta"><span class="rc-time">⏱ ~35 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
+        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>Web Developer</h4><p>Front-end and full-stack development — WordPress, Shopify, React, and custom web builds.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>IT Support Specialist</h4><p>Remote helpdesk, Microsoft 365 and Google Workspace administration, troubleshooting, and user support.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>Data Analyst</h4><p>Data cleaning, reporting, dashboard building (Power BI, Looker, Google Data Studio), and business insights.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>AI & Automation Specialist</h4><p>Workflow automation with Zapier, Make, and AI tools — reducing repetitive tasks across your operations.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>QA Tester</h4><p>Manual and automated testing, bug reporting, test case creation, and release quality assurance.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="tech"><div class="rc-tag">Technology</div><h4>Cybersecurity Analyst</h4><p>Security monitoring, vulnerability assessments, incident response, and compliance support for growing businesses.</p><div class="rc-meta"><span class="rc-time">⏱ ~35 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
         <!-- HR -->
-        <div class="role-card" data-cat="hr"><div class="rc-tag">HR & Recruitment</div><h4>Recruitment Coordinator</h4><p>Job posting, CV screening, interview scheduling, candidate communication, and applicant tracking.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="hr"><div class="rc-tag">HR & Recruitment</div><h4>HR Administrator</h4><p>Employee records, onboarding documentation, leave tracking, HR system management, and compliance support.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="hr"><div class="rc-tag">HR & Recruitment</div><h4>Talent Sourcer</h4><p>Proactive candidate research, LinkedIn sourcing, pipeline building, and outreach for hard-to-fill roles.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
-        <div class="role-card" data-cat="hr"><div class="rc-tag">HR & Recruitment</div><h4>L&D Coordinator</h4><p>Training programme coordination, LMS administration, onboarding material development, and skills tracking.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="contact.html" class="rc-cta">Hire now →</a></div></div>
+        <div class="role-card" data-cat="hr"><div class="rc-tag">HR & Recruitment</div><h4>Recruitment Coordinator</h4><p>Job posting, CV screening, interview scheduling, candidate communication, and applicant tracking.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="hr"><div class="rc-tag">HR & Recruitment</div><h4>HR Administrator</h4><p>Employee records, onboarding documentation, leave tracking, HR system management, and compliance support.</p><div class="rc-meta"><span class="rc-time">⏱ ~28 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="hr"><div class="rc-tag">HR & Recruitment</div><h4>Talent Sourcer</h4><p>Proactive candidate research, LinkedIn sourcing, pipeline building, and outreach for hard-to-fill roles.</p><div class="rc-meta"><span class="rc-time">⏱ ~25 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
+        <div class="role-card" data-cat="hr"><div class="rc-tag">HR & Recruitment</div><h4>L&D Coordinator</h4><p>Training programme coordination, LMS administration, onboarding material development, and skills tracking.</p><div class="rc-meta"><span class="rc-time">⏱ ~30 days</span><a href="javascript:void(0)" class="rc-cta hire-now-btn">Hire now →</a></div></div>
       </div>
       <div style="text-align:center;margin-top:48px;padding:36px;background:var(--white);border-radius:16px;border:1px solid var(--border)" class="reveal">
         <h4 style="font-family:var(--body);font-size:18px;margin-bottom:8px">Don't see the role you need?</h4>
@@ -137,9 +193,90 @@
         <div class="footer-col"><h5>Industries</h5><a href="#">Ecommerce</a><a href="#">Recruitment</a><a href="#">Real Estate</a><a href="#">Accounting</a></div>
         <div class="footer-col"><h5>Get Started</h5><a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/30min?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Book a Call</a><a href="contact.html">Contact Us</a></div>
       </div>
-      <div class="footer-bottom"><p>© 2025 LisBom Limited. Registered in England & Wales. <a href="privacy-policy.html" style="color:rgba(255,255,255,0.4);margin-left:12px;">Privacy Policy</a> · <a href="#" id="cookieSettingsFooter" style="color:rgba(255,255,255,0.4);">Cookie Settings</a></p></div>
+      <div class="footer-bottom"><p>© 2025 LisBom Limited. Registered in England & Wales. <a href="privacy-policy.html" style="color:rgba(255,255,255,0.4);margin-left:12px;">Privacy Policy</a> · <a href="javascript:void(0)" id="cookieSettingsFooter" style="color:rgba(255,255,255,0.4);">Cookie Settings</a></p></div>
     </div>
   </footer>
+
+  <!-- HIRE MODAL -->
+  <div class="hire-modal-overlay" id="hireModalOverlay">
+    <div class="hire-modal" id="hireModal">
+      <button class="hire-modal-close" id="hireModalClose">✕</button>
+      <div id="hireModalForm">
+        <div class="hire-modal-role-tag" id="hireModalTag">Role</div>
+        <h3 id="hireModalTitle">Hire a <span id="hireRoleName"></span></h3>
+        <p class="hire-modal-sub">Fill in your details and we'll be in touch within one business day.</p>
+        <form id="hireForm" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label>First Name *</label><input type="text" id="hFname" placeholder="James" required></div>
+            <div class="form-group"><label>Last Name *</label><input type="text" id="hLname" placeholder="Smith" required></div>
+          </div>
+          <div class="form-group"><label>Work Email *</label><input type="email" id="hEmail" placeholder="james@company.com" required></div>
+          <div class="form-group"><label>Company Name</label><input type="text" id="hCompany" placeholder="Your company name"></div>
+          <div class="form-group">
+            <label>Tell us what you need</label>
+            <textarea id="hMessage" rows="3" placeholder="e.g. Looking for a full-time Executive Assistant to support our founder..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-coral btn-full" style="margin-top:4px">Send Enquiry →</button>
+          <p class="form-privacy-note" style="margin-top:12px">&#128274; Your data will be processed by LisBom Limited to respond to your enquiry. See our <a href="privacy-policy.html">Privacy Policy</a> for your rights.</p>
+        </form>
+      </div>
+      <div class="hire-modal-success" id="hireModalSuccess">
+        <div class="success-circle"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>Enquiry sent!</h3>
+        <p>Thanks — we'll be in touch within one business day to discuss your requirements.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Hire modal
+    (function() {
+      var overlay = document.getElementById('hireModalOverlay');
+      var roleName = document.getElementById('hireRoleName');
+      var tag = document.getElementById('hireModalTag');
+
+      document.querySelectorAll('.hire-now-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var card = btn.closest('.role-card');
+          var role = card.querySelector('h4').textContent;
+          var cat = card.querySelector('.rc-tag').textContent;
+          roleName.textContent = role;
+          tag.textContent = cat;
+          document.getElementById('hireModalSuccess').style.display = 'none';
+          document.getElementById('hireModalForm').style.display = 'block';
+          document.getElementById('hireForm').reset();
+          overlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.getElementById('hireModalClose').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+      document.getElementById('hireForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var fname = document.getElementById('hFname').value.trim();
+        var lname = document.getElementById('hLname').value.trim();
+        var email = document.getElementById('hEmail').value.trim();
+        if (!fname || !lname || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          document.getElementById('hEmail').style.borderColor = '#ef4444';
+          return;
+        }
+        var btn = document.querySelector('#hireForm button[type="submit"]');
+        btn.textContent = 'Sending…'; btn.disabled = true;
+        setTimeout(function() {
+          document.getElementById('hireModalForm').style.display = 'none';
+          document.getElementById('hireModalSuccess').style.display = 'block';
+        }, 800);
+      });
+    })();
+  </script>
   <script src="js/main.js"></script>
   <script>
     document.querySelectorAll('.rfb').forEach(btn => {
