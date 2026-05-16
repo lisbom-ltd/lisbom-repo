@@ -218,7 +218,7 @@
         <li><a href="calculator.html">Cost Calculator</a></li>
         <li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li>
       </ul>
-      <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="nav-cta">Book a Call</a>
+      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="nav-cta">Book a Call</a>
       <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
@@ -226,7 +226,7 @@
       <a href="roles.html" class="mob-link">Roles</a>
       <a href="calculator.html" class="mob-link">Cost Calculator</a>
       <a href="careers.html" class="mob-link">Careers</a><a href="contact.html" class="mob-link">Contact</a>
-      <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="mob-link mob-cta">Book a Call</a>
+      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="mob-link mob-cta">Book a Call</a>
     </div>
   </nav>
 
@@ -244,7 +244,7 @@
           </h1>
           <p class="hero-sub reveal reveal-d2">LisBom gives you exceptional Filipino professionals on a simple monthly subscription — staff compensation, benefits, compliance, and UK oversight all covered in one transparent fee. Hire once, managed forever.</p>
           <div class="hero-buttons reveal reveal-d3">
-            <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral">Book a Discovery Call</a>
+            <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral">Book a Discovery Call</a>
             <a href="calculator.html" class="btn btn-outline-white">See Monthly Costs</a>
           </div>
           <div class="hero-stats reveal reveal-d4">
@@ -466,7 +466,7 @@
         <h2 class="reveal">Ready to build your<br><em>remote dream team?</em></h2>
         <p class="reveal reveal-d1">Book a free discovery call. No pitch, no commitment — just a clear conversation about what you need and how we can help.</p>
         <div class="cta-buttons reveal reveal-d2">
-          <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral">Book a Discovery Call</a>
+          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral">Book a Discovery Call</a>
           <a href="calculator.html" class="btn btn-outline-white">See Your Savings First</a>
         </div>
       </div>
@@ -496,12 +496,12 @@
         </div>
         <div class="footer-col">
           <h5>Get Started</h5>
-          <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Book a Call</a>
+          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Book a Call</a>
           <a href="contact.html">Contact Us</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 LisBom Limited. Registered in England & Wales. <a href="privacy-policy.html" style="color:rgba(255,255,255,0.4);margin-left:12px;">Privacy Policy</a> · <a href="javascript:void(0)" id="cookieSettingsFooter" style="color:rgba(255,255,255,0.4);">Cookie Settings</a></p>
+        <p>© 2025 LisBom Limited. Registered in England & Wales. <a href="privacy-policy.html" style="color:rgba(255,255,255,0.4);margin-left:12px;">Privacy Policy</a> · <a href="terms.html" style="color:rgba(255,255,255,0.4);">Terms &amp; Conditions</a> · <a href="javascript:void(0)" onclick="openCookieSettings()" id="cookieSettingsFooter" style="color:rgba(255,255,255,0.4);">Cookie Settings</a></p>
         <p>UK-Based · Premium Filipino Talent · Long-Term Partnerships</p>
       </div>
     </div>
@@ -528,5 +528,58 @@
     }
   </script>
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+  <!-- ── COOKIE CONSENT BANNER ── -->
+  <div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;
+    background:#1a1a2e;color:#fff;padding:1rem 1.5rem;
+    display:none;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:0.75rem;font-size:0.875rem;
+    box-shadow:0 -2px 20px rgba(0,0,0,0.3);border-top:1px solid rgba(255,255,255,0.08);">
+    <span style="max-width:580px;color:rgba(255,255,255,0.75);line-height:1.5;">
+      We use cookies to understand how visitors use our site (Google Analytics) and to enable booking functionality (Calendly). Non-essential cookies are only set with your consent.
+      <a href="privacy-policy.html" style="color:#a5b4fc;margin-left:4px;">Learn more</a>
+    </span>
+    <div style="display:flex;gap:0.5rem;flex-shrink:0;">
+      <button onclick="setCookieConsent('denied')" style="
+        background:transparent;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);
+        padding:0.45rem 1rem;border-radius:8px;cursor:pointer;font-size:0.85rem;font-family:inherit;">
+        Decline
+      </button>
+      <button onclick="setCookieConsent('granted')" style="
+        background:#6366f1;border:none;color:#fff;
+        padding:0.45rem 1rem;border-radius:8px;cursor:pointer;font-size:0.85rem;font-family:inherit;font-weight:600;">
+        Accept All
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // ── Cookie consent logic ──
+    // Default GA to denied until consent given
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', { analytics_storage: 'denied', functionality_storage: 'denied' });
+
+    var savedConsent = localStorage.getItem('lisbom_cookie_consent');
+    var banner = document.getElementById('cookie-banner');
+
+    if (savedConsent) {
+      // Apply saved preference
+      gtag('consent', 'update', { analytics_storage: savedConsent, functionality_storage: savedConsent });
+    } else {
+      // Show banner on first visit
+      banner.style.display = 'flex';
+    }
+
+    function setCookieConsent(value) {
+      localStorage.setItem('lisbom_cookie_consent', value);
+      gtag('consent', 'update', { analytics_storage: value, functionality_storage: value });
+      banner.style.display = 'none';
+    }
+
+    function openCookieSettings() {
+      banner.style.display = 'flex';
+    }
+  </script>
 </body>
 </html>
