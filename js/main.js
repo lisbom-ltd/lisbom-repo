@@ -117,7 +117,7 @@ if (form && formSuccess) {
     banner.innerHTML = [
       '<div class="cookie-text">',
         '<p>We use cookies to understand how you use our site and to improve your experience. ',
-        'By clicking 'Accept', you consent to analytics and functional cookies. ',
+        'By clicking "Accept", you consent to analytics and functional cookies. ',
         '<a href="privacy-policy.html#s7">Learn more in our Privacy Policy</a>.</p>',
       '</div>',
       '<div class="cookie-actions">',
