@@ -89,3 +89,69 @@ if (form && formSuccess) {
   const emailEl = document.getElementById('email');
   if (emailEl) emailEl.addEventListener('input', function() { this.style.borderColor = ''; });
 }
+
+// ── Cookie Banner ──────────────────────────────────────
+(function() {
+  var COOKIE_KEY = 'lisbom_cookie_consent';
+
+  function getCookie(name) {
+    var v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return v ? v.pop() : null;
+  }
+  function setCookie(name, val, days) {
+    var d = new Date(); d.setTime(d.getTime() + days * 864e5);
+    document.cookie = name + '=' + val + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  }
+
+  function loadAnalytics() {
+    // Place your Google Analytics or other analytics init here
+  }
+
+  function showBanner() {
+    var banner = document.createElement('div');
+    banner.className = 'cookie-banner';
+    banner.id = 'cookieBanner';
+    banner.innerHTML = [
+      '<div class="cookie-text">',
+        '<p>We use cookies to understand how you use our site and to improve your experience. ',
+        'By clicking "Accept", you consent to analytics and functional cookies. ',
+        '<a href="privacy-policy.html#s7">Learn more in our Privacy Policy</a>.</p>',
+      '</div>',
+      '<div class="cookie-actions">',
+        '<button class="cookie-btn cookie-btn-decline" id="cookieDecline">Decline</button>',
+        '<button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accept cookies</button>',
+      '</div>'
+    ].join('');
+    document.body.appendChild(banner);
+
+    document.getElementById('cookieAccept').addEventListener('click', function() {
+      setCookie(COOKIE_KEY, 'accepted', 365);
+      banner.classList.add('hidden');
+      loadAnalytics();
+    });
+    document.getElementById('cookieDecline').addEventListener('click', function() {
+      setCookie(COOKIE_KEY, 'declined', 365);
+      banner.classList.add('hidden');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var consent = getCookie(COOKIE_KEY);
+    if (!consent) {
+      showBanner();
+    } else if (consent === 'accepted') {
+      loadAnalytics();
+    }
+
+    var settingsLink = document.getElementById('cookieSettingsFooter');
+    if (settingsLink) {
+      settingsLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        setCookie(COOKIE_KEY, '', -1);
+        var existing = document.getElementById('cookieBanner');
+        if (existing) existing.remove();
+        showBanner();
+      });
+    }
+  });
+})();
