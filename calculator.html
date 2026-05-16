@@ -1,1053 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cost Calculator — LisBom</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cost Calculator — LisBom</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .calc-section { background: var(--cream); }
+    .calc-wrap { max-width: 1000px; margin: 0 auto; }
+    .calc-controls { background: var(--white); border-radius: 20px; padding: 36px; border: 1px solid var(--border); margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+    .calc-controls-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .calc-controls h4 { font-family: var(--body); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .calc-result { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin-bottom: 20px; }
+    .cr-col { padding: 36px 32px; background: var(--white); }
+    .cr-col.ph-col { background: linear-gradient(135deg, #F5F3FF 0%, #EEF2FF 100%); }
+    .cr-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .cr-flag { font-size: 24px; }
+    .cr-header-text strong { display: block; font-size: 16px; font-weight: 700; }
+    .cr-header-text span { font-size: 12px; color: var(--muted); }
+    .cr-total { font-family: var(--display); font-size: clamp(32px, 5vw, 48px); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+    .cr-total-label { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+    .cr-breakdown { border-top: 1px solid var(--border); padding-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .cr-line { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    .cr-line span:first-child { color: var(--muted); }
+    .cr-line span:last-child { font-weight: 600; color: var(--ink); }
+    .cr-line.cr-total-line { padding-top: 10px; border-top: 1px solid var(--border); font-size: 14px; font-weight: 700; }
+    .cr-line.cr-total-line span { color: var(--ink); }
+    .cr-vs { display: flex; align-items: center; justify-content: center; padding: 0 20px; background: var(--cream); border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+    .cr-vs-text { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.05em; writing-mode: vertical-lr; }
+    .cr-saving-panel { background: var(--ink); border-radius: 20px; padding: 36px; text-align: center; margin-bottom: 20px; }
+    .csp-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+    .csp-amount { font-family: var(--display); font-size: clamp(40px, 6vw, 64px); font-weight: 700; color: var(--white); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+    .csp-pct { font-size: 18px; font-weight: 700; color: #6EE7B7; margin-bottom: 6px; }
+    .csp-sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+    .csp-years { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .csp-year { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 14px; border: 1px solid rgba(255,255,255,0.08); }
+    .csp-year strong { display: block; font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .csp-year span { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .calc-disclaimer { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.7; padding: 0 20px; }
 
-  :root {
-    --black: #0a0a0a;
-    --white: #ffffff;
-    --off-white: #f8f7f4;
-    --accent: #1a1a1a;
-    --muted: #6b6b6b;
-    --border: #e8e5e0;
-    --green: #16a34a;
-    --green-light: #dcfce7;
-    --blue: #1d4ed8;
-    --blue-light: #dbeafe;
-    --red-light: #fef2f2;
-    --red: #dc2626;
-    --eor-accent: #7c3aed;
-    --eor-light: #ede9fe;
-    --radius: 12px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
-    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
-  }
+    .why-calc { background: var(--white); }
+    .why-calc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    .wc-card { text-align: center; padding: 32px 24px; border-radius: 16px; background: var(--cream); border: 1px solid var(--border); }
+    .wc-icon { font-size: 36px; margin-bottom: 16px; }
+    .wc-card h4 { font-family: var(--body); font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .wc-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--black);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* NAV */
-  nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-  }
-  .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.4rem;
-    color: var(--black);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color 0.15s; }
-  .nav-links a:hover { color: var(--black); }
-  .nav-links a.active { color: var(--black); }
-  .nav-cta {
-    background: var(--black);
-    color: var(--white) !important;
-    padding: 0.5rem 1.25rem;
-    border-radius: 6px;
-    font-size: 0.875rem !important;
-    font-weight: 500;
-    transition: opacity 0.15s !important;
-  }
-  .nav-cta:hover { opacity: 0.85; }
-
-  /* HERO */
-  .hero {
-    text-align: center;
-    padding: 5rem 2rem 3rem;
-    max-width: 640px;
-    margin: 0 auto;
-  }
-  .hero-label {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1.25rem;
-  }
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
-    line-height: 1.1;
-    color: var(--black);
-    margin-bottom: 1rem;
-  }
-  .hero h1 em { font-style: italic; color: var(--muted); }
-  .hero p {
-    color: var(--muted);
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  /* MAIN LAYOUT */
-  .calculator-wrap {
-    max-width: 1040px;
-    margin: 0 auto;
-    padding: 0 1.5rem 5rem;
-  }
-
-  .calculator-grid {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 1.5rem;
-    align-items: start;
-  }
-
-  /* CONTROLS PANEL */
-  .controls-panel {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.75rem;
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 76px;
-  }
-
-  .controls-panel h3 {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1.25rem;
-  }
-
-  .field-group { margin-bottom: 1.5rem; }
-  .field-label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--black);
-    margin-bottom: 0.5rem;
-  }
-
-  select {
-    width: 100%;
-    padding: 0.65rem 0.875rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--off-white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.875rem;
-    color: var(--black);
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b6b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.875rem center;
-    padding-right: 2.5rem;
-    transition: border-color 0.15s;
-  }
-  select:focus { outline: none; border-color: var(--black); }
-
-  /* SENIORITY TABS */
-  .seniority-tabs { display: flex; gap: 0.5rem; }
-  .seniority-tab {
-    flex: 1;
-    padding: 0.55rem 0.5rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--off-white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: var(--muted);
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.15s;
-  }
-  .seniority-tab.active {
-    background: var(--black);
-    border-color: var(--black);
-    color: var(--white);
-  }
-
-  /* EOR TOGGLE */
-  .eor-toggle-block {
-    background: var(--eor-light);
-    border: 1px solid #c4b5fd;
-    border-radius: 10px;
-    padding: 1rem 1.125rem;
-    margin-top: 0.5rem;
-  }
-  .eor-toggle-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.625rem;
-  }
-  .eor-toggle-title {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--eor-accent);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-  .eor-toggle-title span { font-size: 1rem; }
-  .eor-tooltip {
-    font-size: 0.72rem;
-    color: #7c3aed;
-    opacity: 0.7;
-    line-height: 1.4;
-    margin-bottom: 0.75rem;
-  }
-  .eor-options { display: flex; flex-direction: column; gap: 0.4rem; }
-  .eor-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    padding: 0.6rem 0.75rem;
-    border: 1px solid #c4b5fd;
-    border-radius: 8px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.15s;
-    text-align: left;
-  }
-  .eor-option:hover { border-color: var(--eor-accent); }
-  .eor-option.selected { border-color: var(--eor-accent); background: #f5f3ff; }
-  .eor-option input[type="radio"] { margin-top: 2px; accent-color: var(--eor-accent); flex-shrink: 0; }
-  .eor-option-text { font-size: 0.8rem; line-height: 1.4; }
-  .eor-option-text strong { display: block; font-weight: 600; color: var(--black); font-size: 0.82rem; }
-  .eor-option-text small { color: var(--muted); font-size: 0.74rem; }
-
-  /* RESULTS PANEL */
-  .results-panel { display: flex; flex-direction: column; gap: 1.5rem; }
-
-  /* COMPARISON CARDS */
-  .comparison-row {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 1rem;
-    align-items: start;
-  }
-
-  .cost-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-  }
-  .cost-card.lisbom-card {
-    border-color: #16a34a;
-    border-width: 2px;
-    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 60%);
-  }
-
-  .card-flag { font-size: 1.5rem; margin-bottom: 0.625rem; display: block; }
-  .card-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.25rem;
-  }
-  .card-sublabel { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
-  .card-total {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.4rem;
-    color: var(--black);
-    line-height: 1;
-    margin-bottom: 1.25rem;
-  }
-  .lisbom-card .card-total { color: var(--green); }
-
-  .cost-breakdown { border-top: 1px solid var(--border); padding-top: 1rem; }
-  .cost-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.3rem 0;
-    font-size: 0.82rem;
-  }
-  .cost-line-label { color: var(--muted); }
-  .cost-line-value { font-weight: 500; color: var(--black); }
-  .cost-line.total-line {
-    border-top: 1px solid var(--border);
-    margin-top: 0.375rem;
-    padding-top: 0.625rem;
-    font-weight: 600;
-  }
-  .cost-line.total-line .cost-line-label { color: var(--black); font-size: 0.85rem; }
-  .cost-line.total-line .cost-line-value { font-size: 0.9rem; }
-  .eor-line { background: var(--eor-light); border-radius: 6px; padding: 0.3rem 0.5rem; margin: 0.2rem -0.5rem; }
-  .eor-line .cost-line-label { color: var(--eor-accent); font-weight: 500; }
-  .eor-line .cost-line-value { color: var(--eor-accent); }
-
-  /* VS DIVIDER */
-  .vs-divider {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 4rem;
-    gap: 0.5rem;
-  }
-  .vs-badge {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--black);
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-  }
-
-  /* SAVINGS CARD */
-  .savings-card {
-    background: var(--black);
-    color: var(--white);
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow-lg);
-  }
-  .savings-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1.75rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .savings-main-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 0.4rem;
-  }
-  .savings-amount {
-    font-family: 'DM Serif Display', serif;
-    font-size: 3rem;
-    color: var(--white);
-    line-height: 1;
-  }
-  .savings-percent {
-    display: inline-block;
-    background: var(--green);
-    color: var(--white);
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 0.3rem 0.75rem;
-    border-radius: 20px;
-    margin-top: 0.5rem;
-  }
-  .savings-desc {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.5);
-    margin-top: 0.4rem;
-  }
-  .savings-timeline {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 1.5rem;
-  }
-  .timeline-item { text-align: center; }
-  .timeline-value {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.6rem;
-    color: var(--white);
-    display: block;
-  }
-  .timeline-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 0.2rem; }
-
-  /* EOR INFO CALLOUT */
-  .eor-callout {
-    background: var(--eor-light);
-    border: 1px solid #c4b5fd;
-    border-radius: 10px;
-    padding: 1.125rem 1.25rem;
-    display: flex;
-    gap: 0.875rem;
-    align-items: flex-start;
-  }
-  .eor-callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-  .eor-callout-text { font-size: 0.82rem; color: #4c1d95; line-height: 1.5; }
-  .eor-callout-text strong { display: block; font-weight: 700; margin-bottom: 0.2rem; color: var(--eor-accent); }
-  .eor-callout.hidden { display: none; }
-
-  /* DISCLAIMER */
-  .disclaimer {
-    font-size: 0.76rem;
-    color: var(--muted);
-    line-height: 1.6;
-    padding: 1rem 1.25rem;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-  }
-
-  /* CTA */
-  .cta-row {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .btn-primary {
-    background: var(--black);
-    color: var(--white);
-    padding: 0.875rem 1.75rem;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.15s;
-    display: inline-block;
-  }
-  .btn-primary:hover { opacity: 0.85; }
-  .btn-secondary {
-    background: transparent;
-    color: var(--black);
-    padding: 0.875rem 1.75rem;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    border: 1.5px solid var(--border);
-    cursor: pointer;
-    transition: border-color 0.15s;
-    display: inline-block;
-  }
-  .btn-secondary:hover { border-color: var(--black); }
-
-  /* WHY SECTION */
-  .why-section {
-    max-width: 1040px;
-    margin: 4rem auto 0;
-    padding: 0 1.5rem 5rem;
-  }
-  .why-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  .why-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    text-align: center;
-    margin-bottom: 2.5rem;
-    line-height: 1.2;
-  }
-  .why-title em { font-style: italic; color: var(--muted); }
-  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-  .why-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-  }
-  .why-icon { font-size: 1.5rem; margin-bottom: 0.875rem; display: block; }
-  .why-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .why-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    background: var(--white);
-    padding: 2.5rem 2rem;
-  }
-  .footer-inner {
-    max-width: 1040px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .footer-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.3rem;
-    color: var(--black);
-    text-decoration: none;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  .footer-desc { font-size: 0.8rem; color: var(--muted); max-width: 220px; line-height: 1.5; }
-  .footer-col h5 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.875rem; }
-  .footer-col a { display: block; font-size: 0.82rem; color: var(--muted); text-decoration: none; margin-bottom: 0.4rem; transition: color 0.15s; }
-  .footer-col a:hover { color: var(--black); }
-  .footer-bottom {
-    max-width: 1040px;
-    margin: 1.5rem auto 0;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 860px) {
-    .calculator-grid { grid-template-columns: 1fr; }
-    .controls-panel { position: static; }
-    .comparison-row { grid-template-columns: 1fr; }
-    .vs-divider { flex-direction: row; padding-top: 0; }
-    .why-grid { grid-template-columns: 1fr; }
-    nav { padding: 0 1rem; }
-    .nav-links { display: none; }
-  }
-</style>
+    @media(max-width:1024px){ .calc-controls-grid{grid-template-columns:1fr 1fr;} .why-calc-grid{grid-template-columns:1fr;} }
+    @media(max-width:768px){ .calc-result{grid-template-columns:1fr;} .cr-vs{display:none;} .calc-controls-grid{grid-template-columns:1fr;} .csp-years{grid-template-columns:1fr;} }
+  </style>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <a href="https://www.lisbom-ltd.com/index.html" class="nav-logo">LisBom.</a>
-  <ul class="nav-links">
-    <li><a href="https://www.lisbom-ltd.com/how-it-works.html">How It Works</a></li>
-    <li><a href="https://www.lisbom-ltd.com/roles.html">Roles</a></li>
-    <li><a href="https://www.lisbom-ltd.com/calculator.html" class="active">Cost Calculator</a></li>
-    <li><a href="https://www.lisbom-ltd.com/careers.html">Careers</a></li>
-    <li><a href="https://www.lisbom-ltd.com/contact.html">Contact</a></li>
-    <li><a href="https://www.lisbom-ltd.com/contact.html" class="nav-cta">Book a Call</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <span class="hero-label">Cost Calculator</span>
-  <h1>See your monthly cost <em>vs hiring locally</em></h1>
-  <p>Select your country, role, and seniority. Get a clear side-by-side comparison — and choose whether you need EOR included in your monthly fee.</p>
-</div>
-
-<!-- CALCULATOR -->
-<div class="calculator-wrap">
-  <div class="calculator-grid">
-
-    <!-- LEFT: CONTROLS -->
-    <div class="controls-panel">
-      <h3>Configure your hire</h3>
-
-      <div class="field-group">
-        <label class="field-label" for="country">Your Country</label>
-        <select id="country">
-          <optgroup label="Europe">
-            <option value="GB" selected>🇬🇧 United Kingdom</option>
-            <option value="DE">🇩🇪 Germany</option>
-            <option value="NL">🇳🇱 Netherlands</option>
-            <option value="FR">🇫🇷 France</option>
-            <option value="ES">🇪🇸 Spain</option>
-            <option value="IT">🇮🇹 Italy</option>
-            <option value="SE">🇸🇪 Sweden</option>
-            <option value="CH">🇨🇭 Switzerland</option>
-            <option value="BE">🇧🇪 Belgium</option>
-            <option value="DK">🇩🇰 Denmark</option>
-            <option value="NO">🇳🇴 Norway</option>
-            <option value="IE">🇮🇪 Ireland</option>
-          </optgroup>
-          <optgroup label="Americas">
-            <option value="US">🇺🇸 United States</option>
-            <option value="CA">🇨🇦 Canada</option>
-            <option value="BR">🇧🇷 Brazil</option>
-            <option value="MX">🇲🇽 Mexico</option>
-          </optgroup>
-          <optgroup label="Asia Pacific">
-            <option value="AU">🇦🇺 Australia</option>
-            <option value="NZ">🇳🇿 New Zealand</option>
-            <option value="SG">🇸🇬 Singapore</option>
-            <option value="HK">🇭🇰 Hong Kong</option>
-            <option value="JP">🇯🇵 Japan</option>
-          </optgroup>
-          <optgroup label="Middle East & Africa">
-            <option value="AE">🇦🇪 UAE</option>
-            <option value="SA">🇸🇦 Saudi Arabia</option>
-            <option value="ZA">🇿🇦 South Africa</option>
-          </optgroup>
-        </select>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="role">Role Type</label>
-        <select id="role">
-          <optgroup label="Admin & Operations">
-            <option value="va" selected>Executive / Virtual Assistant</option>
-            <option value="ops">Operations Coordinator</option>
-            <option value="pm">Project Coordinator</option>
-          </optgroup>
-          <optgroup label="Customer Support">
-            <option value="cs">Customer Support Agent</option>
-            <option value="csm">Customer Success Manager</option>
-            <option value="ts">Technical Support Specialist</option>
-          </optgroup>
-          <optgroup label="Finance">
-            <option value="bk">Bookkeeper</option>
-            <option value="fa">Financial Analyst</option>
-            <option value="pa">Payroll Administrator</option>
-          </optgroup>
-          <optgroup label="Marketing">
-            <option value="sm">Social Media Manager</option>
-            <option value="seo">SEO / Content Specialist</option>
-            <option value="gd">Graphic Designer</option>
-          </optgroup>
-          <optgroup label="Technology">
-            <option value="dev">Web Developer</option>
-            <option value="da">Data Analyst</option>
-            <option value="it">IT Support Specialist</option>
-            <option value="ai">AI & Automation Specialist</option>
-          </optgroup>
-          <optgroup label="HR & Recruitment">
-            <option value="hr">HR Administrator</option>
-            <option value="rc">Recruitment Coordinator</option>
-          </optgroup>
-        </select>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Seniority Level</label>
-        <div class="seniority-tabs">
-          <button class="seniority-tab" data-level="junior">Junior</button>
-          <button class="seniority-tab active" data-level="mid">Mid-level</button>
-          <button class="seniority-tab" data-level="senior">Senior</button>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Employment Setup</label>
-        <div class="eor-toggle-block">
-          <div class="eor-toggle-header">
-            <span class="eor-toggle-title"><span>⚡</span> EOR (Employer of Record)</span>
-          </div>
-          <p class="eor-tooltip">Do you need a legal employer to handle payroll, compliance & statutory benefits in the Philippines?</p>
-          <div class="eor-options">
-            <label class="eor-option selected" id="eor-yes-label">
-              <input type="radio" name="eor" value="yes" checked>
-              <span class="eor-option-text">
-                <strong>Include EOR arrangement</strong>
-                <small>LisBom arranges compliant employment — SSS, PhilHealth, Pag-IBIG, 13th month pay all covered</small>
-              </span>
-            </label>
-            <label class="eor-option" id="eor-no-label">
-              <input type="radio" name="eor" value="no">
-              <span class="eor-option-text">
-                <strong>I already have an EOR / local entity</strong>
-                <small>You manage employment compliance independently</small>
-              </span>
-            </label>
-          </div>
-        </div>
-      </div>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">LisBom<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="roles.html">Roles</a></li>
+        <li><a href="calculator.html" class="active">Cost Calculator</a></li>
+        <li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/30min?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="nav-cta">Book a Call</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
     </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="how-it-works.html" class="mob-link">How It Works</a>
+      <a href="roles.html" class="mob-link">Roles</a>
+      <a href="calculator.html" class="mob-link">Cost Calculator</a>
+      <a href="careers.html" class="mob-link">Careers</a><a href="contact.html" class="mob-link">Contact</a>
+      <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/30min?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="mob-link mob-cta">Book a Call</a>
+    </div>
+  </nav>
 
-    <!-- RIGHT: RESULTS -->
-    <div class="results-panel">
-
-      <!-- COMPARISON -->
-      <div class="comparison-row">
-        <div class="cost-card" id="local-card">
-          <span class="card-flag" id="local-flag">🇬🇧</span>
-          <div class="card-label" id="local-label">UK Local Hire</div>
-          <div class="card-sublabel">Monthly all-in employer cost</div>
-          <div class="card-total" id="local-total">£3,510</div>
-          <div class="cost-breakdown">
-            <div class="cost-line">
-              <span class="cost-line-label">Base salary</span>
-              <span class="cost-line-value" id="local-salary">£3,000</span>
-            </div>
-            <div class="cost-line">
-              <span class="cost-line-label" id="local-tax-label">Employer NI &amp; tax</span>
-              <span class="cost-line-value" id="local-tax">£360</span>
-            </div>
-            <div class="cost-line">
-              <span class="cost-line-label">Benefits &amp; pension</span>
-              <span class="cost-line-value" id="local-benefits">£150</span>
-            </div>
-            <div class="cost-line total-line">
-              <span class="cost-line-label">Total per month</span>
-              <span class="cost-line-value" id="local-total-line">£3,510</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="vs-divider">
-          <div class="vs-badge">VS</div>
-        </div>
-
-        <div class="cost-card lisbom-card">
-          <span class="card-flag">🇵🇭</span>
-          <div class="card-label">LisBom Monthly Fee</div>
-          <div class="card-sublabel">All-inclusive monthly cost</div>
-          <div class="card-total" id="lisbom-total">£1,260</div>
-          <div class="cost-breakdown">
-            <div class="cost-line">
-              <span class="cost-line-label">Staff compensation</span>
-              <span class="cost-line-value" id="lb-salary">£800</span>
-            </div>
-            <div class="cost-line">
-              <span class="cost-line-label">Benefits &amp; statutory compliance</span>
-              <span class="cost-line-value" id="lb-benefits">£110</span>
-            </div>
-            <div class="cost-line eor-line" id="eor-line">
-              <span class="cost-line-label">⚡ EOR arrangement fee</span>
-              <span class="cost-line-value" id="lb-eor">£160</span>
-            </div>
-            <div class="cost-line">
-              <span class="cost-line-label">LisBom management fee</span>
-              <span class="cost-line-value" id="lb-mgmt">£190</span>
-            </div>
-            <div class="cost-line total-line">
-              <span class="cost-line-label">Total per month</span>
-              <span class="cost-line-value" id="lb-total-line">£1,260</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- EOR CALLOUT -->
-      <div class="eor-callout" id="eor-callout">
-        <span class="eor-callout-icon">⚡</span>
-        <div class="eor-callout-text">
-          <strong>What's included in the EOR arrangement?</strong>
-          LisBom handles full legal employment in the Philippines on your behalf — including SSS, PhilHealth, Pag-IBIG contributions, 13th month pay, compliant contracts, and payroll processing. No Philippine entity required.
-        </div>
-      </div>
-
-      <!-- SAVINGS -->
-      <div class="savings-card">
-        <div class="savings-header">
-          <div>
-            <div class="savings-main-label">Your Monthly Saving</div>
-            <div class="savings-amount" id="saving-amount">£2,250</div>
-            <span class="savings-percent" id="saving-pct">64% less than a local hire</span>
-            <div class="savings-desc">per team member, per month — with no reduction in quality</div>
-          </div>
-        </div>
-        <div class="savings-timeline">
-          <div class="timeline-item">
-            <span class="timeline-value" id="save-1y">£27k</span>
-            <div class="timeline-label">Year 1 saving</div>
-          </div>
-          <div class="timeline-item">
-            <span class="timeline-value" id="save-3y">£81k</span>
-            <div class="timeline-label">3-year saving</div>
-          </div>
-          <div class="timeline-item">
-            <span class="timeline-value" id="save-5y">£135k</span>
-            <div class="timeline-label">5-year saving</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="cta-row">
-        <a href="https://www.lisbom-ltd.com/contact.html" class="btn-primary">Get your personalised monthly quote →</a>
-        <a href="https://www.lisbom-ltd.com/roles.html" class="btn-secondary">Browse all roles</a>
-      </div>
-
-      <!-- DISCLAIMER -->
-      <div class="disclaimer">
-        Figures are illustrative monthly estimates based on 2025 market salary data and typical employer costs. EOR fee is based on a leading provider (approx. £160/month per employee). Your exact LisBom monthly fee is confirmed on your discovery call — tailored to your specific role, seniority, and requirements.
-      </div>
+  <div class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="eyebrow reveal">Cost Calculator</div>
+      <h1 class="reveal reveal-d1">See your monthly cost<br><em>vs hiring locally</em></h1>
+      <p class="reveal reveal-d2">Select your country, role, and seniority. Get a clear side-by-side comparison of what a local hire costs per month versus a LisBom managed remote hire — all-in, no hidden extras.</p>
     </div>
   </div>
-</div>
 
-<!-- WHY SECTION -->
-<div class="why-section">
-  <div class="why-label">Why The Numbers Stack Up</div>
-  <h2 class="why-title">The saving is real. <em>Here's why.</em></h2>
-  <div class="why-grid">
-    <div class="why-card">
-      <span class="why-icon">💰</span>
-      <h4>Cost of living, not skill level</h4>
-      <p>The Philippines has significantly lower costs of living than Western markets. A Filipino professional earning the equivalent of £10,000/year lives very comfortably. The same skill set costs 3–5x more in the UK, US, or Australia.</p>
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-wrap">
+        <div class="calc-controls reveal">
+          <div class="calc-controls-grid">
+            <div>
+              <h4>Your Country</h4>
+              <div class="select-wrap form-group" style="margin:0">
+                <select id="calcCountry">
+                  <optgroup label="Europe">
+                    <option value="uk">🇬🇧 United Kingdom</option>
+                    <option value="de">🇩🇪 Germany</option>
+                    <option value="nl">🇳🇱 Netherlands</option>
+                    <option value="fr">🇫🇷 France</option>
+                    <option value="es">🇪🇸 Spain</option>
+                    <option value="it">🇮🇹 Italy</option>
+                    <option value="se">🇸🇪 Sweden</option>
+                    <option value="ch">🇨🇭 Switzerland</option>
+                    <option value="be">🇧🇪 Belgium</option>
+                    <option value="dk">🇩🇰 Denmark</option>
+                    <option value="no">🇳🇴 Norway</option>
+                    <option value="ie">🇮🇪 Ireland</option>
+                  </optgroup>
+                  <optgroup label="Americas">
+                    <option value="us">🇺🇸 United States</option>
+                    <option value="ca">🇨🇦 Canada</option>
+                    <option value="br">🇧🇷 Brazil</option>
+                    <option value="mx">🇲🇽 Mexico</option>
+                  </optgroup>
+                  <optgroup label="Asia Pacific">
+                    <option value="au">🇦🇺 Australia</option>
+                    <option value="nz">🇳🇿 New Zealand</option>
+                    <option value="sg">🇸🇬 Singapore</option>
+                    <option value="hk">🇭🇰 Hong Kong</option>
+                    <option value="jp">🇯🇵 Japan</option>
+                  </optgroup>
+                  <optgroup label="Middle East & Africa">
+                    <option value="ae">🇦🇪 UAE</option>
+                    <option value="sa">🇸🇦 Saudi Arabia</option>
+                    <option value="za">🇿🇦 South Africa</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div>
+              <h4>Role Type</h4>
+              <div class="select-wrap form-group" style="margin:0">
+                <select id="calcRole">
+                  <optgroup label="Admin & Operations">
+                    <option value="va">Executive / Virtual Assistant</option>
+                    <option value="ops">Operations Coordinator</option>
+                    <option value="pm">Project Coordinator</option>
+                  </optgroup>
+                  <optgroup label="Customer Support">
+                    <option value="cs">Customer Support Agent</option>
+                    <option value="csm">Customer Success Manager</option>
+                    <option value="tech">Technical Support Specialist</option>
+                  </optgroup>
+                  <optgroup label="Finance">
+                    <option value="book">Bookkeeper</option>
+                    <option value="fin">Financial Analyst</option>
+                    <option value="pay">Payroll Administrator</option>
+                  </optgroup>
+                  <optgroup label="Marketing">
+                    <option value="social">Social Media Manager</option>
+                    <option value="seo">SEO / Content Specialist</option>
+                    <option value="design">Graphic Designer</option>
+                  </optgroup>
+                  <optgroup label="Technology">
+                    <option value="dev">Web Developer</option>
+                    <option value="data">Data Analyst</option>
+                    <option value="it">IT Support Specialist</option>
+                    <option value="ai">AI & Automation Specialist</option>
+                  </optgroup>
+                  <optgroup label="HR & Recruitment">
+                    <option value="hr">HR Administrator</option>
+                    <option value="rec">Recruitment Coordinator</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div>
+              <h4>Seniority Level</h4>
+              <div class="select-wrap form-group" style="margin:0">
+                <select id="calcLevel">
+                  <option value="junior">Junior (1–2 years exp.)</option>
+                  <option value="mid" selected>Mid-level (3–5 years exp.)</option>
+                  <option value="senior">Senior (5+ years exp.)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-result reveal reveal-d1">
+          <div class="cr-col">
+            <div class="cr-header"><div class="cr-flag" id="localFlag">🇬🇧</div><div class="cr-header-text"><strong id="localName">UK Local Hire</strong><span>Monthly all-in cost</span></div></div>
+            <div class="cr-total" id="localTotal">£3,500</div>
+            <div class="cr-total-label">Total monthly employer cost</div>
+            <div class="cr-breakdown">
+              <div class="cr-line"><span>Base salary</span><span id="lBase">£3,000</span></div>
+              <div class="cr-line"><span id="lTaxLabel">Employer NI & tax</span><span id="lTax">£360</span></div>
+              <div class="cr-line"><span>Benefits & pension</span><span id="lBen">£150</span></div>
+              <div class="cr-line cr-total-line"><span>Total per month</span><span id="lTotalLine">£3,510</span></div>
+            </div>
+          </div>
+          <div class="cr-vs"><div class="cr-vs-text">VS</div></div>
+          <div class="cr-col ph-col">
+            <div class="cr-header"><div class="cr-flag">🇵🇭</div><div class="cr-header-text"><strong>LisBom Monthly Fee</strong><span>All-inclusive monthly cost</span></div></div>
+            <div class="cr-total" id="phTotal" style="color:var(--indigo)">£1,100</div>
+            <div class="cr-total-label">One invoice — staff + management</div>
+            <div class="cr-breakdown">
+              <div class="cr-line"><span>Staff compensation</span><span id="phBase">£800</span></div>
+              <div class="cr-line"><span>Benefits & compliance</span><span id="phBen">£150</span></div>
+              <div class="cr-line"><span>LisBom management fee</span><span id="phFee">£150</span></div>
+              <div class="cr-line cr-total-line"><span>Total per month</span><span id="phTotalLine">£1,100</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cr-saving-panel reveal reveal-d2">
+          <div class="csp-label">Your Monthly Saving</div>
+          <div class="csp-amount" id="savingAmt">£2,400</div>
+          <div class="csp-pct" id="savingPct">69% less than a local hire</div>
+          <div class="csp-sub">per team member, per month — with no reduction in quality</div>
+          <div class="csp-years">
+            <div class="csp-year"><strong id="save1y">£29k</strong><span>Year 1 saving</span></div>
+            <div class="csp-year"><strong id="save3y">£87k</strong><span>3-year saving</span></div>
+            <div class="csp-year"><strong id="save5y">£145k</strong><span>5-year saving</span></div>
+          </div>
+          <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/30min?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral">Get your personalised monthly quote →</a>
+        </div>
+
+        <p class="calc-disclaimer reveal">Figures are illustrative monthly estimates based on 2025 market salary data and typical employer costs. Your LisBom monthly fee has two components: staff compensation and the LisBom management fee. Exact figures are provided on your discovery call — tailored to your specific role, seniority, and requirements.</p>
+      </div>
     </div>
-    <div class="why-card">
-      <span class="why-icon">🎓</span>
-      <h4>World-class education system</h4>
-      <p>The Philippines produces 500,000+ graduates annually. English is a co-official language and the medium of university instruction. The IT-BPM sector hit $40B+ in revenue — this is a mature, proven professional market.</p>
+  </section>
+
+  <section class="why-calc">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:48px"><div class="eyebrow reveal" style="justify-content:center">Why The Numbers Stack Up</div><h2 class="reveal reveal-d1">The saving is real.<br><em>Here's why.</em></h2></div>
+      <div class="why-calc-grid">
+        <div class="wc-card reveal"><div class="wc-icon">💰</div><h4>Cost of living, not skill level</h4><p>The Philippines has significantly lower costs of living than Western markets. A Filipino professional earning the equivalent of £10,000/year lives very comfortably. The same skill set costs 3–5x more in the UK, US, or Australia.</p></div>
+        <div class="wc-card reveal reveal-d1"><div class="wc-icon">🎓</div><h4>World-class education system</h4><p>The Philippines produces 500,000+ graduates annually. English is a co-official language and the medium of university instruction. The IT-BPM sector hit $40B+ in revenue — this is a mature, proven professional market.</p></div>
+        <div class="wc-card reveal reveal-d2"><div class="wc-icon">✅</div><h4>All-in, no surprises</h4><p>Our fee covers everything: staff compensation, statutory benefits, compliance, and LisBom management and onboarding support. No hidden recruitment fees, no agency markups, no surprise invoices.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:48px" class="reveal">
+        <a href="contact.html" class="btn btn-coral" style="margin-right:12px">Book a Discovery Call</a>
+        <a href="roles.html" class="btn btn-outline">Browse All Roles</a>
+      </div>
     </div>
-    <div class="why-card">
-      <span class="why-icon">✅</span>
-      <h4>All-in, no surprises</h4>
-      <p>Our fee covers everything: staff compensation, statutory benefits, EOR compliance where needed, and LisBom management and onboarding support. No hidden recruitment fees, no agency markups, no surprise invoices.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><a href="index.html" class="footer-logo">LisBom<span>.</span></a><p class="footer-tagline">UK-managed remote teams powered by exceptional Filipino talent.</p></div>
+        <div class="footer-col"><h5>Company</h5><a href="how-it-works.html">How It Works</a><a href="roles.html">Roles We Fill</a><a href="calculator.html">Cost Calculator</a></div>
+        <div class="footer-col"><h5>Industries</h5><a href="#">Ecommerce</a><a href="#">Recruitment</a><a href="#">Real Estate</a><a href="#">Accounting</a></div>
+        <div class="footer-col"><h5>Get Started</h5><a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/30min?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Book a Call</a><a href="contact.html">Contact Us</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 LisBom Limited. Registered in England & Wales. <a href="privacy-policy.html" style="color:rgba(255,255,255,0.4);margin-left:12px;">Privacy Policy</a> · <a href="#" id="cookieSettingsFooter" style="color:rgba(255,255,255,0.4);">Cookie Settings</a></p></div>
     </div>
-  </div>
-</div>
+  </footer>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <a href="https://www.lisbom-ltd.com/index.html" class="footer-logo">LisBom.</a>
-      <p class="footer-desc">UK-managed remote teams powered by exceptional Filipino talent.</p>
-    </div>
-    <div class="footer-col">
-      <h5>Company</h5>
-      <a href="https://www.lisbom-ltd.com/how-it-works.html">How It Works</a>
-      <a href="https://www.lisbom-ltd.com/roles.html">Roles We Fill</a>
-      <a href="https://www.lisbom-ltd.com/calculator.html">Cost Calculator</a>
-    </div>
-    <div class="footer-col">
-      <h5>Industries</h5>
-      <a href="#">Ecommerce</a>
-      <a href="#">Recruitment</a>
-      <a href="#">Real Estate</a>
-      <a href="#">Accounting</a>
-    </div>
-    <div class="footer-col">
-      <h5>Get Started</h5>
-      <a href="https://www.lisbom-ltd.com/contact.html">Book a Call</a>
-      <a href="https://www.lisbom-ltd.com/contact.html">Contact Us</a>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2025 LisBom Limited. Registered in England & Wales.</div>
-</footer>
+  <script src="js/main.js"></script>
+  <script>
+    // Salary data [junior, mid, senior] in GBP
+    const local = {
+      uk:{flag:'🇬🇧',name:'UK Local Hire',tax:'Employer NI & tax',taxR:0.138,ben:0.05,
+        va:[26000,34000,44000],ops:[26000,36000,48000],pm:[24000,34000,46000],
+        cs:[20000,27000,36000],csm:[28000,38000,52000],tech:[24000,34000,46000],
+        book:[24000,32000,42000],fin:[28000,42000,58000],pay:[22000,30000,40000],
+        social:[22000,30000,40000],seo:[24000,32000,44000],design:[22000,30000,40000],
+        dev:[30000,46000,65000],data:[28000,42000,58000],it:[24000,34000,46000],ai:[30000,46000,62000],
+        hr:[22000,30000,42000],rec:[22000,30000,40000]},
+      us:{flag:'🇺🇸',name:'US Local Hire',tax:'Payroll taxes',taxR:0.152,ben:0.08,
+        va:[33000,46000,60000],ops:[34000,50000,68000],pm:[32000,48000,65000],
+        cs:[28000,38000,52000],csm:[40000,58000,80000],tech:[36000,52000,70000],
+        book:[34000,46000,62000],fin:[40000,60000,82000],pay:[32000,44000,60000],
+        social:[32000,46000,62000],seo:[34000,50000,68000],design:[32000,46000,62000],
+        dev:[48000,72000,100000],data:[44000,68000,94000],it:[34000,50000,70000],ai:[46000,70000,96000],
+        hr:[32000,46000,64000],rec:[30000,44000,60000]},
+      au:{flag:'🇦🇺',name:'AU Local Hire',tax:'Super & payroll tax',taxR:0.145,ben:0.06,
+        va:[36000,50000,64000],ops:[38000,55000,72000],pm:[34000,50000,68000],
+        cs:[30000,42000,56000],csm:[44000,62000,84000],tech:[38000,56000,76000],
+        book:[36000,50000,66000],fin:[44000,65000,88000],pay:[34000,48000,65000],
+        social:[34000,50000,66000],seo:[36000,52000,70000],design:[34000,50000,66000],
+        dev:[50000,76000,106000],data:[46000,70000,98000],it:[36000,54000,74000],ai:[50000,76000,104000],
+        hr:[34000,50000,68000],rec:[32000,48000,64000]},
+      ca:{flag:'🇨🇦',name:'CA Local Hire',tax:'CPP/EI/tax',taxR:0.135,ben:0.06,
+        va:[30000,42000,56000],ops:[32000,46000,62000],pm:[30000,44000,60000],
+        cs:[26000,36000,50000],csm:[38000,56000,76000],tech:[34000,50000,68000],
+        book:[30000,42000,58000],fin:[38000,58000,80000],pay:[28000,40000,56000],
+        social:[30000,44000,60000],seo:[32000,48000,65000],design:[30000,44000,60000],
+        dev:[44000,68000,96000],data:[40000,62000,86000],it:[32000,48000,66000],ai:[44000,68000,94000],
+        hr:[30000,44000,62000],rec:[28000,42000,58000]},
+      de:{flag:'🇩🇪',name:'DE Local Hire',tax:'Social contributions',taxR:0.21,ben:0.04,
+        va:[28000,38000,50000],ops:[30000,44000,58000],pm:[28000,42000,57000],
+        cs:[24000,34000,46000],csm:[35000,52000,72000],tech:[30000,46000,64000],
+        book:[28000,40000,54000],fin:[36000,55000,76000],pay:[26000,38000,52000],
+        social:[26000,38000,52000],seo:[28000,42000,58000],design:[26000,38000,52000],
+        dev:[42000,64000,90000],data:[38000,58000,82000],it:[30000,46000,63000],ai:[40000,62000,88000],
+        hr:[28000,42000,58000],rec:[26000,38000,54000]},
+      nl:{flag:'🇳🇱',name:'NL Local Hire',tax:'Social contributions',taxR:0.19,ben:0.05,
+        va:[30000,42000,56000],ops:[32000,46000,62000],pm:[30000,44000,60000],
+        cs:[26000,36000,50000],csm:[37000,55000,75000],tech:[32000,48000,66000],
+        book:[30000,42000,57000],fin:[38000,58000,80000],pay:[28000,40000,55000],
+        social:[28000,40000,55000],seo:[30000,44000,60000],design:[28000,40000,55000],
+        dev:[44000,68000,95000],data:[40000,62000,86000],it:[32000,48000,66000],ai:[42000,65000,92000],
+        hr:[30000,44000,60000],rec:[28000,42000,58000]},
+      fr:{flag:'🇫🇷',name:'FR Local Hire',tax:'Social charges',taxR:0.28,ben:0.03,
+        va:[26000,36000,48000],ops:[28000,40000,55000],pm:[26000,40000,55000],
+        cs:[22000,32000,44000],csm:[33000,50000,68000],tech:[28000,44000,62000],
+        book:[26000,38000,52000],fin:[34000,52000,72000],pay:[24000,36000,50000],
+        social:[24000,36000,50000],seo:[26000,40000,56000],design:[24000,36000,50000],
+        dev:[38000,60000,84000],data:[36000,56000,80000],it:[28000,44000,62000],ai:[38000,60000,86000],
+        hr:[26000,40000,56000],rec:[24000,36000,52000]},
+      es:{flag:'🇪🇸',name:'ES Local Hire',tax:'Social security',taxR:0.236,ben:0.03,
+        va:[20000,28000,38000],ops:[22000,32000,44000],pm:[20000,30000,42000],
+        cs:[18000,26000,36000],csm:[26000,38000,54000],tech:[22000,34000,48000],
+        book:[20000,30000,42000],fin:[26000,40000,58000],pay:[18000,28000,40000],
+        social:[18000,28000,40000],seo:[20000,30000,44000],design:[18000,28000,40000],
+        dev:[28000,46000,68000],data:[26000,42000,62000],it:[22000,34000,50000],ai:[28000,46000,68000],
+        hr:[20000,30000,44000],rec:[18000,28000,40000]},
+      it:{flag:'🇮🇹',name:'IT Local Hire',tax:'Social contributions',taxR:0.30,ben:0.03,
+        va:[20000,28000,38000],ops:[22000,32000,44000],pm:[20000,30000,42000],
+        cs:[17000,25000,35000],csm:[25000,37000,52000],tech:[22000,33000,47000],
+        book:[19000,28000,39000],fin:[25000,38000,54000],pay:[17000,26000,37000],
+        social:[17000,26000,37000],seo:[19000,29000,42000],design:[17000,26000,37000],
+        dev:[26000,42000,62000],data:[24000,38000,56000],it:[21000,32000,47000],ai:[26000,42000,62000],
+        hr:[19000,28000,40000],rec:[17000,26000,37000]},
+      se:{flag:'🇸🇪',name:'SE Local Hire',tax:'Employer tax',taxR:0.314,ben:0.03,
+        va:[30000,42000,56000],ops:[32000,48000,64000],pm:[30000,46000,62000],
+        cs:[26000,38000,52000],csm:[38000,58000,80000],tech:[32000,50000,70000],
+        book:[30000,44000,60000],fin:[38000,60000,84000],pay:[28000,42000,58000],
+        social:[28000,42000,58000],seo:[30000,46000,64000],design:[28000,42000,58000],
+        dev:[44000,70000,100000],data:[40000,64000,92000],it:[32000,50000,70000],ai:[44000,70000,100000],
+        hr:[30000,46000,64000],rec:[28000,44000,62000]},
+      ch:{flag:'🇨🇭',name:'CH Local Hire',tax:'Social insurance',taxR:0.13,ben:0.05,
+        va:[46000,64000,84000],ops:[50000,72000,96000],pm:[48000,70000,94000],
+        cs:[38000,54000,74000],csm:[56000,80000,110000],tech:[50000,74000,100000],
+        book:[46000,68000,92000],fin:[58000,88000,124000],pay:[42000,62000,86000],
+        social:[42000,62000,86000],seo:[46000,68000,94000],design:[42000,62000,86000],
+        dev:[66000,100000,140000],data:[60000,92000,130000],it:[50000,76000,104000],ai:[66000,100000,140000],
+        hr:[46000,70000,98000],rec:[42000,64000,90000]},
+      be:{flag:'🇧🇪',name:'BE Local Hire',tax:'Social contributions',taxR:0.27,ben:0.03,
+        va:[28000,40000,54000],ops:[30000,44000,60000],pm:[28000,42000,58000],
+        cs:[24000,34000,48000],csm:[35000,52000,72000],tech:[30000,46000,64000],
+        book:[28000,40000,56000],fin:[35000,54000,76000],pay:[26000,38000,53000],
+        social:[26000,38000,53000],seo:[28000,42000,60000],design:[26000,38000,53000],
+        dev:[40000,62000,88000],data:[36000,58000,82000],it:[30000,46000,64000],ai:[40000,62000,88000],
+        hr:[28000,42000,60000],rec:[26000,40000,56000]},
+      dk:{flag:'🇩🇰',name:'DK Local Hire',tax:'Labour market levy',taxR:0.08,ben:0.10,
+        va:[34000,48000,64000],ops:[36000,52000,70000],pm:[34000,50000,68000],
+        cs:[28000,40000,56000],csm:[42000,62000,86000],tech:[36000,54000,74000],
+        book:[34000,50000,68000],fin:[42000,64000,90000],pay:[30000,46000,64000],
+        social:[30000,46000,64000],seo:[34000,52000,72000],design:[30000,46000,64000],
+        dev:[48000,76000,108000],data:[44000,70000,100000],it:[36000,56000,78000],ai:[48000,76000,108000],
+        hr:[34000,52000,72000],rec:[30000,48000,68000]},
+      no:{flag:'🇳🇴',name:'NO Local Hire',tax:'National insurance',taxR:0.141,ben:0.05,
+        va:[36000,52000,70000],ops:[38000,56000,76000],pm:[36000,54000,74000],
+        cs:[30000,44000,60000],csm:[44000,66000,92000],tech:[38000,58000,80000],
+        book:[36000,54000,74000],fin:[44000,68000,96000],pay:[32000,50000,70000],
+        social:[32000,50000,70000],seo:[36000,56000,78000],design:[32000,50000,70000],
+        dev:[50000,80000,114000],data:[46000,74000,106000],it:[38000,60000,84000],ai:[50000,80000,114000],
+        hr:[36000,56000,78000],rec:[32000,52000,74000]},
+      ie:{flag:'🇮🇪',name:'IE Local Hire',tax:"Employer's PRSI",taxR:0.111,ben:0.05,
+        va:[28000,38000,52000],ops:[30000,44000,60000],pm:[28000,42000,58000],
+        cs:[24000,34000,48000],csm:[36000,54000,76000],tech:[30000,46000,64000],
+        book:[28000,40000,56000],fin:[36000,56000,80000],pay:[26000,38000,54000],
+        social:[26000,38000,54000],seo:[28000,42000,60000],design:[26000,38000,54000],
+        dev:[40000,64000,92000],data:[38000,60000,86000],it:[30000,46000,66000],ai:[40000,64000,92000],
+        hr:[28000,42000,60000],rec:[26000,40000,56000]},
+      sg:{flag:'🇸🇬',name:'SG Local Hire',tax:'CPF contributions',taxR:0.17,ben:0.04,
+        va:[24000,36000,50000],ops:[26000,40000,56000],pm:[24000,38000,54000],
+        cs:[20000,30000,44000],csm:[32000,50000,70000],tech:[26000,42000,60000],
+        book:[24000,36000,52000],fin:[30000,50000,72000],pay:[22000,34000,50000],
+        social:[22000,34000,50000],seo:[24000,38000,56000],design:[22000,34000,50000],
+        dev:[36000,58000,84000],data:[32000,54000,78000],it:[26000,42000,60000],ai:[36000,58000,84000],
+        hr:[24000,38000,56000],rec:[22000,36000,52000]},
+      hk:{flag:'🇭🇰',name:'HK Local Hire',tax:'MPF contributions',taxR:0.05,ben:0.04,
+        va:[22000,32000,46000],ops:[24000,36000,52000],pm:[22000,34000,50000],
+        cs:[18000,28000,40000],csm:[30000,46000,66000],tech:[24000,38000,56000],
+        book:[22000,32000,48000],fin:[28000,46000,68000],pay:[20000,30000,46000],
+        social:[20000,30000,46000],seo:[22000,34000,52000],design:[20000,30000,46000],
+        dev:[32000,52000,78000],data:[30000,50000,74000],it:[24000,38000,58000],ai:[32000,52000,78000],
+        hr:[22000,34000,52000],rec:[20000,32000,48000]},
+      jp:{flag:'🇯🇵',name:'JP Local Hire',tax:'Social insurance',taxR:0.15,ben:0.04,
+        va:[24000,34000,48000],ops:[26000,38000,54000],pm:[24000,36000,52000],
+        cs:[20000,30000,44000],csm:[30000,46000,66000],tech:[26000,40000,58000],
+        book:[22000,34000,50000],fin:[28000,46000,68000],pay:[20000,32000,48000],
+        social:[20000,32000,48000],seo:[22000,34000,52000],design:[20000,32000,48000],
+        dev:[32000,52000,78000],data:[30000,48000,72000],it:[24000,38000,58000],ai:[32000,52000,78000],
+        hr:[22000,34000,52000],rec:[20000,32000,48000]},
+      ae:{flag:'🇦🇪',name:'UAE Local Hire',tax:'Visa & benefits',taxR:0.08,ben:0.05,
+        va:[22000,32000,46000],ops:[24000,36000,52000],pm:[22000,34000,50000],
+        cs:[18000,28000,40000],csm:[28000,44000,64000],tech:[22000,36000,54000],
+        book:[20000,30000,46000],fin:[26000,44000,66000],pay:[18000,30000,46000],
+        social:[18000,30000,46000],seo:[20000,32000,50000],design:[18000,30000,46000],
+        dev:[28000,48000,72000],data:[26000,44000,68000],it:[22000,36000,56000],ai:[28000,48000,72000],
+        hr:[20000,32000,50000],rec:[18000,30000,46000]},
+      sa:{flag:'🇸🇦',name:'SA Local Hire',tax:'GOSI contributions',taxR:0.12,ben:0.04,
+        va:[20000,30000,44000],ops:[22000,34000,50000],pm:[20000,32000,48000],
+        cs:[16000,26000,38000],csm:[26000,42000,62000],tech:[20000,34000,52000],
+        book:[18000,28000,44000],fin:[24000,40000,62000],pay:[16000,28000,44000],
+        social:[16000,28000,44000],seo:[18000,30000,48000],design:[16000,28000,44000],
+        dev:[24000,42000,66000],data:[22000,38000,60000],it:[20000,32000,52000],ai:[24000,42000,66000],
+        hr:[18000,28000,46000],rec:[16000,26000,42000]},
+      za:{flag:'🇿🇦',name:'ZA Local Hire',tax:'UIF contributions',taxR:0.01,ben:0.05,
+        va:[8000,14000,22000],ops:[9000,16000,26000],pm:[8000,14000,24000],
+        cs:[6000,12000,20000],csm:[12000,20000,34000],tech:[9000,16000,28000],
+        book:[8000,14000,22000],fin:[10000,18000,30000],pay:[7000,12000,20000],
+        social:[7000,12000,20000],seo:[8000,14000,24000],design:[7000,12000,20000],
+        dev:[10000,20000,36000],data:[9000,18000,32000],it:[8000,14000,24000],ai:[10000,20000,36000],
+        hr:[7000,14000,24000],rec:[6000,12000,20000]},
+      br:{flag:'🇧🇷',name:'BR Local Hire',tax:'Social charges',taxR:0.28,ben:0.04,
+        va:[8000,14000,22000],ops:[9000,16000,26000],pm:[8000,14000,24000],
+        cs:[6000,11000,18000],csm:[11000,19000,32000],tech:[9000,16000,28000],
+        book:[7000,13000,22000],fin:[10000,18000,30000],pay:[6000,12000,20000],
+        social:[6000,12000,20000],seo:[7000,13000,22000],design:[6000,12000,20000],
+        dev:[10000,19000,34000],data:[9000,17000,30000],it:[7000,13000,23000],ai:[10000,19000,34000],
+        hr:[7000,12000,22000],rec:[5000,11000,19000]},
+      mx:{flag:'🇲🇽',name:'MX Local Hire',tax:'IMSS contributions',taxR:0.26,ben:0.04,
+        va:[7000,12000,20000],ops:[8000,14000,24000],pm:[7000,13000,22000],
+        cs:[5000,10000,17000],csm:[9000,17000,29000],tech:[7000,14000,24000],
+        book:[6000,11000,19000],fin:[8000,15000,27000],pay:[5000,10000,18000],
+        social:[5000,10000,18000],seo:[6000,11000,20000],design:[5000,10000,18000],
+        dev:[8000,16000,30000],data:[7000,14000,26000],it:[6000,11000,21000],ai:[8000,16000,30000],
+        hr:[5000,11000,19000],rec:[4000,9000,17000]},
+      nz:{flag:'🇳🇿',name:'NZ Local Hire',tax:'ACC & Kiwisaver',taxR:0.06,ben:0.05,
+        va:[30000,42000,56000],ops:[32000,48000,64000],pm:[30000,46000,62000],
+        cs:[24000,36000,50000],csm:[38000,56000,78000],tech:[32000,50000,70000],
+        book:[28000,42000,58000],fin:[36000,56000,80000],pay:[26000,40000,56000],
+        social:[26000,40000,56000],seo:[28000,44000,62000],design:[26000,40000,56000],
+        dev:[40000,64000,92000],data:[36000,58000,84000],it:[30000,48000,68000],ai:[40000,64000,92000],
+        hr:[28000,44000,62000],rec:[26000,40000,58000]},
+    };
 
-<script>
-// ─── DATA ───────────────────────────────────────────────────────────────────
+    // Philippines costs [junior, mid, senior] in GBP
+    const ph = {
+      va:[5500,8800,13200],ops:[5800,9500,14500],pm:[5200,8500,13000],
+      cs:[4800,7800,12000],csm:[6500,10500,16000],tech:[5200,9000,14000],
+      book:[5200,8500,13200],fin:[6500,11000,17000],pay:[4800,7800,12500],
+      social:[4800,7800,12000],seo:[4800,7800,12000],design:[4500,7500,11500],
+      dev:[7500,13500,21000],data:[6500,11000,17000],it:[5200,8800,13500],ai:[7000,12500,20000],
+      hr:[4800,7800,12000],rec:[4500,7500,11500],
+    };
+    const mgmt = {
+      va:1800,ops:1800,pm:1800,cs:1800,csm:2000,tech:1800,book:1800,fin:2000,pay:1800,
+      social:1800,seo:1800,design:1800,dev:2400,data:2400,it:1800,ai:2400,hr:1800,rec:1800
+    };
+    const li = {junior:0,mid:1,senior:2};
 
-const CURRENCY = {
-  GB: { sym: '£', rate: 1,     flag: '🇬🇧', name: 'UK' },
-  DE: { sym: '€', rate: 1.18,  flag: '🇩🇪', name: 'Germany' },
-  NL: { sym: '€', rate: 1.18,  flag: '🇳🇱', name: 'Netherlands' },
-  FR: { sym: '€', rate: 1.18,  flag: '🇫🇷', name: 'France' },
-  ES: { sym: '€', rate: 1.18,  flag: '🇪🇸', name: 'Spain' },
-  IT: { sym: '€', rate: 1.18,  flag: '🇮🇹', name: 'Italy' },
-  SE: { sym: 'kr', rate: 13.2, flag: '🇸🇪', name: 'Sweden' },
-  CH: { sym: 'CHF', rate: 1.12, flag: '🇨🇭', name: 'Switzerland' },
-  BE: { sym: '€', rate: 1.18,  flag: '🇧🇪', name: 'Belgium' },
-  DK: { sym: 'kr', rate: 8.8,  flag: '🇩🇰', name: 'Denmark' },
-  NO: { sym: 'kr', rate: 13.5, flag: '🇳🇴', name: 'Norway' },
-  IE: { sym: '€', rate: 1.18,  flag: '🇮🇪', name: 'Ireland' },
-  US: { sym: '$', rate: 1.27,  flag: '🇺🇸', name: 'United States' },
-  CA: { sym: '$', rate: 1.72,  flag: '🇨🇦', name: 'Canada' },
-  BR: { sym: 'R$', rate: 6.35, flag: '🇧🇷', name: 'Brazil' },
-  MX: { sym: '$', rate: 21.8,  flag: '🇲🇽', name: 'Mexico' },
-  AU: { sym: '$', rate: 1.95,  flag: '🇦🇺', name: 'Australia' },
-  NZ: { sym: '$', rate: 2.12,  flag: '🇳🇿', name: 'New Zealand' },
-  SG: { sym: '$', rate: 1.71,  flag: '🇸🇬', name: 'Singapore' },
-  HK: { sym: '$', rate: 9.9,   flag: '🇭🇰', name: 'Hong Kong' },
-  JP: { sym: '¥', rate: 188,   flag: '🇯🇵', name: 'Japan' },
-  AE: { sym: 'AED', rate: 4.66, flag: '🇦🇪', name: 'UAE' },
-  SA: { sym: 'SAR', rate: 4.76, flag: '🇸🇦', name: 'Saudi Arabia' },
-  ZA: { sym: 'R', rate: 23.4,  flag: '🇿🇦', name: 'South Africa' },
-};
+    function fmt(n, sym) {
+      if(n >= 1000) return sym + Math.round(n/1000*10)/10 + 'k';
+      return sym + Math.round(n);
+    }
+    function fmtFull(n, sym) { return sym + Math.round(n).toLocaleString(); }
 
-// Employer overhead multiplier per country (on top of salary)
-const OVERHEAD = {
-  GB: { pct: 0.12, label: 'Employer NI & tax', benefits: 150 },
-  DE: { pct: 0.21, label: 'Employer social contributions', benefits: 180 },
-  NL: { pct: 0.19, label: 'Employer social contributions', benefits: 170 },
-  FR: { pct: 0.42, label: 'Employer social contributions', benefits: 200 },
-  ES: { pct: 0.30, label: 'Employer social contributions', benefits: 160 },
-  IT: { pct: 0.33, label: 'Employer social contributions', benefits: 160 },
-  SE: { pct: 0.315, label: 'Employer social contributions', benefits: 180 },
-  CH: { pct: 0.13, label: 'Employer social contributions', benefits: 200 },
-  BE: { pct: 0.35, label: 'Employer social contributions', benefits: 180 },
-  DK: { pct: 0.08, label: 'Employer contributions', benefits: 170 },
-  NO: { pct: 0.141, label: 'Employer NI contributions', benefits: 175 },
-  IE: { pct: 0.115, label: 'Employer PRSI', benefits: 155 },
-  US: { pct: 0.075, label: 'Payroll tax (FICA etc.)', benefits: 600 },
-  CA: { pct: 0.08, label: 'Employer CPP/EI', benefits: 350 },
-  BR: { pct: 0.37, label: 'Employer contributions', benefits: 250 },
-  MX: { pct: 0.30, label: 'Employer social contributions', benefits: 180 },
-  AU: { pct: 0.105, label: 'Employer super & payroll tax', benefits: 200 },
-  NZ: { pct: 0.03, label: 'Employer contributions', benefits: 150 },
-  SG: { pct: 0.17, label: 'Employer CPF', benefits: 200 },
-  HK: { pct: 0.05, label: 'Employer MPF', benefits: 180 },
-  JP: { pct: 0.155, label: 'Employer social insurance', benefits: 220 },
-  AE: { pct: 0.0,  label: 'No employer taxes', benefits: 300 },
-  SA: { pct: 0.0,  label: 'No employer taxes', benefits: 280 },
-  ZA: { pct: 0.01, label: 'SDL & UIF', benefits: 120 },
-};
+    function update() {
+      const c = document.getElementById('calcCountry').value;
+      const r = document.getElementById('calcRole').value;
+      const l = document.getElementById('calcLevel').value;
+      const i = li[l];
+      const cd = local[c];
+      const sym = (c==='us')?'$':(c==='au')?'A$':(c==='ca')?'C$':(c==='sg')?'S$':(c==='hk')?'HK$':(c==='jp')?'¥':(c==='ae'||c==='sa')?'AED':(c==='za')?'R':(c==='br')?'R$':(c==='mx')?'MX$':
+                  (c==='de'||c==='fr'||c==='es'||c==='it'||c==='nl'||c==='be'||c==='at'||c==='fi')?'€':
+                  (c==='se')?'kr':(c==='ch')?'CHF':(c==='dk')?'kr':(c==='no')?'kr':'£';
 
-// Base GBP salaries by role and seniority
-const ROLE_DATA = {
-  va:  { junior: 1800, mid: 2600, senior: 3400 },
-  ops: { junior: 2000, mid: 2800, senior: 3800 },
-  pm:  { junior: 2200, mid: 3200, senior: 4200 },
-  cs:  { junior: 1900, mid: 2600, senior: 3400 },
-  csm: { junior: 2400, mid: 3400, senior: 4600 },
-  ts:  { junior: 2200, mid: 3000, senior: 4000 },
-  bk:  { junior: 2000, mid: 2800, senior: 3600 },
-  fa:  { junior: 2600, mid: 3600, senior: 5000 },
-  pa:  { junior: 2000, mid: 2800, senior: 3600 },
-  sm:  { junior: 2000, mid: 2800, senior: 3800 },
-  seo: { junior: 1900, mid: 2700, senior: 3600 },
-  gd:  { junior: 2000, mid: 2900, senior: 4000 },
-  dev: { junior: 2800, mid: 4000, senior: 5500 },
-  da:  { junior: 2600, mid: 3800, senior: 5200 },
-  it:  { junior: 2200, mid: 3000, senior: 4000 },
-  ai:  { junior: 3000, mid: 4400, senior: 6000 },
-  hr:  { junior: 2000, mid: 2800, senior: 3600 },
-  rc:  { junior: 2000, mid: 2700, senior: 3500 },
-};
+      // Annual figures
+      const base = cd[r][i];
+      const tax  = base * cd.taxR;
+      const ben  = base * cd.ben;
+      const lTotAnnual = base + tax + ben;
 
-// LisBom PH staff cost (GBP) by role and seniority
-const PH_DATA = {
-  va:  { junior: 550,  mid: 750,  senior: 1050 },
-  ops: { junior: 600,  mid: 850,  senior: 1150 },
-  pm:  { junior: 700,  mid: 950,  senior: 1300 },
-  cs:  { junior: 550,  mid: 750,  senior: 1000 },
-  csm: { junior: 700,  mid: 950,  senior: 1300 },
-  ts:  { junior: 650,  mid: 900,  senior: 1200 },
-  bk:  { junior: 600,  mid: 820,  senior: 1100 },
-  fa:  { junior: 750,  mid: 1050, senior: 1450 },
-  pa:  { junior: 600,  mid: 820,  senior: 1100 },
-  sm:  { junior: 600,  mid: 820,  senior: 1100 },
-  seo: { junior: 550,  mid: 780,  senior: 1050 },
-  gd:  { junior: 600,  mid: 850,  senior: 1150 },
-  dev: { junior: 850,  mid: 1200, senior: 1700 },
-  da:  { junior: 800,  mid: 1150, senior: 1600 },
-  it:  { junior: 650,  mid: 900,  senior: 1200 },
-  ai:  { junior: 950,  mid: 1400, senior: 2000 },
-  hr:  { junior: 580,  mid: 800,  senior: 1080 },
-  rc:  { junior: 560,  mid: 780,  senior: 1050 },
-};
+      const phB  = ph[r][i];
+      const phBn = phB * 0.20;
+      const phF  = mgmt[r];
+      const phTAnnual = phB + phBn + phF;
 
-const EOR_FEE_GBP = 160;
-const PH_COMPLIANCE_GBP = 110; // statutory PH contributions (SSS, PhilHealth, Pag-IBIG, 13th month provision)
-const LISBOM_MGMT_GBP = 190;
+      // Monthly figures (divide by 12)
+      const lTot  = lTotAnnual / 12;
+      const phT   = phTAnnual / 12;
+      const save  = lTot - phT;
+      const saveA = lTotAnnual - phTAnnual;
+      const pct   = Math.round((save/lTot)*100);
 
-// ─── STATE ───────────────────────────────────────────────────────────────────
-let state = { country: 'GB', role: 'va', level: 'mid', eor: true };
+      document.getElementById('localFlag').textContent  = cd.flag;
+      document.getElementById('localName').textContent  = cd.name;
+      document.getElementById('lTaxLabel').textContent  = cd.tax;
+      document.getElementById('localTotal').textContent = fmtFull(lTot, sym);
+      document.getElementById('lBase').textContent      = fmtFull(base/12, sym);
+      document.getElementById('lTax').textContent       = fmtFull(tax/12, sym);
+      document.getElementById('lBen').textContent       = fmtFull(ben/12, sym);
+      document.getElementById('lTotalLine').textContent = fmtFull(lTot, sym);
 
-// ─── HELPERS ─────────────────────────────────────────────────────────────────
-function fmt(gbp, country) {
-  const c = CURRENCY[country];
-  const val = Math.round(gbp * c.rate);
-  if (c.sym === '£' || c.sym === '$' || c.sym === '€') return c.sym + val.toLocaleString();
-  return val.toLocaleString() + ' ' + c.sym;
-}
+      document.getElementById('phTotal').textContent    = fmtFull(phT, sym);
+      document.getElementById('phBase').textContent     = fmtFull(phB/12, sym);
+      document.getElementById('phBen').textContent      = fmtFull(phBn/12, sym);
+      document.getElementById('phFee').textContent      = fmtFull(phF/12, sym);
+      document.getElementById('phTotalLine').textContent= fmtFull(phT, sym);
 
-function fmtK(gbp, country) {
-  const c = CURRENCY[country];
-  const val = Math.round(gbp * c.rate / 1000);
-  if (c.sym === '£' || c.sym === '$' || c.sym === '€') return c.sym + val + 'k';
-  return val + 'k ' + c.sym;
-}
+      document.getElementById('savingAmt').textContent  = fmtFull(save, sym);
+      document.getElementById('savingPct').textContent  = pct + '% less than a local hire';
+      document.getElementById('save1y').textContent     = fmt(saveA, sym);
+      document.getElementById('save3y').textContent     = fmt(saveA*3, sym);
+      document.getElementById('save5y').textContent     = fmt(saveA*5, sym);
+    }
 
-// ─── RENDER ──────────────────────────────────────────────────────────────────
-function render() {
-  const { country, role, level, eor } = state;
-  const c = CURRENCY[country];
-  const oh = OVERHEAD[country];
-
-  // LOCAL
-  const localSalary = ROLE_DATA[role][level];
-  const localTax = Math.round(localSalary * oh.pct);
-  const localBenefits = oh.benefits;
-  const localTotal = localSalary + localTax + localBenefits;
-
-  // LISBOM
-  const phSalary = PH_DATA[role][level];
-  const phCompliance = PH_COMPLIANCE_GBP;
-  const eorFee = eor ? EOR_FEE_GBP : 0;
-  const mgmt = LISBOM_MGMT_GBP;
-  const lisbomTotal = phSalary + phCompliance + eorFee + mgmt;
-
-  // SAVING
-  const saving = localTotal - lisbomTotal;
-  const savingPct = Math.round((saving / localTotal) * 100);
-
-  // Update local card
-  document.getElementById('local-flag').textContent = c.flag;
-  document.getElementById('local-label').textContent = c.name + ' Local Hire';
-  document.getElementById('local-salary').textContent = fmt(localSalary, country);
-  document.getElementById('local-tax-label').textContent = oh.label;
-  document.getElementById('local-tax').textContent = fmt(localTax, country);
-  document.getElementById('local-benefits').textContent = fmt(localBenefits, country);
-  document.getElementById('local-total').textContent = fmt(localTotal, country);
-  document.getElementById('local-total-line').textContent = fmt(localTotal, country);
-
-  // Update lisbom card
-  document.getElementById('lb-salary').textContent = fmt(phSalary, country);
-  document.getElementById('lb-benefits').textContent = fmt(phCompliance, country);
-  document.getElementById('lb-eor').textContent = fmt(eorFee, country);
-  document.getElementById('lb-mgmt').textContent = fmt(mgmt, country);
-  document.getElementById('lisbom-total').textContent = fmt(lisbomTotal, country);
-  document.getElementById('lb-total-line').textContent = fmt(lisbomTotal, country);
-
-  // Show/hide EOR line
-  const eorLine = document.getElementById('eor-line');
-  eorLine.style.display = eor ? 'flex' : 'none';
-
-  // Show/hide EOR callout
-  document.getElementById('eor-callout').classList.toggle('hidden', !eor);
-
-  // Savings
-  document.getElementById('saving-amount').textContent = fmt(saving, country);
-  document.getElementById('saving-pct').textContent = savingPct + '% less than a local hire';
-  document.getElementById('save-1y').textContent = fmtK(saving * 12, country);
-  document.getElementById('save-3y').textContent = fmtK(saving * 36, country);
-  document.getElementById('save-5y').textContent = fmtK(saving * 60, country);
-}
-
-// ─── EVENT LISTENERS ─────────────────────────────────────────────────────────
-document.getElementById('country').addEventListener('change', e => {
-  state.country = e.target.value;
-  render();
-});
-
-document.getElementById('role').addEventListener('change', e => {
-  state.role = e.target.value;
-  render();
-});
-
-document.querySelectorAll('.seniority-tab').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.seniority-tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    state.level = btn.dataset.level;
-    render();
-  });
-});
-
-document.querySelectorAll('input[name="eor"]').forEach(radio => {
-  radio.addEventListener('change', e => {
-    state.eor = e.target.value === 'yes';
-    document.getElementById('eor-yes-label').classList.toggle('selected', state.eor);
-    document.getElementById('eor-no-label').classList.toggle('selected', !state.eor);
-    render();
-  });
-});
-
-// ─── INIT ────────────────────────────────────────────────────────────────────
-render();
-</script>
+    document.getElementById('calcCountry').addEventListener('change', update);
+    document.getElementById('calcRole').addEventListener('change', update);
+    document.getElementById('calcLevel').addEventListener('change', update);
+    update();
+  </script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
