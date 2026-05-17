@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LisBom — Compliance Fixes</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #1a1a2e; background: #f8f8fc; padding: 2rem; }
+    h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    .card { background: #fff; border: 1px solid #e0dcff; border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; }
+    .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.2em 0.6em; border-radius: 4px; }
+    .badge-red { background: #fee2e2; color: #991b1b; }
+    .badge-yellow { background: #fef9c3; color: #854d0e; }
+    .badge-done { background: #dcfce7; color: #166534; }
+    h2 { font-size: 1.1rem; font-weight: 700; }
+    p { color: #444; margin-bottom: 0.75rem; }
+    pre { background: #1e1e2e; color: #cdd6f4; border-radius: 8px; padding: 1.25rem; overflow-x: auto; font-size: 0.82rem; line-height: 1.6; margin: 0.75rem 0; white-space: pre-wrap; word-break: break-all; }
+    code { font-family: "Fira Code", "Cascadia Code", Consolas, monospace; }
+    .step { display: flex; gap: 0.75rem; margin: 0.5rem 0; align-items: flex-start; }
+    .step-num { background: #4f46e5; color: #fff; border-radius: 50%; width: 1.4rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; margin-top: 0.15rem; }
+    .step-text { color: #333; }
+    .note { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; color: #166534; margin: 0.75rem 0; }
+    .warn { background: #fefce8; border-left: 4px solid #ca8a04; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; color: #854d0e; margin: 0.75rem 0; }
+    a { color: #4f46e5; }
+  </style>
+</head>
+<body>
+
+<h1>LisBom — Compliance Fix Reference</h1>
+<p class="subtitle">Code snippets and instructions for the 4 identified issues. Save this file for reference.</p>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ISSUE 1: COOKIE BANNER -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-red">🔴 High Priority</span>
+    <h2>Fix 1 — Working Cookie Consent Banner</h2>
+  </div>
+  <p>The current "Cookie Settings" footer link does nothing (<code>javascript:void(0)</code>). UK PECR requires real, functioning consent before setting non-essential cookies. The simplest compliant solution is to use <strong>CookieYes</strong> (free tier available) or <strong>Cookiebot</strong>.</p>
+
+  <h3 style="margin: 1rem 0 0.5rem; font-size:0.95rem;">Option A — CookieYes (Recommended, Free Tier)</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-text">Sign up at <a href="https://www.cookieyes.com" target="_blank">cookieyes.com</a> → Add your domain → Copy your embed script.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-text">Paste the script tag into the <code>&lt;head&gt;</code> of every page on your site (before any analytics scripts):</div></div>
+<pre><code>&lt;!-- CookieYes banner — paste your actual script URL from the CookieYes dashboard --&gt;
+&lt;script id="cookieyes" type="text/javascript"
+  src="https://cdn-cookieyes.com/client_data/YOUR_ID_HERE/script.js"&gt;
+&lt;/script&gt;</code></pre>
+  <div class="step"><div class="step-num">3</div><div class="step-text">Replace the "Cookie Settings" footer link with the CookieYes re-open trigger:</div></div>
+<pre><code>&lt;!-- BEFORE (broken) --&gt;
+&lt;a href="javascript:void(0)"&gt;Cookie Settings&lt;/a&gt;
+
+&lt;!-- AFTER (working) --&gt;
+&lt;a href="javascript:void(0)" class="cky-banner-element"&gt;Cookie Settings&lt;/a&gt;</code></pre>
+  <div class="step"><div class="step-num">4</div><div class="step-text">In the CookieYes dashboard, scan your site to auto-detect cookies, then categorise them (Google Analytics → Analytics; Calendly → Functional). This populates your cookie declaration automatically.</div></div>
+
+  <div class="note">✅ CookieYes free tier covers up to 25,000 page views/month and is ICO-compliant. It also auto-blocks Google Analytics until consent is given.</div>
+
+  <h3 style="margin: 1rem 0 0.5rem; font-size:0.95rem;">Option B — Move Google Analytics to Consent-Gated Loading (Manual)</h3>
+  <p>If you prefer not to use a third-party banner tool, you can load GA only after consent. Replace your current GA snippet with:</p>
+<pre><code>&lt;!-- Consent-gated Google Analytics --&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+
+  // Default: deny all non-essential cookies
+  gtag('consent', 'default', {
+    analytics_storage: 'denied',
+    functionality_storage: 'denied',
+    wait_for_update: 500
+  });
+&lt;/script&gt;
+
+&lt;!-- Load GA tag AFTER consent default is set --&gt;
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"&gt;&lt;/script&gt;
+&lt;script&gt;
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+&lt;/script&gt;
+
+&lt;!-- Simple consent banner (inline) --&gt;
+&lt;div id="cookie-banner" style="
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#1a1a2e; color:#fff; padding:1rem 1.5rem;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:0.75rem; font-size:0.875rem;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.2);"&gt;
+  &lt;span&gt;
+    We use cookies to understand how visitors use our site.
+    &lt;a href="/privacy-policy/" style="color:#a5b4fc;"&gt;Learn more&lt;/a&gt;
+  &lt;/span&gt;
+  &lt;div style="display:flex; gap:0.5rem;"&gt;
+    &lt;button onclick="setCookieConsent('denied')" style="
+      background:transparent; border:1px solid #666; color:#ccc;
+      padding:0.4rem 0.9rem; border-radius:6px; cursor:pointer; font-size:0.85rem;"&gt;
+      Decline
+    &lt;/button&gt;
+    &lt;button onclick="setCookieConsent('granted')" style="
+      background:#4f46e5; border:none; color:#fff;
+      padding:0.4rem 0.9rem; border-radius:6px; cursor:pointer; font-size:0.85rem;"&gt;
+      Accept All
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // Check existing preference
+  const savedConsent = localStorage.getItem('cookie_consent');
+  if (savedConsent) {
+    document.getElementById('cookie-banner').style.display = 'none';
+    gtag('consent', 'update', {
+      analytics_storage: savedConsent,
+      functionality_storage: savedConsent
+    });
+  }
+
+  function setCookieConsent(value) {
+    localStorage.setItem('cookie_consent', value);
+    gtag('consent', 'update', {
+      analytics_storage: value,
+      functionality_storage: value
+    });
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+
+  // Re-open from footer link
+  function openCookieSettings() {
+    document.getElementById('cookie-banner').style.display = 'flex';
+  }
+&lt;/script&gt;
+
+&lt;!-- Then update your footer link to: --&gt;
+&lt;a href="javascript:openCookieSettings()"&gt;Cookie Settings&lt;/a&gt;</code></pre>
+
+  <div class="warn">⚠️ Option B (manual) is functional but basic. Option A (CookieYes) is easier to maintain and gives you an auto-generated cookie declaration table — which your privacy policy references.</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ISSUE 2: CAREERS FORM PRIVACY NOTICE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-red">🔴 High Priority</span>
+    <h2>Fix 2 — Privacy Notice on Careers / Application Forms</h2>
+  </div>
+  <p>Under UK GDPR Article 13, you must provide privacy information at the point of data collection. Your contact form already does this well — your careers/application forms don't. Add the snippet below directly above each "Submit Application" button on <code>careers.html</code>.</p>
+
+  <h3 style="margin: 1rem 0 0.5rem; font-size:0.95rem;">For the General Application form and each role modal — paste above the submit button:</h3>
+<pre><code>&lt;!-- ✅ UK GDPR Article 13 transparency notice — add above every Submit button on careers.html --&gt;
+&lt;p class="form-privacy-notice" style="
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #f8f7ff;
+  border-radius: 6px;
+  line-height: 1.5;"&gt;
+  🔒 By submitting this application, you agree to LisBom Limited processing your personal data
+  (including your name, email address, CV, and work history) for the purpose of assessing your
+  suitability for this and future roles. We rely on our
+  &lt;strong&gt;legitimate interests&lt;/strong&gt; as the lawful basis for processing. We will retain your
+  application data for up to &lt;strong&gt;6 months&lt;/strong&gt; from the date we make a hiring decision,
+  after which it will be securely deleted — unless you give us explicit consent to retain it
+  for future opportunities. Your data will not be sold or shared with third parties for marketing.
+  See our &lt;a href="/privacy-policy/" style="color:#4f46e5;"&gt;Privacy Policy&lt;/a&gt; for your full
+  rights, including the right to access or delete your data.
+&lt;/p&gt;</code></pre>
+
+  <div class="note">✅ This covers the Article 13 requirements: identity of controller, purpose, lawful basis, retention period, and rights. It matches what your Privacy Policy already says about candidate data.</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ISSUE 3: TERMS & CONDITIONS -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-yellow">🟡 Medium Priority</span>
+    <h2>Fix 3 — Terms &amp; Conditions Page</h2>
+  </div>
+  <p>A full Terms &amp; Conditions document has been created and provided as a separate file: <strong>lisbom-terms-and-conditions.html</strong></p>
+
+  <div class="step"><div class="step-num">1</div><div class="step-text">Save <code>lisbom-terms-and-conditions.html</code> to your site as <code>terms.html</code> (or <code>terms-and-conditions.html</code>).</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-text">Add "Terms &amp; Conditions" to your footer links, next to Privacy Policy:</div></div>
+<pre><code>&lt;!-- BEFORE --&gt;
+&lt;a href="/privacy-policy/"&gt;Privacy Policy&lt;/a&gt; · &lt;a href="javascript:void(0)"&gt;Cookie Settings&lt;/a&gt;
+
+&lt;!-- AFTER --&gt;
+&lt;a href="/privacy-policy/"&gt;Privacy Policy&lt;/a&gt; ·
+&lt;a href="/terms/"&gt;Terms &amp; Conditions&lt;/a&gt; ·
+&lt;a href="javascript:openCookieSettings()"&gt;Cookie Settings&lt;/a&gt;</code></pre>
+
+  <div class="step"><div class="step-num">3</div><div class="step-text">Add a reference to the T&Cs in the contact form privacy notice — update the existing text to include: <em>"By submitting this form you also agree to our <a href="/terms/">Terms &amp; Conditions</a>."</em></div></div>
+
+  <div class="warn">⚠️ Important: Have a solicitor review the T&Cs before publishing, particularly the limitation of liability clause and the non-solicitation/transfer fee provisions, to ensure they reflect your actual commercial arrangements.</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ISSUE 4: BOOK A CALL LINKS -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-yellow">🟡 Medium Priority</span>
+    <h2>Fix 4 — "Book a Call" Broken Links</h2>
+  </div>
+  <p>All "Book a Call" / "Book a Discovery Call" buttons currently link to <code>&lt;&gt;</code> (empty href). If you're using Calendly, replace with one of the following options:</p>
+
+  <h3 style="margin: 1rem 0 0.5rem; font-size:0.95rem;">Option A — Direct Calendly Link (simplest)</h3>
+<pre><code>&lt;!-- Replace all href="&lt;&gt;" with your actual Calendly URL --&gt;
+&lt;a href="https://calendly.com/YOUR_USERNAME/discovery-call" target="_blank"
+   rel="noopener noreferrer"&gt;
+  Book a Discovery Call
+&lt;/a&gt;</code></pre>
+
+  <h3 style="margin: 1rem 0 0.5rem; font-size:0.95rem;">Option B — Inline Calendly Popup Widget</h3>
+<pre><code>&lt;!-- 1. Add to your &lt;head&gt; (consent-gated — only load after Functional cookies accepted) --&gt;
+&lt;link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet"&gt;
+&lt;script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async&gt;&lt;/script&gt;
+
+&lt;!-- 2. Replace button/link onclick --&gt;
+&lt;a href="javascript:void(0)"
+   onclick="Calendly.initPopupWidget({url: 'https://calendly.com/YOUR_USERNAME/discovery-call'}); return false;"&gt;
+  Book a Discovery Call
+&lt;/a&gt;</code></pre>
+
+  <div class="note">✅ Your privacy policy already mentions Calendly in Section 6 — so once the link is working, the data disclosure is covered. Just make sure the Functional cookie category in your banner covers Calendly.</div>
+
+  <h3 style="margin: 1rem 0 0.5rem; font-size:0.95rem;">Pages to update:</h3>
+  <ul style="color:#333; padding-left:1.25rem;">
+    <li><code>index.html</code> — hero CTA + second CTA + nav button</li>
+    <li><code>how-it-works.html</code> — any CTA buttons</li>
+    <li><code>roles.html</code> — any CTA buttons</li>
+    <li><code>contact.html</code> — nav "Book a Call" button</li>
+    <li><code>careers.html</code> — nav "Book a Call" button</li>
+    <li>All footers</li>
+  </ul>
+</div>
+
+
+<!-- SUMMARY -->
+<div class="card" style="background: linear-gradient(135deg, #f5f3ff, #ede9fe); border-color: #c4b5fd;">
+  <h2 style="margin-bottom:0.75rem;">✅ Summary Checklist</h2>
+  <div class="step"><div class="step-num" style="background:#16a34a;">1</div><div class="step-text"><strong>Cookie banner:</strong> Install CookieYes (Option A) or add the inline consent code (Option B). Update footer "Cookie Settings" link.</div></div>
+  <div class="step"><div class="step-num" style="background:#16a34a;">2</div><div class="step-text"><strong>Careers forms:</strong> Paste the privacy notice snippet above both Submit buttons in <code>careers.html</code> (general form + role modal form).</div></div>
+  <div class="step"><div class="step-num" style="background:#16a34a;">3</div><div class="step-text"><strong>Terms &amp; Conditions:</strong> Upload <code>lisbom-terms-and-conditions.html</code> as <code>/terms.html</code>, add to footer, update contact form notice, get legal review.</div></div>
+  <div class="step"><div class="step-num" style="background:#16a34a;">4</div><div class="step-text"><strong>"Book a Call" links:</strong> Replace all <code>href="&lt;&gt;"</code> with your Calendly URL across all pages.</div></div>
+</div>
+
+</body>
+</html>
