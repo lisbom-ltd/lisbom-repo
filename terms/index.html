@@ -8,6 +8,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
+    padding-top: 70px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       font-size: 16px;
       line-height: 1.7;
@@ -16,20 +17,6 @@
     }
 
     /* ── NAV (matches LisBom style) ── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 2rem;
-      border-bottom: 1px solid #e8e8f0;
-    }
-    .nav-logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #1a1a2e;
-      text-decoration: none;
-    }
-    .nav-logo span { color: #4f46e5; }
 
     /* ── HERO ── */
     .hero {
@@ -174,7 +161,58 @@
       border-top: 1px solid #e8e8f0;
     }
     footer a { color: #4f46e5; text-decoration: none; }
-  </style>
+  
+  /* ── SHARED NAV ── */
+  :root {
+    --nav-ink: #1A1714; --nav-ink2: #4A433C; --nav-coral: #E8593F;
+    --nav-coral2: #FF7A5C; --nav-cream: #FAF8F4; --nav-cream2: #F2EFE9;
+    --nav-indigo: #4338CA; --nav-border: #EAE6DF;
+  }
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0; transition: all 0.3s;
+  }
+  #navbar.scrolled {
+    background: rgba(250,248,244,0.95); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--nav-border); box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .nav-inner {
+    max-width: 1160px; margin: 0 auto; padding: 0 32px;
+    height: 70px; display: flex; align-items: center; gap: 0;
+  }
+  .nav-logo {
+    font-size: 22px; font-weight: 800; color: var(--nav-ink);
+    text-decoration: none; letter-spacing: -0.03em; flex-shrink: 0; margin-right: auto;
+  }
+  .nav-logo span { color: var(--nav-coral); }
+  .nav-links { display: flex; gap: 8px; align-items: center; margin-right: 24px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500; color: var(--nav-ink2);
+    text-decoration: none; padding: 8px 14px; border-radius: 6px; transition: background 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { background: var(--nav-cream2); color: var(--nav-ink); }
+  .nav-links a.active { color: var(--nav-indigo); font-weight: 600; }
+  .nav-cta {
+    font-size: 14px; font-weight: 600; background: var(--nav-coral);
+    color: #fff !important; padding: 10px 22px; border-radius: 8px;
+    text-decoration: none; flex-shrink: 0; transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--nav-coral2); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--nav-ink); border-radius: 2px; }
+  .mobile-menu {
+    display: none; flex-direction: column; padding: 20px 32px 28px;
+    background: var(--nav-cream); border-bottom: 1px solid var(--nav-border);
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link { font-size: 16px; font-weight: 500; color: var(--nav-ink); text-decoration: none; padding: 13px 0; border-bottom: 1px solid var(--nav-border); }
+  .mob-cta { margin-top: 16px; background: var(--nav-coral); color: #fff !important; text-align: center; padding: 14px; border-radius: 8px; font-weight: 600; }
+  @media (max-width: 860px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+    #navbar .nav-cta { display: none; }
+    .nav-inner { padding: 0 20px; }
+  }
+</style>
 </head>
 <body>
 
@@ -457,5 +495,7 @@
   </p>
 </footer>
 
+  <script src="/js/main.js"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>

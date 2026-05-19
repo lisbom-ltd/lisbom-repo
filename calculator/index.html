@@ -31,6 +31,7 @@
   html { scroll-behavior: smooth; }
 
   body {
+    padding-top: 70px;
     font-family: 'DM Sans', sans-serif;
     background: var(--off-white);
     color: var(--black);
@@ -38,44 +39,72 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* NAV */
-  nav {
-    background: var(--white);
+  /* NAV — shared system */
+  :root {
+    --ink: #1A1714;
+    --ink2: #4A433C;
+    --coral: #E8593F;
+    --coral2: #FF7A5C;
+    --cream: #FAF8F4;
+    --cream2: #F2EFE9;
+    --indigo: #4338CA;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    padding: 0; transition: all 0.3s;
+  }
+  #navbar.scrolled {
+    background: rgba(250,248,244,0.95);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-inner {
+    max-width: 1160px; margin: 0 auto; padding: 0 32px;
+    height: 70px; display: flex; align-items: center; gap: 0;
   }
   .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.4rem;
-    color: var(--black);
-    text-decoration: none;
+    font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 700;
+    color: var(--ink); text-decoration: none; letter-spacing: -0.03em;
+    flex-shrink: 0; margin-right: auto;
   }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color 0.15s; }
-  .nav-links a:hover { color: var(--black); }
-  .nav-links a.active { color: var(--black); }
+  .nav-logo span { color: var(--coral); }
+  .nav-links { display: flex; gap: 8px; align-items: center; margin-right: 24px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500; color: var(--ink2);
+    text-decoration: none; padding: 8px 14px; border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { background: var(--cream2); color: var(--ink); }
+  .nav-links a.active { color: var(--indigo); font-weight: 600; }
   .nav-cta {
-    background: var(--black);
-    color: var(--white) !important;
-    padding: 0.5rem 1.25rem;
-    border-radius: 6px;
-    font-size: 0.875rem !important;
-    font-weight: 500;
-    transition: opacity 0.15s !important;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+    background: var(--coral); color: var(--white) !important; padding: 10px 22px;
+    border-radius: 8px; text-decoration: none; flex-shrink: 0;
+    transition: background 0.2s, transform 0.2s;
   }
-  .nav-cta:hover { opacity: 0.85; }
+  .nav-cta:hover { background: var(--coral2); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.25s; }
+  .mobile-menu {
+    display: none; flex-direction: column; padding: 20px 32px 28px;
+    background: var(--cream); border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link { font-size: 16px; font-weight: 500; color: var(--ink); text-decoration: none; padding: 13px 0; border-bottom: 1px solid var(--border); }
+  .mob-cta { margin-top: 16px; background: var(--coral); color: var(--white) !important; text-align: center; padding: 14px; border-radius: 8px; font-weight: 600; }
+  @media (max-width: 860px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-inner { padding: 0 20px; }
+  }
 
   /* HERO */
   .hero {
     text-align: center;
-    padding: 5rem 2rem 3rem;
+    padding: 3rem 2rem 3rem;
     max-width: 640px;
     margin: 0 auto;
   }
@@ -1061,5 +1090,7 @@ document.querySelectorAll('input[name="eor"]').forEach(radio => {
 // ─── INIT ────────────────────────────────────────────────────────────────────
 render();
 </script>
+  <script src="/js/main.js"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
