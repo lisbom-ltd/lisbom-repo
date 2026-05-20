@@ -7,35 +7,13 @@
   <title>LisBom — More Leads. Less Admin. Lower Costs.</title>
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .hero {
-      min-height: 100vh;
-      background: #0F0D0B;
-      display: flex; align-items: center;
-      padding-top: 70px; position: relative; overflow: hidden;
-    }
-    .hero-grain {
-      position: absolute; inset: 0; pointer-events: none; opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 180px 180px;
-    }
-    .hero-glow-1 {
-      position: absolute; pointer-events: none;
-      width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(232,93,63,0.09) 0%, transparent 70%);
-      top: -200px; right: -150px;
-    }
-    .hero-glow-2 {
-      position: absolute; pointer-events: none;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%);
-      bottom: -100px; left: 5%;
-    }
+    /* ── HERO ── */
+    .hero { min-height: 100vh; background: #0F0D0B; display: flex; align-items: center; padding-top: 70px; position: relative; overflow: hidden; }
+    .hero-grain { position: absolute; inset: 0; pointer-events: none; opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 180px 180px; }
+    .hero-glow-1 { position: absolute; pointer-events: none; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(232,93,63,0.09) 0%, transparent 70%); top: -200px; right: -150px; }
+    .hero-glow-2 { position: absolute; pointer-events: none; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%); bottom: -100px; left: 5%; }
     .hero-inner { position: relative; z-index: 2; padding: 80px 0 100px; max-width: 880px; }
-    .hero-kicker {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--coral2); margin-bottom: 32px;
-    }
+    .hero-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral2); margin-bottom: 32px; }
     .hero-kicker-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral2); animation: pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
     .hero h1 { color: var(--white); font-size: clamp(46px, 7.5vw, 96px); line-height: 1.04; letter-spacing: -0.035em; margin-bottom: 32px; }
@@ -44,16 +22,13 @@
     .hero-sub { font-size: 18px; color: rgba(255,255,255,0.48); max-width: 600px; margin-bottom: 52px; line-height: 1.65; font-weight: 400; }
     .hero-sub strong { color: rgba(255,255,255,0.82); font-weight: 500; }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 80px; }
-    .hero-outcomes {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
-      border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; overflow: hidden;
-      background: rgba(255,255,255,0.04);
-    }
+    .hero-outcomes { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); }
     .hero-outcome { padding: 22px 24px; background: rgba(0,0,0,0.2); }
     .ho-num { font-family: var(--display); font-size: 28px; font-weight: 700; color: var(--white); letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px; }
     .ho-num span { color: var(--coral2); }
     .ho-label { font-size: 12px; color: rgba(255,255,255,0.36); line-height: 1.4; }
 
+    /* ── OUTCOMES BAR ── */
     .outcomes-bar { background: var(--cream2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 18px 0; overflow-x: auto; }
     .outcomes-inner { display: flex; align-items: center; min-width: max-content; }
     .opill { display: flex; align-items: center; gap: 10px; padding: 0 32px; border-right: 1px solid var(--border); flex-shrink: 0; }
@@ -61,6 +36,7 @@
     .opill-text { font-size: 13px; font-weight: 500; color: var(--ink2); white-space: nowrap; }
     .opill-text strong { color: var(--ink); }
 
+    /* ── PROBLEM ── */
     .problem-section { background: var(--white); }
     .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--coral); margin-bottom: 20px; display: block; }
@@ -78,14 +54,39 @@
     .prob-box p { font-size: 15px; color: rgba(255,255,255,0.58); line-height: 1.65; margin: 0; }
     .prob-box p strong { color: var(--coral2); }
 
-    .offers-section { background: var(--cream); }
+    /* ── FOUNDER SECTION ── */
+    .founder-section { background: var(--cream); }
+    .founder-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
+    .founder-avatar-wrap { position: relative; }
+    .founder-avatar-plate {
+      background: var(--ink); border-radius: 20px; padding: 48px 40px;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 28px;
+    }
+    .founder-initials {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--coral); display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--white);
+      letter-spacing: -0.02em; flex-shrink: 0;
+    }
+    .founder-name-block { display: flex; flex-direction: column; gap: 4px; }
+    .founder-name-block strong { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--white); }
+    .founder-name-block span { font-size: 13px; color: rgba(255,255,255,0.45); }
+    .founder-quote-pull {
+      font-family: var(--display); font-size: 18px; font-style: italic; line-height: 1.5;
+      color: rgba(255,255,255,0.75); border-left: 3px solid var(--coral2); padding-left: 20px;
+    }
+    .founder-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ftag { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 100px; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); letter-spacing: 0.06em; }
+    .founder-copy { display: flex; flex-direction: column; gap: 20px; }
+    .founder-copy h2 { margin-bottom: 4px; }
+    .founder-copy p { font-size: 16px; color: var(--muted); line-height: 1.8; margin: 0; }
+    .founder-copy p strong { color: var(--ink); }
+
+    /* ── FREE OFFERS ── */
+    .offers-section { background: var(--white); }
     .offers-hdr { text-align: center; margin-bottom: 60px; }
     .offers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 44px; }
-    .offer-card {
-      background: var(--white); border-radius: 16px; padding: 36px 32px;
-      border: 1px solid var(--border); position: relative; overflow: hidden;
-      transition: transform 0.3s var(--ease), box-shadow 0.3s;
-    }
+    .offer-card { background: var(--cream); border-radius: 16px; padding: 36px 32px; border: 1px solid var(--border); position: relative; overflow: hidden; transition: transform 0.3s var(--ease), box-shadow 0.3s; }
     .offer-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
     .free-badge { position: absolute; top: 24px; right: 24px; background: var(--coral); color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
     .offer-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 20px; }
@@ -103,7 +104,8 @@
     .offers-cta-row { text-align: center; }
     .offers-sub { font-size: 14px; color: var(--muted); margin-top: 14px; }
 
-    .what-section { background: var(--white); }
+    /* ── WHAT WE DO ── */
+    .what-section { background: var(--cream); }
     .what-hdr { margin-bottom: 64px; }
     .what-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
     .what-card { padding: 36px 0; border-top: 2px solid var(--border); transition: border-color 0.2s; }
@@ -115,6 +117,7 @@
     .what-out { font-size: 13px; color: var(--ink2); display: flex; align-items: center; gap: 8px; }
     .what-out::before { content: '→'; color: var(--coral); font-size: 13px; flex-shrink: 0; }
 
+    /* ── PROOF / INDUSTRIES ── */
     .proof-section { background: var(--ink); position: relative; overflow: hidden; }
     .proof-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 90% 10%, rgba(99,102,241,0.12) 0%, transparent 55%); }
     .proof-inner { position: relative; z-index: 2; }
@@ -138,6 +141,7 @@
     .gbox h4 { font-family: var(--body); font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
     .gbox p { font-size: 13px; color: rgba(255,255,255,0.42); line-height: 1.6; margin: 0; }
 
+    /* ── HOW IT WORKS ── */
     .hiw-section { background: var(--cream); }
     .hiw-hdr { text-align: center; margin-bottom: 64px; }
     .hiw-steps-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
@@ -151,6 +155,7 @@
     .hiw-note { font-size: 14px; color: var(--muted); margin-top: 16px; }
     .hiw-note strong { color: var(--ink); }
 
+    /* ── WHY LISBOM ── */
     .about-section { background: var(--white); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
     .about-pts { display: flex; flex-direction: column; gap: 0; margin-top: 36px; }
@@ -170,6 +175,7 @@
     .astat-dark .astat-n em { color: var(--coral2); }
     .astat-dark .astat-l { color: rgba(255,255,255,0.38); }
 
+    /* ── FINAL CTA ── */
     .final-cta { background: #0F0D0B; position: relative; overflow: hidden; }
     .final-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(232,93,63,0.13) 0%, transparent 60%); }
     .final-inner { position: relative; z-index: 2; text-align: center; max-width: 680px; margin: 0 auto; }
@@ -182,8 +188,9 @@
     .fpill { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.09); border-radius: 100px; padding: 6px 14px; display: flex; align-items: center; gap: 6px; }
     .fpill::before { content: '✓'; color: var(--coral2); }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      .problem-grid, .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .problem-grid, .about-grid, .founder-grid { grid-template-columns: 1fr; gap: 48px; }
       .offers-grid, .what-grid { grid-template-columns: 1fr; }
       .hiw-steps-row { grid-template-columns: 1fr 1fr; gap: 32px; }
       .hiw-steps-row::before { display: none; }
@@ -203,7 +210,7 @@
 <body>
 
   <!-- NAV -->
-      <nav id="navbar">
+  <nav id="navbar">
     <div class="nav-inner">
       <a href="/" class="nav-logo">LisBom<span>.</span></a>
       <ul class="nav-links">
@@ -245,7 +252,7 @@
           <span class="dim">Lower costs.</span>
         </h1>
         <p class="hero-sub reveal reveal-d2">
-          We help UK businesses <strong>automate operations, cut admin overhead, and generate more qualified leads</strong> — through AI-powered systems and high-converting websites, staffed by exceptional Filipino professionals.
+          We help UK businesses <strong>automate operations, cut admin overhead, and generate more qualified leads</strong> — through dedicated Filipino professionals, UK-managed from day one.
         </p>
         <div class="hero-ctas reveal reveal-d3">
           <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral">Get a Free Audit &rarr;</a>
@@ -277,8 +284,8 @@
   <div class="outcomes-bar">
     <div class="container">
       <div class="outcomes-inner">
-        <div class="opill"><span class="opill-text"><strong>AI workflow automation</strong> that removes manual admin</span></div>
-        <div class="opill"><span class="opill-text"><strong>High-conversion websites</strong> built to generate qualified leads</span></div>
+        <div class="opill"><span class="opill-text"><strong>Admin automation</strong> that removes manual overhead</span></div>
+        <div class="opill"><span class="opill-text"><strong>More qualified leads</strong> from your existing traffic</span></div>
         <div class="opill"><span class="opill-text"><strong>Dedicated remote teams</strong> UK-managed, Filipino-staffed</span></div>
         <div class="opill"><span class="opill-text"><strong>Full compliance</strong> — payroll, benefits &amp; onboarding included</span></div>
       </div>
@@ -292,7 +299,7 @@
         <div class="reveal">
           <span class="section-label">The problem we solve</span>
           <div class="problem-statement">UK businesses are drowning in admin while their competition scales <em>leaner and faster.</em></div>
-          <p class="problem-copy">The businesses we work with aren't failing — they're growing. But growth brings friction: more customer queries, more manual processes, more hiring headaches, and a website that isn't converting like it should. We fix that.</p>
+          <p class="problem-copy">The businesses we work with aren't failing — they're growing. But growth brings friction: more customer queries, more manual processes, more hiring headaches. We fix that — for less than the cost of a single UK hire.</p>
         </div>
         <div class="reveal reveal-d1">
           <div class="pain-list">
@@ -310,18 +317,61 @@
             </div>
             <div class="pain-item">
               <div class="pain-x"><svg viewBox="0 0 12 12" fill="none"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg></div>
-              <div class="pain-body"><strong>Growth is stalling at the wrong time</strong>You know what to do — you just don't have the capacity or systems to execute.</div>
+              <div class="pain-body"><strong>Growth is stalling at the wrong time</strong>You know what to do — you just don't have the capacity to execute.</div>
             </div>
           </div>
           <div class="prob-box">
-            <p>LisBom gives you the <strong>people, systems, and websites</strong> to fix all four — for less than the cost of a single UK hire.</p>
+            <p>LisBom gives you the <strong>people and systems</strong> to fix all four — for less than the cost of a single UK hire.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FREE OFFERS -->
+  <!-- FOUNDER SECTION — fixes blocker: no face, no story, no trust -->
+  <section class="founder-section">
+    <div class="container">
+      <div class="founder-grid">
+        <div class="founder-avatar-plate reveal">
+          <div class="founder-initials">DB</div>
+          <div class="founder-name-block">
+            <strong>Diven Babu</strong>
+            <span>Founder, LisBom Limited &middot; London, UK</span>
+          </div>
+          <div class="founder-quote-pull">
+            "LisBom wasn't born in a boardroom. It started with a problem I kept seeing over and over."
+          </div>
+          <div class="founder-tags">
+            <span class="ftag">8 yrs — Finance &amp; SaaS</span>
+            <span class="ftag">London since 2016</span>
+            <span class="ftag">UK-registered business</span>
+          </div>
+        </div>
+        <div class="founder-copy reveal reveal-d1">
+          <div class="eyebrow">Who's behind LisBom</div>
+          <h2>Not a staffing agency.<br><em>A growth partner.</em></h2>
+          <p>
+            After eight years in financial planning and software — watching ambitious UK businesses grind to a halt not because of strategy, but because of <strong>time</strong> — I knew there had to be a smarter way.
+          </p>
+          <p>
+            Time eaten up by admin backlogs. Processes that didn't need a London salary to get done brilliantly. Teams stretched too thin to focus on what actually moves the business forward.
+          </p>
+          <p>
+            The answer came from the Philippines. I'd seen first-hand how Filipino professionals approach their work — genuine pride, loyalty, and a commitment to being part of something bigger than a job description. They don't clock in and clock out. <strong>They invest themselves. They grow with you.</strong>
+          </p>
+          <p>
+            That combination — UK businesses ready to scale, and Filipino professionals ready to pour everything into helping them do it — felt like something worth building around. So I built LisBom.
+          </p>
+          <p style="font-size:14px; color:var(--muted); margin-top:4px;">
+            LisBom is <strong>actively building its first UK client roster</strong> — which means you get founder-level attention, early-adopter pricing, and a partner who has every reason to make your first placement exceptional.
+          </p>
+          <a href="/contact/" class="btn btn-primary" style="margin-top: 8px;">Start a conversation with Diven &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE OFFERS — lower-friction entry point -->
   <section class="offers-section">
     <div class="container">
       <div class="offers-hdr">
@@ -335,7 +385,7 @@
           <div class="offer-icon ic-1">&#9889;</div>
           <h3>AI Workflow Audit</h3>
           <span class="offer-value">Worth &pound;500 &mdash; yours at no cost</span>
-          <p>We map your current operations and identify every task that can be automated. You receive a prioritised plan showing exactly where AI saves your team time — and what that's worth per month.</p>
+          <p>We map your current operations and identify every task that can be automated. You receive a prioritised plan showing exactly where you can save time — and what that's worth per month.</p>
           <div class="offer-items">
             <div class="offer-item"><div class="otick"><svg viewBox="0 0 10 8" fill="none"><path d="M1 3.5L4 6.5L9 1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Full operations review</div>
             <div class="offer-item"><div class="otick"><svg viewBox="0 0 10 8" fill="none"><path d="M1 3.5L4 6.5L9 1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Automation opportunity map</div>
@@ -347,7 +397,7 @@
           <div class="offer-icon ic-2">&#128200;</div>
           <h3>Website Conversion Audit</h3>
           <span class="offer-value">Identify leads you're leaving on the table</span>
-          <p>We review your current site and show you the specific friction points costing you enquiries and sales. Written report with prioritised fixes — with or without using us to implement them.</p>
+          <p>We review your current site and show you the specific friction points costing you enquiries. Written report with prioritised fixes — with or without using us to implement them.</p>
           <div class="offer-items">
             <div class="offer-item"><div class="otick"><svg viewBox="0 0 10 8" fill="none"><path d="M1 3.5L4 6.5L9 1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Page-by-page conversion review</div>
             <div class="offer-item"><div class="otick"><svg viewBox="0 0 10 8" fill="none"><path d="M1 3.5L4 6.5L9 1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Copy, CTA &amp; UX analysis</div>
@@ -359,10 +409,10 @@
           <div class="offer-icon ic-3">&#127919;</div>
           <h3>15-Minute Automation Assessment</h3>
           <span class="offer-value">A focused call &mdash; not a sales pitch</span>
-          <p>Tell us your biggest operational headache. In 15 minutes, we'll tell you whether automation can solve it, what it looks like, and what the realistic ROI is. No fluff, no filler.</p>
+          <p>Tell us your biggest operational headache. In 15 minutes, we'll tell you whether we can solve it, what it looks like, and what the realistic ROI is. No fluff, no filler.</p>
           <div class="offer-items">
             <div class="offer-item"><div class="otick"><svg viewBox="0 0 10 8" fill="none"><path d="M1 3.5L4 6.5L9 1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Specific to your business &amp; sector</div>
-            <div class="offer-item"><div class="otick"><svg viewBox="0 0 10 8" fill="none"><path d="M1 3.5L4 6.5L9 1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Honest assessment — we'll say if it won't work</div>
+            <div class="offer-item"><div class="otick"><svg viewBox="0 0 10 8" fill="none"><path d="M1 3.5L4 6.5L9 1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Honest — we'll say if it won't work</div>
             <div class="offer-item"><div class="otick"><svg viewBox="0 0 10 8" fill="none"><path d="M1 3.5L4 6.5L9 1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Actionable next steps, whatever you decide</div>
           </div>
         </div>
@@ -396,54 +446,54 @@
       <div class="what-grid">
         <div class="what-card reveal">
           <div class="what-num">01</div>
-          <h3>AI-Powered Operations</h3>
-          <p>We identify and automate the repetitive workflows eating your team's time — from CRM updates and inbox triage to reporting, scheduling, and client communication.</p>
-          <div class="what-outs">
-            <div class="what-out">Fewer manual hours per week</div>
-            <div class="what-out">Faster response times to clients</div>
-            <div class="what-out">Systems that scale without more headcount</div>
-          </div>
-        </div>
-        <div class="what-card reveal reveal-d1">
-          <div class="what-num">02</div>
-          <h3>High-Conversion Websites</h3>
-          <p>We build websites engineered to turn visitors into qualified enquiries — combining sharp copy, strategic UX, and conversion-focused design. Not templates. Not guesswork.</p>
-          <div class="what-outs">
-            <div class="what-out">More leads from your existing traffic</div>
-            <div class="what-out">Stronger positioning vs competitors</div>
-            <div class="what-out">Websites that work while you sleep</div>
-          </div>
-        </div>
-        <div class="what-card reveal reveal-d2">
-          <div class="what-num">03</div>
           <h3>Dedicated Remote Teams</h3>
-          <p>Exceptional Filipino professionals — vetted, onboarded, and UK-managed. Customer service, marketing, IT support, admin, and ops roles for 60%+ less than UK equivalents.</p>
+          <p>Exceptional Filipino professionals — vetted, onboarded, and UK-managed. Customer service, marketing, ops, admin, and finance roles for 60%+ less than UK equivalents.</p>
           <div class="what-outs">
             <div class="what-out">Capacity to grow without UK salary costs</div>
             <div class="what-out">Full compliance: payroll, tax &amp; benefits covered</div>
             <div class="what-out">30-day placement or your first month free</div>
           </div>
         </div>
+        <div class="what-card reveal reveal-d1">
+          <div class="what-num">02</div>
+          <h3>Admin &amp; Ops Automation</h3>
+          <p>We identify and remove the repetitive workflows eating your team's time — CRM updates, inbox triage, reporting, scheduling, and client communication.</p>
+          <div class="what-outs">
+            <div class="what-out">Fewer manual hours per week</div>
+            <div class="what-out">Faster response times to customers</div>
+            <div class="what-out">Systems that scale without more headcount</div>
+          </div>
+        </div>
+        <div class="what-card reveal reveal-d2">
+          <div class="what-num">03</div>
+          <h3>More Leads, Less Spend</h3>
+          <p>From SEO and content to paid ads and email — we place the marketing talent that builds your pipeline consistently, at a fraction of UK agency or in-house costs.</p>
+          <div class="what-outs">
+            <div class="what-out">More leads from your existing traffic</div>
+            <div class="what-out">Stronger positioning vs competitors</div>
+            <div class="what-out">Marketing that runs while you sleep</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PROOF + INDUSTRIES -->
+  <!-- INDUSTRIES + GUARANTEES -->
   <section class="proof-section">
     <div class="container">
       <div class="proof-inner">
         <div class="proof-hdr reveal">
-          <div class="eyebrow">Industries we specialise in</div>
-          <h2 class="reveal reveal-d1">Built for businesses <em style="color:var(--coral2)">ready to scale intelligently.</em></h2>
-          <p class="reveal reveal-d2">The message is focused — even if the delivery is broad.</p>
+          <div class="eyebrow">Industries we focus on</div>
+          <h2 class="reveal reveal-d1">Built for UK businesses <em style="color:var(--coral2)">ready to scale intelligently.</em></h2>
+          <p class="reveal reveal-d2">Founder-led, growing, and feeling the weight of doing too much with too little.</p>
         </div>
         <div class="inds-grid">
           <div class="ind-card reveal">
-            <div class="ind-name">&#128722; Ecommerce</div>
-            <div class="ind-roles">CS agents &middot; Order ops &middot; Returns admin &middot; Backend automation</div>
+            <div class="ind-name">&#128722; Ecommerce &amp; DTC</div>
+            <div class="ind-roles">CS agents &middot; Order ops &middot; Returns admin &middot; Social &amp; marketing</div>
             <div class="ind-results">
               <div class="ind-result">Scale customer ops without scaling UK headcount</div>
-              <div class="ind-result">Automated order &amp; refund workflows</div>
+              <div class="ind-result">Consistent marketing without agency fees</div>
             </div>
           </div>
           <div class="ind-card reveal reveal-d1">
@@ -464,25 +514,25 @@
           </div>
           <div class="ind-card reveal">
             <div class="ind-name">&#128202; Accounting &amp; Finance</div>
-            <div class="ind-roles">Bookkeeping support &middot; Data entry &middot; Client admin &middot; Reporting</div>
+            <div class="ind-roles">Bookkeeping &middot; Data entry &middot; Client admin &middot; Reporting</div>
             <div class="ind-results">
               <div class="ind-result">Qualified staff focused on qualified work</div>
-              <div class="ind-result">Automated reporting pipelines</div>
+              <div class="ind-result">60%+ cost saving vs UK equivalent hire</div>
             </div>
           </div>
           <div class="ind-card reveal reveal-d1">
             <div class="ind-name">&#128187; SaaS &amp; Tech</div>
             <div class="ind-roles">Technical support &middot; QA &middot; Customer success &middot; Ops</div>
             <div class="ind-results">
-              <div class="ind-result">Longer hours of support coverage</div>
+              <div class="ind-result">Extended hours of support coverage</div>
               <div class="ind-result">Faster bug triage and escalation</div>
             </div>
           </div>
           <div class="ind-card reveal reveal-d2">
-            <div class="ind-name">&#127973; Healthcare &amp; Wellness</div>
-            <div class="ind-roles">Scheduling &middot; Patient comms &middot; Back-office admin &middot; Billing support</div>
+            <div class="ind-name">&#127973; Health &amp; Wellness</div>
+            <div class="ind-roles">Scheduling &middot; Patient comms &middot; Back-office admin &middot; Billing</div>
             <div class="ind-results">
-              <div class="ind-result">Clinical staff freed from admin</div>
+              <div class="ind-result">Clinical staff freed from admin overhead</div>
               <div class="ind-result">Reduced no-shows with proactive comms</div>
             </div>
           </div>
@@ -533,7 +583,7 @@
         <div class="hiw-step">
           <div class="hiw-num">04</div>
           <h4>Long-Term Partnership</h4>
-          <p>We stay involved. Career development, performance management — not just placed and forgotten.</p>
+          <p>We stay involved. Performance management, career development — not just placed and forgotten.</p>
         </div>
       </div>
       <div class="hiw-foot reveal">
@@ -549,13 +599,13 @@
       <div class="about-grid">
         <div class="reveal">
           <div class="eyebrow">Why LisBom</div>
-          <h2>Not a staffing agency.<br><em>A growth partner.</em></h2>
+          <h2>Four things that make<br><em>this genuinely different.</em></h2>
           <div class="about-pts">
             <div class="about-pt">
               <div class="apt-num">01</div>
               <div class="apt-body">
                 <h4>UK-managed from day one</h4>
-                <p>We're not a Filipino agency with a UK phone number. Our management and accountability is genuinely UK-side — you always have a local point of contact.</p>
+                <p>We're not a Filipino agency with a UK phone number. Management, accountability, and your point of contact are genuinely UK-side — always.</p>
               </div>
             </div>
             <div class="about-pt">
@@ -568,8 +618,8 @@
             <div class="about-pt">
               <div class="apt-num">03</div>
               <div class="apt-body">
-                <h4>We build systems, not just teams</h4>
-                <p>We help you design the workflows and automation your team needs to perform — not just hand you a CV and walk away.</p>
+                <h4>Founder-level attention at early-adopter pricing</h4>
+                <p>We're actively building our first UK client roster. That means you get direct access to the founder, above-and-beyond onboarding, and pricing that reflects where we are — not where we're going.</p>
               </div>
             </div>
             <div class="about-pt">
@@ -621,7 +671,7 @@
       <div class="final-inner reveal">
         <span class="final-eye">Ready when you are</span>
         <h2>Let's find where you're<br>leaving money on the table.</h2>
-        <p class="final-sub">Book a free audit or discovery call — <strong>no commitment, no pitch.</strong> Just a clear conversation about what's possible for your business.</p>
+        <p class="final-sub">Book a free audit — <strong>no commitment, no pitch.</strong> Just an honest conversation about what's possible for your business.</p>
         <div class="final-btns">
           <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral" style="font-size:16px;padding:16px 36px">Book a Free Audit &rarr;</a>
           <a href="/calculator/" class="btn btn-outline-white">Calculate Your Savings</a>
@@ -630,7 +680,7 @@
           <div class="fpill">Free AI Workflow Audit</div>
           <div class="fpill">Free Conversion Audit</div>
           <div class="fpill">15-Min Assessment</div>
-          <div class="fpill">Performance Teardown</div>
+          <div class="fpill">No lock-in contracts</div>
         </div>
       </div>
     </div>
@@ -652,7 +702,7 @@
         </div>
         <div class="footer-col">
           <h5>Industries</h5>
-          <a href="#">Ecommerce</a>
+          <a href="#">Ecommerce &amp; DTC</a>
           <a href="#">Recruitment</a>
           <a href="#">Real Estate</a>
           <a href="#">Accounting</a>
@@ -661,7 +711,7 @@
           <h5>Free Audits</h5>
           <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">AI Workflow Audit</a>
           <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Conversion Audit</a>
-          <a href="/contact/">Contact Us</a>
+          <a href="/contact/">Contact Diven</a>
         </div>
       </div>
       <div class="footer-bottom">
