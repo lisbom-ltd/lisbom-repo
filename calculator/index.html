@@ -592,7 +592,7 @@
 <div class="hero">
   <span class="hero-label">Cost Calculator</span>
   <h1>See your monthly cost <em>vs hiring locally</em></h1>
-  <p>Select your country, role, and seniority. Get a clear side-by-side comparison — and choose whether you need EOR included in your monthly fee.</p>
+  <p>Select your country, role, and seniority — then choose your hiring model: dedicated employee via EOR, independent contractor, or bring your own entity. Get a clear side-by-side cost comparison instantly.</p>
 </div>
 
 <!-- CALCULATOR -->
@@ -687,28 +687,29 @@
       </div>
 
       <div class="field-group">
-        <label class="field-label">Employment Setup</label>
-        <div class="eor-toggle-block">
-          <div class="eor-toggle-header">
-            <span class="eor-toggle-title"><span>⚡</span> EOR (Employer of Record)</span>
-          </div>
-          <p class="eor-tooltip">Do you need a legal employer to handle payroll, compliance & statutory benefits in the Philippines?</p>
-          <div class="eor-options">
-            <label class="eor-option selected" id="eor-yes-label">
-              <input type="radio" name="eor" value="yes" checked>
-              <span class="eor-option-text">
-                <strong>Include EOR arrangement</strong>
-                <small>LisBom arranges compliant employment — SSS, PhilHealth, Pag-IBIG, 13th month pay all covered</small>
-              </span>
-            </label>
-            <label class="eor-option" id="eor-no-label">
-              <input type="radio" name="eor" value="no">
-              <span class="eor-option-text">
-                <strong>I already have an EOR / local entity</strong>
-                <small>You manage employment compliance independently</small>
-              </span>
-            </label>
-          </div>
+        <label class="field-label">Hiring model</label>
+        <div class="eor-options" style="margin-top:0.5rem;">
+          <label class="eor-option selected" id="eor-yes-label">
+            <input type="radio" name="eor" value="yes" checked>
+            <span class="eor-option-text">
+              <strong>Dedicated employee via EOR <span style="font-weight:400;color:#7c3aed;font-size:0.72rem;">Most popular</span></strong>
+              <small>LisBom manages full legal employment — SSS, PhilHealth, Pag-IBIG, 13th month pay all covered. Best for long-term, full-time roles.</small>
+            </span>
+          </label>
+          <label class="eor-option" id="eor-contractor-label">
+            <input type="radio" name="eor" value="contractor">
+            <span class="eor-option-text">
+              <strong>Independent contractor</strong>
+              <small>Worker invoices directly — manages their own contributions. Lower cost, ideal for project-based or flexible engagements. No statutory obligations on your side.</small>
+            </span>
+          </label>
+          <label class="eor-option" id="eor-no-label">
+            <input type="radio" name="eor" value="no">
+            <span class="eor-option-text">
+              <strong>I already have an EOR / local entity</strong>
+              <small>You manage employment compliance independently. Exclude EOR fee from your estimate.</small>
+            </span>
+          </label>
         </div>
       </div>
     </div>
@@ -757,7 +758,7 @@
               <span class="cost-line-label">Staff compensation</span>
               <span class="cost-line-value" id="lb-salary">£800</span>
             </div>
-            <div class="cost-line">
+            <div class="cost-line" id="compliance-line">
               <span class="cost-line-label">Benefits &amp; statutory compliance</span>
               <span class="cost-line-value" id="lb-benefits">£110</span>
             </div>
@@ -783,6 +784,13 @@
         <div class="eor-callout-text">
           <strong>What's included in the EOR arrangement?</strong>
           LisBom handles full legal employment in the Philippines on your behalf — including SSS, PhilHealth, Pag-IBIG contributions, 13th month pay, compliant contracts, and payroll processing. No Philippine entity required.
+        </div>
+      </div>
+      <div class="eor-callout hidden" id="contractor-callout" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+        <span class="eor-callout-icon">📋</span>
+        <div class="eor-callout-text" style="color:#166534;">
+          <strong style="color:#15803d;">How the contractor model works</strong>
+          Your hire invoices LisBom monthly. They manage their own SSS, PhilHealth, and Pag-IBIG as a self-employed professional — most experienced Filipino remote workers already do this. No EOR fee, no statutory obligations on your side. LisBom provides a compliant services agreement.
         </div>
       </div>
 
@@ -985,7 +993,7 @@ const PH_COMPLIANCE_GBP = 110; // statutory PH contributions (SSS, PhilHealth, P
 const LISBOM_MGMT_GBP = 190;
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
-let state = { country: 'GB', role: 'va', level: 'mid', eor: true };
+let state = { country: 'GB', role: 'va', level: 'mid', hiring: 'eor' };
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 function fmt(gbp, country) {
@@ -1004,7 +1012,7 @@ function fmtK(gbp, country) {
 
 // ─── RENDER ──────────────────────────────────────────────────────────────────
 function render() {
-  const { country, role, level, eor } = state;
+  const { country, role, level, hiring } = state;
   const c = CURRENCY[country];
   const oh = OVERHEAD[country];
 
@@ -1016,8 +1024,11 @@ function render() {
 
   // LISBOM
   const phSalary = PH_DATA[role][level];
-  const phCompliance = PH_COMPLIANCE_GBP;
-  const eorFee = eor ? EOR_FEE_GBP : 0;
+  // contractor: no compliance fee (worker self-manages), no EOR fee
+  // eor: full compliance + EOR fee
+  // own-eor: compliance only (no EOR fee)
+  const phCompliance = hiring === 'contractor' ? 0 : PH_COMPLIANCE_GBP;
+  const eorFee = hiring === 'eor' ? EOR_FEE_GBP : 0;
   const mgmt = LISBOM_MGMT_GBP;
   const lisbomTotal = phSalary + phCompliance + eorFee + mgmt;
 
@@ -1043,12 +1054,18 @@ function render() {
   document.getElementById('lisbom-total').textContent = fmt(lisbomTotal, country);
   document.getElementById('lb-total-line').textContent = fmt(lisbomTotal, country);
 
-  // Show/hide EOR line
+  // Show/hide EOR fee line
   const eorLine = document.getElementById('eor-line');
-  eorLine.style.display = eor ? 'flex' : 'none';
+  eorLine.style.display = hiring === 'eor' ? 'flex' : 'none';
 
-  // Show/hide EOR callout
-  document.getElementById('eor-callout').classList.toggle('hidden', !eor);
+  // Show/hide compliance line (hidden for contractor)
+  const complianceLine = document.getElementById('compliance-line');
+  if (complianceLine) complianceLine.style.display = hiring === 'contractor' ? 'none' : 'flex';
+
+  // Show/hide callouts
+  document.getElementById('eor-callout').classList.toggle('hidden', hiring !== 'eor');
+  const cc = document.getElementById('contractor-callout');
+  if (cc) cc.classList.toggle('hidden', hiring !== 'contractor');
 
   // Savings
   document.getElementById('saving-amount').textContent = fmt(saving, country);
@@ -1080,9 +1097,11 @@ document.querySelectorAll('.seniority-tab').forEach(btn => {
 
 document.querySelectorAll('input[name="eor"]').forEach(radio => {
   radio.addEventListener('change', e => {
-    state.eor = e.target.value === 'yes';
-    document.getElementById('eor-yes-label').classList.toggle('selected', state.eor);
-    document.getElementById('eor-no-label').classList.toggle('selected', !state.eor);
+    state.hiring = e.target.value === 'yes' ? 'eor' : e.target.value === 'contractor' ? 'contractor' : 'no';
+    document.getElementById('eor-yes-label').classList.toggle('selected', state.hiring === 'eor');
+    const cl = document.getElementById('eor-contractor-label');
+    if (cl) cl.classList.toggle('selected', state.hiring === 'contractor');
+    document.getElementById('eor-no-label').classList.toggle('selected', state.hiring === 'no');
     render();
   });
 });
