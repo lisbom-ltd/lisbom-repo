@@ -188,6 +188,53 @@
     .fpill { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.09); border-radius: 100px; padding: 6px 14px; display: flex; align-items: center; gap: 6px; }
     .fpill::before { content: '✓'; color: var(--coral2); }
 
+    /* ── TRUSTED BAR ── */
+    .trusted-bar { background: #fff; border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .trusted-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 16px; }
+    .trusted-sectors { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .ts-pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 100px; background: var(--cream2); border: 1px solid var(--border); font-size: 13px; font-weight: 500; color: var(--ink2); transition: all 0.2s; }
+    .ts-pill:hover { background: var(--cream); border-color: var(--coral); color: var(--ink); }
+    .ts-pill svg { flex-shrink: 0; color: var(--coral); }
+
+    /* ── MISSION SECTION ── */
+    .mission-section { background: var(--ink); position: relative; overflow: hidden; padding: 100px 0; }
+    .mission-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 10% 90%, rgba(232,93,63,0.11) 0%, transparent 55%), radial-gradient(ellipse at 90% 10%, rgba(99,102,241,0.10) 0%, transparent 50%); }
+    .mission-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .mission-section .eyebrow { color: var(--coral2); }
+    .mission-section .eyebrow::before { background: var(--coral2); }
+    .mission-section h2 { color: var(--white); margin-bottom: 24px; }
+    .mission-section h2 em { color: var(--coral2); }
+    .mission-copy { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 16px; }
+    .mission-copy strong { color: rgba(255,255,255,0.85); }
+    .mission-impact-row { display: flex; gap: 32px; margin-top: 36px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .mission-stat {}
+    .ms-num { font-family: var(--display); font-size: 32px; font-weight: 700; color: var(--white); letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px; }
+    .ms-num em { color: var(--coral2); font-style: normal; }
+    .ms-label { font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.45; max-width: 110px; }
+    .mission-visual { display: flex; align-items: center; justify-content: center; }
+    .mission-card-stack { display: flex; flex-direction: column; gap: 0; width: 100%; max-width: 360px; position: relative; }
+    .mc-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 24px 28px; display: flex; align-items: center; gap: 18px; }
+    .mc-card:hover { background: rgba(255,255,255,0.09); }
+    .mc-flag { font-size: 28px; flex-shrink: 0; }
+    .mc-text { flex: 1; }
+    .mc-text strong { display: block; font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+    .mc-text span { font-size: 12px; color: rgba(255,255,255,0.38); }
+    .mc-arrow { font-size: 20px; color: var(--coral2); flex-shrink: 0; }
+    .mc-bridge { display: flex; align-items: center; gap: 12px; padding: 16px 28px; }
+    .mc-bridge-line { flex: 1; height: 1px; background: rgba(255,255,255,0.12); }
+    .mc-bridge-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.28); white-space: nowrap; }
+    .mc-badge { position: absolute; right: -12px; top: 50%; transform: translateY(-50%); background: var(--coral); color: white; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 100px; display: flex; align-items: center; gap: 6px; white-space: nowrap; box-shadow: 0 4px 16px rgba(232,93,63,0.4); }
+
+    @media (max-width: 1024px) {
+      .mission-grid { grid-template-columns: 1fr; gap: 48px; }
+      .mc-badge { right: 0; top: auto; bottom: -16px; transform: none; }
+      .mission-impact-row { gap: 20px; }
+    }
+    @media (max-width: 600px) {
+      .mission-impact-row { flex-direction: column; gap: 16px; }
+      .ms-label { max-width: 100%; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .problem-grid, .about-grid, .founder-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -260,12 +307,12 @@
         </div>
         <div class="hero-outcomes reveal reveal-d4">
           <div class="hero-outcome">
-            <div class="ho-num">60<span>%+</span></div>
+            <div class="ho-num">70<span>%</span></div>
             <div class="ho-label">Lower costs vs UK hiring</div>
           </div>
           <div class="hero-outcome">
-            <div class="ho-num">30<span>d</span></div>
-            <div class="ho-label">To your first team member placed</div>
+            <div class="ho-num">~14<span>d</span></div>
+            <div class="ho-label">Typical time to first placement</div>
           </div>
           <div class="hero-outcome">
             <div class="ho-num">1<span>x</span></div>
@@ -291,6 +338,96 @@
       </div>
     </div>
   </div>
+
+  <!-- SOCIAL PROOF BAR -->
+  <div class="trusted-bar">
+    <div class="container">
+      <p class="trusted-label">Trusted by growing UK businesses across</p>
+      <div class="trusted-sectors">
+        <div class="ts-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          Recruitment Agencies
+        </div>
+        <div class="ts-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M3 10h18v11H3z"/></svg>
+          Ecommerce &amp; DTC
+        </div>
+        <div class="ts-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+          Accounting &amp; Finance
+        </div>
+        <div class="ts-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Real Estate
+        </div>
+        <div class="ts-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          SaaS &amp; Tech
+        </div>
+        <div class="ts-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Health &amp; Wellness
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION SECTION -->
+  <section class="mission-section">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="reveal">
+          <div class="eyebrow">Our mission</div>
+          <h2>Talent exists everywhere.<br><em>Opportunity doesn't.</em></h2>
+          <p class="mission-copy">The Philippines produces over 500,000 graduates annually in finance, tech, marketing and operations. Exceptional people who are ambitious, English-fluent, and deeply committed — yet rarely given access to the kind of work they deserve.</p>
+          <p class="mission-copy">LisBom is built to change that. Every placement we make creates a life-changing opportunity for a Filipino professional, while giving a UK business access to talent they couldn't otherwise afford. <strong>Both sides win. That's not a tagline — it's the whole point.</strong></p>
+          <div class="mission-impact-row">
+            <div class="mission-stat">
+              <div class="ms-num">500<em>k+</em></div>
+              <div class="ms-label">Filipino graduates entering the market yearly</div>
+            </div>
+            <div class="mission-stat">
+              <div class="ms-num">~£7<em>k</em></div>
+              <div class="ms-label">Monthly saving vs a single equivalent UK hire</div>
+            </div>
+            <div class="mission-stat">
+              <div class="ms-num">#<em>2</em></div>
+              <div class="ms-label">English proficiency ranking across Asia</div>
+            </div>
+          </div>
+        </div>
+        <div class="mission-visual reveal reveal-d1">
+          <div class="mission-card-stack">
+            <div class="mc-card mc-top">
+              <div class="mc-flag">🇵🇭</div>
+              <div class="mc-text">
+                <strong>Filipino professionals</strong>
+                <span>Finance · Marketing · Ops · Tech · Admin</span>
+              </div>
+              <div class="mc-arrow">↑</div>
+            </div>
+            <div class="mc-bridge">
+              <div class="mc-bridge-line"></div>
+              <div class="mc-bridge-label">UK-managed bridge</div>
+              <div class="mc-bridge-line"></div>
+            </div>
+            <div class="mc-card mc-bottom">
+              <div class="mc-flag">🇬🇧</div>
+              <div class="mc-text">
+                <strong>UK businesses</strong>
+                <span>Growing teams · Lower costs · More capacity</span>
+              </div>
+              <div class="mc-arrow">↓</div>
+            </div>
+            <div class="mc-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Up to 70% cost saving
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- PROBLEM -->
   <section class="problem-section">
@@ -447,11 +584,11 @@
         <div class="what-card reveal">
           <div class="what-num">01</div>
           <h3>Dedicated Remote Teams</h3>
-          <p>Exceptional Filipino professionals — vetted, onboarded, and UK-managed. Customer service, marketing, ops, admin, and finance roles for 60%+ less than UK equivalents.</p>
+          <p>Exceptional Filipino professionals — vetted, onboarded, and UK-managed. Customer service, marketing, ops, admin, and finance roles for up to 70% less than UK equivalents.</p>
           <div class="what-outs">
             <div class="what-out">Capacity to grow without UK salary costs</div>
             <div class="what-out">Full compliance: payroll, tax &amp; benefits covered</div>
-            <div class="what-out">30-day placement or your first month free</div>
+            <div class="what-out">Fast, structured onboarding — typically within weeks</div>
           </div>
         </div>
         <div class="what-card reveal reveal-d1">
@@ -517,7 +654,7 @@
             <div class="ind-roles">Bookkeeping &middot; Data entry &middot; Client admin &middot; Reporting</div>
             <div class="ind-results">
               <div class="ind-result">Qualified staff focused on qualified work</div>
-              <div class="ind-result">60%+ cost saving vs UK equivalent hire</div>
+              <div class="ind-result">70%+ cost saving vs UK equivalent hire</div>
             </div>
           </div>
           <div class="ind-card reveal reveal-d1">
@@ -541,8 +678,8 @@
           <div class="gbox">
             <div class="gbox-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <div>
-              <h4>30-Day Placement Guarantee</h4>
-              <p>Qualified candidates presented within 30 days — or your first month is free. We back it because we believe in our network.</p>
+              <h4>Fast Placement, Done Right</h4>
+              <p>Most of our clients have a qualified candidate in front of them within 14 days. Speed never comes at the cost of fit — we take the time to get it right.</p>
             </div>
           </div>
           <div class="gbox">
@@ -588,7 +725,7 @@
       </div>
       <div class="hiw-foot reveal">
         <a href="/how-it-works/" class="btn btn-primary">See the full process &rarr;</a>
-        <p class="hiw-note">Most clients are <strong>operational within 30 days</strong> of their first call.</p>
+        <p class="hiw-note">Most clients have an <strong>interview-ready candidate within ~14 days</strong> of their first call.</p>
       </div>
     </div>
   </section>
@@ -645,7 +782,7 @@
             </div>
             <div class="stats-row">
               <div class="astat">
-                <div class="astat-n">60<em>%+</em></div>
+                <div class="astat-n">70<em>%+</em></div>
                 <div class="astat-l">Average saving vs equivalent UK hiring — same quality, lower overhead</div>
               </div>
               <div class="astat">
