@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WQQ9BH17FJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WQQ9BH17FJ');
+  </script>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hire remote Filipino professionals for customer service, marketing, SEO, admin, finance and automation roles. Every placement is outcome-focused - more leads, less admin, lower costs.">
+  <title>Remote Staff Roles - VA, CS, Marketing, SEO & Automation | LisBom</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .outcomes-nav { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 70px; z-index: 100; }
+    .outcomes-nav-inner { display: flex; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .onav-btn { font-family: var(--body); font-size: 13px; font-weight: 500; padding: 16px 24px; border: none; background: none; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.2s; }
+    .onav-btn:hover { color: var(--ink); }
+    .onav-btn.on { color: var(--coral); border-bottom-color: var(--coral); font-weight: 600; }
+
+    .outcome-block { padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .outcome-block:last-child { border-bottom: none; }
+    .outcome-block:nth-child(even) { background: var(--cream); }
+    .outcome-block:nth-child(odd) { background: var(--white); }
+
+    .ob-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 56px; }
+    .ob-left {}
+    .ob-outcome-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--coral); margin-bottom: 16px; }
+    .ob-outcome-tag::before { content: '→'; }
+    .ob-left h2 { font-size: clamp(26px, 3.5vw, 40px); margin-bottom: 16px; line-height: 1.2; }
+    .ob-left p { font-size: 15px; color: var(--muted); line-height: 1.75; }
+    .ob-right { padding-top: 8px; }
+    .ob-result-list { display: flex; flex-direction: column; gap: 12px; }
+    .ob-result { display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px; background: var(--white); border-radius: 10px; border: 1px solid var(--border); }
+    .outcome-block:nth-child(even) .ob-result { background: var(--cream2); }
+    .ob-result-arrow { color: var(--coral); font-weight: 700; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .ob-result-text { font-size: 14px; color: var(--ink2); line-height: 1.5; }
+    .ob-result-text strong { color: var(--ink); display: block; }
+
+    .roles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .role-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 24px; transition: transform 0.2s var(--ease), box-shadow 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
+    .outcome-block:nth-child(even) .role-card { background: var(--white); }
+    .role-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--coral); opacity: 0; transition: opacity 0.2s; }
+    .role-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(232,93,63,0.2); }
+    .role-card:hover::before { opacity: 1; }
+    .rc-time { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+    .role-card h4 { font-family: var(--body); font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+    .role-card p { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+    .rc-impact { font-size: 12px; color: var(--coral); font-weight: 600; display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
+    .rc-impact::before { content: '↗'; }
+    .hire-now-btn { font-size: 12px; font-weight: 600; color: var(--indigo); text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; font-family: var(--body); transition: color 0.2s; }
+    .hire-now-btn:hover { color: var(--coral); }
+
+    .custom-role-box { margin-top: 60px; background: var(--ink); border-radius: 16px; padding: 48px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+    .crb-left h3 { color: var(--white); font-size: 26px; margin-bottom: 12px; }
+    .crb-left p { color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.65; margin: 0; }
+
+    /* Modal */
+    .hire-modal-overlay { display:none; position:fixed; inset:0; background:rgba(26,23,20,0.7); z-index:800; align-items:center; justify-content:center; padding:20px; }
+    .hire-modal-overlay.open { display:flex; }
+    .hire-modal { background:var(--white); border-radius:20px; width:100%; max-width:540px; max-height:90vh; overflow-y:auto; padding:40px; position:relative; animation:fadeUp 0.3s var(--ease) both; }
+    .hire-modal-close { position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:8px; border:none; background:var(--cream2); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; color:var(--muted); }
+    .hire-modal-close:hover { background:var(--border); }
+    .hire-modal h3 { font-family:var(--body); font-size:22px; font-weight:700; margin-bottom:6px; }
+    .hire-modal-sub { font-size:14px; color:var(--muted); margin-bottom:24px; }
+    .hire-modal .form-group { margin-bottom:16px; }
+    .hire-modal .form-group label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--ink2); }
+    .hire-modal .form-group input, .hire-modal .form-group select, .hire-modal .form-group textarea { width:100%; padding:10px 14px; border:1.5px solid var(--border); border-radius:10px; font-family:var(--body); font-size:14px; color:var(--ink); background:var(--white); transition:border-color 0.2s; }
+    .hire-modal .form-group input:focus, .hire-modal .form-group select:focus, .hire-modal .form-group textarea:focus { outline:none; border-color:var(--indigo); box-shadow:0 0 0 3px rgba(67,56,202,0.1); }
+    .hire-modal .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .hire-modal-success { display:none; text-align:center; padding:20px 0; }
+    .hire-modal-success .success-circle { width:64px; height:64px; border-radius:50%; background:rgba(45,155,111,0.15); color:var(--green); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+
+    @media(max-width:1024px){ .ob-header{grid-template-columns:1fr;gap:32px;} .roles-grid{grid-template-columns:repeat(2,1fr);} .custom-role-box{grid-template-columns:1fr;gap:24px;} }
+    @media(max-width:600px){ .roles-grid{grid-template-columns:1fr;} .hire-modal .form-row{grid-template-columns:1fr;} .hire-modal{padding:28px 20px;} }
+  </style>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico">
+</head>
+<body>
+
+    <nav id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">LisBom<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="/how-it-works/">How It Works</a></li>
+        <li><a href="/roles/" class="active">Solutions</a></li>
+        <li><a href="/calculator/">Cost Calculator</a></li>
+        <li><a href="/careers/">For Talent</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="nav-cta">Get a Free Audit</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/how-it-works/" class="mob-link">How It Works</a>
+      <a href="/roles/" class="mob-link">Solutions</a>
+      <a href="/calculator/" class="mob-link">Cost Calculator</a>
+      <a href="/careers/" class="mob-link">For Talent</a>
+      <a href="/blog/" class="mob-link">Blog</a>
+      <a href="/contact/" class="mob-link">Contact</a>
+      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="mob-link mob-cta">Get a Free Audit</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="eyebrow reveal">Solutions &amp; Roles</div>
+      <h1 class="reveal reveal-d1">Every hire solves<br><em>a specific problem.</em></h1>
+      <p class="reveal reveal-d2">We don't sell you a job title. We place the right person to drive a measurable outcome — more leads, less admin, lower costs, or greater capacity. Browse by what you need to fix.</p>
+    </div>
+  </div>
+
+  <!-- STICKY OUTCOME NAV -->
+  <div class="outcomes-nav">
+    <div class="container">
+      <div class="outcomes-nav-inner">
+        <button class="onav-btn on" data-target="generate-leads">Generate More Leads</button>
+        <button class="onav-btn" data-target="reduce-admin">Reduce Admin</button>
+        <button class="onav-btn" data-target="lower-costs">Lower Costs</button>
+        <button class="onav-btn" data-target="scale-ops">Scale Operations</button>
+        <button class="onav-btn" data-target="tech-automation">Tech &amp; Automation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOME 1: GENERATE MORE LEADS -->
+  <div class="outcome-block" id="generate-leads">
+    <div class="container">
+      <div class="ob-header">
+        <div class="ob-left">
+          <div class="ob-outcome-tag">Business outcome</div>
+          <h2>Generate more<br><em>qualified leads</em></h2>
+          <p>Your website and marketing should be your best salesperson — working 24/7. These roles directly drive pipeline: more enquiries, better conversion, and content that positions you ahead of competitors.</p>
+        </div>
+        <div class="ob-right">
+          <div class="ob-result-list">
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>More inbound enquiries</strong>Consistent content and SEO compounds over time — traffic that converts without ad spend.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Higher website conversion</strong>Targeted copy and CRO work turns existing visitors into enquiries you're currently losing.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Stronger brand positioning</strong>Regular output builds authority — you show up when buyers are researching.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card"><div class="rc-time">⏱ ~25 days</div><h4>Social Media Manager</h4><p>Content planning, post scheduling, community management, and performance reporting across channels.</p><div class="rc-impact">Consistent pipeline of warm inbound leads</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~22 days</div><h4>Content Writer</h4><p>Blog posts, website copy, email newsletters, and SEO content — clear, professional English that converts.</p><div class="rc-impact">More organic traffic and time-on-site</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>SEO Specialist</h4><p>Keyword research, on-page optimisation, technical audits, and link building for sustained organic growth.</p><div class="rc-impact">Lower customer acquisition cost over time</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~25 days</div><h4>Email Marketing Specialist</h4><p>Campaign creation, list management, A/B testing, and performance reporting across email platforms.</p><div class="rc-impact">Re-engage existing contacts into pipeline</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>Paid Ads Specialist</h4><p>Google Ads, Meta advertising, campaign setup, bid optimisation, and ROAS reporting.</p><div class="rc-impact">Predictable paid pipeline at lower CPL</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~25 days</div><h4>Graphic Designer</h4><p>Social assets, marketing collateral, presentations, and brand-consistent visual content.</p><div class="rc-impact">Professional brand presence across every channel</div><button class="hire-now-btn">Enquire about this role →</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOME 2: REDUCE ADMIN -->
+  <div class="outcome-block" id="reduce-admin">
+    <div class="container">
+      <div class="ob-header">
+        <div class="ob-left">
+          <div class="ob-outcome-tag">Business outcome</div>
+          <h2>Reduce admin.<br><em>Free your senior team.</em></h2>
+          <p>Every hour your founders, managers, or qualified staff spend on admin is an hour not spent on growth. These roles absorb the operational load — so your people focus on what only they can do.</p>
+        </div>
+        <div class="ob-right">
+          <div class="ob-result-list">
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Senior team focused on growth</strong>Founders and managers free from inbox, scheduling, and data work.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Faster response times</strong>Customers and clients get replies faster — without it falling on you.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Nothing falls through the cracks</strong>Structured admin roles mean processes run reliably, not reactively.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card"><div class="rc-time">⏱ ~25 days</div><h4>Executive Assistant</h4><p>Calendar management, inbox triage, travel booking, and high-trust support for founders and directors.</p><div class="rc-impact">Founder reclaims 10+ hours per week</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~20 days</div><h4>Virtual Assistant</h4><p>General admin support — scheduling, research, document preparation, and day-to-day business tasks.</p><div class="rc-impact">Low-value tasks gone from your plate immediately</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~14 days</div><h4>Operations Coordinator</h4><p>Process management, reporting, supplier coordination, and keeping daily operations running without constant oversight.</p><div class="rc-impact">Business runs smoothly without your input</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~20 days</div><h4>Customer Support Agent</h4><p>Email, live chat, and ticket management. Brand-aligned communication that lifts response times and satisfaction scores.</p><div class="rc-impact">Faster replies, higher CSAT, less stress</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~20 days</div><h4>Data Entry Specialist</h4><p>Accurate, fast data processing, CRM updates, spreadsheet management, and database maintenance.</p><div class="rc-impact">Clean data, faster decisions, no backlogs</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>CRM Administrator</h4><p>Managing HubSpot, Salesforce, or Pipedrive — data hygiene, pipeline reporting, and system integrity.</p><div class="rc-impact">Sales team works from clean, accurate data</div><button class="hire-now-btn">Enquire about this role →</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOME 3: LOWER COSTS -->
+  <div class="outcome-block" id="lower-costs">
+    <div class="container">
+      <div class="ob-header">
+        <div class="ob-left">
+          <div class="ob-outcome-tag">Business outcome</div>
+          <h2>Lower costs.<br><em>Same quality output.</em></h2>
+          <p>Finance and accounting functions are among the highest-cost support roles for growing businesses. These hires deliver the same accuracy and output — at up to 70% less than their local equivalent, fully managed.</p>
+        </div>
+        <div class="ob-right">
+          <div class="ob-result-list">
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Up to 70% cost reduction on support roles</strong>Same capability, lower overhead — because of cost of living, not skill.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Qualified staff on qualified work</strong>Your accountants or finance managers focus on advisory, not data entry.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Better cash flow visibility</strong>Timely reconciliations, chasing, and reporting mean fewer financial surprises.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>Bookkeeper</h4><p>Day-to-day financial records, bank reconciliations, expense tracking, and accountant support.</p><div class="rc-impact">Save significantly vs local equivalent</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>Accounts Payable / Receivable</h4><p>Invoice processing, payment runs, chasing outstanding invoices, and cash flow accuracy.</p><div class="rc-impact">Faster collections, fewer late payments</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~14 days</div><h4>Payroll Administrator</h4><p>Processing payroll runs, managing deductions, handling queries, and ensuring pay cycle accuracy.</p><div class="rc-impact">Payroll that runs on time, every time</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~35 days</div><h4>Financial Reporting Analyst</h4><p>Monthly management accounts, KPI dashboards, budget tracking, and financial analysis.</p><div class="rc-impact">Better decisions from cleaner numbers</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~25 days</div><h4>Recruitment Coordinator</h4><p>Job posting, CV screening, interview scheduling, candidate comms, and applicant tracking.</p><div class="rc-impact">Consultants freed to bill, not coordinate</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>HR Administrator</h4><p>Employee records, onboarding documentation, leave tracking, and HR system management.</p><div class="rc-impact">HR compliance without a full-time local hire</div><button class="hire-now-btn">Enquire about this role →</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOME 4: SCALE OPERATIONS -->
+  <div class="outcome-block" id="scale-ops">
+    <div class="container">
+      <div class="ob-header">
+        <div class="ob-left">
+          <div class="ob-outcome-tag">Business outcome</div>
+          <h2>Scale operations<br><em>without scaling costs.</em></h2>
+          <p>Growth creates operational pressure. Customer queries, project coordination, ecommerce fulfilment — these roles give you the capacity to handle more volume without the overhead of expensive local hiring.</p>
+        </div>
+        <div class="ob-right">
+          <div class="ob-result-list">
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Handle more volume, same margins</strong>Grow revenue without growing your local wage bill proportionally.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Longer operational coverage</strong>Filipino time zones work seamlessly across UK, US, and AU hours — more coverage per day.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Consistent customer experience at scale</strong>SLAs met, tickets resolved, clients retained — even during growth spikes.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card"><div class="rc-time">⏱ ~20 days</div><h4>Ecommerce Support Agent</h4><p>Order management, returns processing, product queries, and customer comms for online retailers.</p><div class="rc-impact">Scale CS without scaling local headcount</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~14 days</div><h4>Customer Success Manager</h4><p>Proactive account management, onboarding customers, renewals, and reducing churn.</p><div class="rc-impact">Higher retention, lower churn, more upsell</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>Project Coordinator</h4><p>Task tracking, stakeholder updates, and deadline management across cross-functional teams.</p><div class="rc-impact">Projects delivered on time, without chasing</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~22 days</div><h4>Helpdesk Coordinator</h4><p>Managing support queues, routing tickets, SLA tracking, and first-response resolution.</p><div class="rc-impact">SLAs met consistently, team less stretched</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~25 days</div><h4>Talent Sourcer</h4><p>Proactive candidate research, LinkedIn sourcing, pipeline building, and outreach for hard-to-fill roles.</p><div class="rc-impact">Faster talent pipeline for your clients</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>Technical Support Specialist</h4><p>First and second-line troubleshooting, helpdesk management, and escalation for software products.</p><div class="rc-impact">Users unblocked faster, fewer escalations</div><button class="hire-now-btn">Enquire about this role →</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOME 5: TECH & AUTOMATION -->
+  <div class="outcome-block" id="tech-automation">
+    <div class="container">
+      <div class="ob-header">
+        <div class="ob-left">
+          <div class="ob-outcome-tag">Business outcome</div>
+          <h2>Automate workflows.<br><em>Build smarter systems.</em></h2>
+          <p>These roles don't just fill a seat — they actively reduce your operational overhead by replacing manual processes with automated systems. The ROI compounds every month.</p>
+        </div>
+        <div class="ob-right">
+          <div class="ob-result-list">
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Manual hours eliminated permanently</strong>Automations built once, running indefinitely — not recurring labour costs.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Fewer errors, faster throughput</strong>Automated workflows are more accurate and faster than manual processing.</div></div>
+            <div class="ob-result"><div class="ob-result-arrow">↗</div><div class="ob-result-text"><strong>Tech that scales with you</strong>Systems designed to handle more volume without more headcount.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card"><div class="rc-time">⏱ ~14 days</div><h4>AI &amp; Automation Specialist</h4><p>Workflow automation with Zapier, Make, n8n, and AI tools — eliminating repetitive tasks across your operations.</p><div class="rc-impact">Hours of manual work removed every week</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~14 days</div><h4>Web Developer</h4><p>Front-end and full-stack development — WordPress, Shopify, React, and custom web builds that convert.</p><div class="rc-impact">Website built to generate leads, not just exist</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~14 days</div><h4>Data Analyst</h4><p>Data cleaning, reporting, and dashboard building (Power BI, Looker, Google Data Studio) for clear business decisions.</p><div class="rc-impact">Decisions from data, not guesswork</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~25 days</div><h4>IT Support Specialist</h4><p>Remote helpdesk, Microsoft 365 and Google Workspace admin, troubleshooting, and user support.</p><div class="rc-impact">Tech issues resolved fast, team unblocked</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~28 days</div><h4>QA Tester</h4><p>Manual and automated testing, bug reporting, test case creation, and release quality assurance.</p><div class="rc-impact">Ship faster with fewer production bugs</div><button class="hire-now-btn">Enquire about this role →</button></div>
+        <div class="role-card"><div class="rc-time">⏱ ~35 days</div><h4>Cybersecurity Analyst</h4><p>Security monitoring, vulnerability assessments, incident response, and compliance for growing businesses.</p><div class="rc-impact">Reduced risk exposure, audit-ready posture</div><button class="hire-now-btn">Enquire about this role →</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM ROLE CTA -->
+  <section style="background:var(--cream);padding:80px 0">
+    <div class="container">
+      <div class="custom-role-box">
+        <div class="crb-left">
+          <h3>Don't see the role you need?</h3>
+          <p>We place professionals across dozens of functions. If you know the outcome you need — reduced costs, more leads, less admin — tell us the problem and we'll find the right person to solve it.</p>
+        </div>
+        <a href="/contact/" class="btn btn-coral">Tell us what you need &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><a href="/" class="footer-logo">LisBom<span>.</span></a><p class="footer-tagline">More leads. Less admin. Lower costs. Filipino talent for UK, US &amp; Australian businesses.</p></div>
+        <div class="footer-col"><h5>For Businesses</h5><a href="/how-it-works/">How It Works</a><a href="/roles/">Solutions &amp; Roles</a><a href="/calculator/">Cost Calculator</a><a href="/blog/">Blog</a></div>
+        <div class="footer-col"><h5>Industries</h5><a href="#">Ecommerce</a><a href="#">Recruitment</a><a href="#">Real Estate</a><a href="#">Accounting</a></div>
+        <div class="footer-col"><h5>Get Started</h5><a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Free Audit</a><a href="/contact/">Contact Us</a><a href="/careers/" style="opacity:0.5;font-size:12px;margin-top:8px">For Filipino Talent &rarr;</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 LisBom Limited. Registered in England &amp; Wales. <a href="/privacy-policy/" style="color:rgba(255,255,255,0.4);margin-left:12px;">Privacy Policy</a> &middot; <a href="/terms/" style="color:rgba(255,255,255,0.4);">Terms</a> &middot; <a href="javascript:void(0)" onclick="openCookieSettings()" id="cookieSettingsFooter" style="color:rgba(255,255,255,0.4);">Cookie Settings</a></p>
+        <p>UK · US · AU &middot; Premium Filipino Talent &middot; Results-First</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ENQUIRY MODAL -->
+  <div class="hire-modal-overlay" id="hireModalOverlay">
+    <div class="hire-modal">
+      <button class="hire-modal-close" id="hireModalClose">&#x2715;</button>
+      <div id="hireModalForm">
+        <h3>Enquire about this role</h3>
+        <p class="hire-modal-sub">Tell us what you need and we'll be in touch within one business day.</p>
+        <form id="hireForm" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label>First Name *</label><input type="text" id="hFname" placeholder="James" required></div>
+            <div class="form-group"><label>Last Name *</label><input type="text" id="hLname" placeholder="Smith" required></div>
+          </div>
+          <div class="form-group"><label>Work Email *</label><input type="email" id="hEmail" placeholder="james@company.com" required></div>
+          <div class="form-group"><label>Company</label><input type="text" id="hCompany" placeholder="Your company name"></div>
+          <div class="form-group"><label>Role you're interested in</label><input type="text" id="hRole" placeholder="e.g. Executive Assistant"></div>
+          <div class="form-group"><label>What outcome are you trying to achieve?</label><textarea id="hMessage" rows="3" placeholder="e.g. I want to free up my time from inbox and scheduling so I can focus on sales…"></textarea></div>
+          <button type="submit" class="btn btn-coral btn-full">Send Enquiry &rarr;</button>
+          <p class="form-privacy-note" style="margin-top:12px">&#128274; Your data will be processed by LisBom Limited to respond to your enquiry. See our <a href="/privacy-policy/">Privacy Policy</a>.</p>
+        </form>
+      </div>
+      <div class="hire-modal-success" id="hireModalSuccess">
+        <div class="success-circle"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3 style="font-family:var(--body)">Enquiry sent!</h3>
+        <p>We'll be in touch within one business day to discuss your requirements.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <script>
+    // Sticky outcome nav
+    document.querySelectorAll('.onav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.onav-btn').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        const target = document.getElementById(btn.dataset.target);
+        if (target) { const offset = 140; const top = target.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({ top, behavior: 'smooth' }); }
+      });
+    });
+    // Update active nav on scroll
+    const blocks = document.querySelectorAll('.outcome-block');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      blocks.forEach(b => { if (window.scrollY >= b.offsetTop - 200) current = b.id; });
+      document.querySelectorAll('.onav-btn').forEach(b => b.classList.toggle('on', b.dataset.target === current));
+    }, { passive: true });
+
+    // Modal
+    const overlay = document.getElementById('hireModalOverlay');
+    document.querySelectorAll('.hire-now-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.role-card');
+        const role = card.querySelector('h4').textContent;
+        document.getElementById('hRole').value = role;
+        document.getElementById('hireModalSuccess').style.display = 'none';
+        document.getElementById('hireModalForm').style.display = 'block';
+        document.getElementById('hireForm').reset();
+        document.getElementById('hRole').value = role;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+    document.getElementById('hireModalClose').addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    document.getElementById('hireForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!document.getElementById('hFname').value || !document.getElementById('hEmail').value) return;
+      const btn = this.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      setTimeout(() => { document.getElementById('hireModalForm').style.display = 'none'; document.getElementById('hireModalSuccess').style.display = 'block'; }, 800);
+    });
+    function openCookieSettings() {}
+  </script>
+</body>
+</html>
