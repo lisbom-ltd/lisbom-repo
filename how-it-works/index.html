@@ -393,14 +393,6 @@
   <script src="/js/main.js"></script>
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <script>
-    // Wire up FAQ buttons on this page (using faq-icon-inner class)
-    document.querySelectorAll('.faq-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const isOpen = btn.getAttribute('aria-expanded') === 'true';
-        document.querySelectorAll('.faq-btn').forEach(b => { b.setAttribute('aria-expanded','false'); b.nextElementSibling.classList.remove('open'); });
-        if (!isOpen) { btn.setAttribute('aria-expanded','true'); btn.nextElementSibling.classList.add('open'); }
-      });
-    });
     function openCookieSettings(){}
   </script>
 </body>
