@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /compliance/
+
+Sitemap: https://www.lisbom-ltd.com/sitemap.xml

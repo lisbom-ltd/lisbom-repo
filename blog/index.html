@@ -1,213 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WQQ9BH17FJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-WQQ9BH17FJ');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WQQ9BH17FJ');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Practical guides on hiring Filipino remote staff, cutting admin costs, building SEO funnels and scaling operations - without the UK salary overhead. Written for UK, US and Australian business owners.">
-  <meta name="keywords" content="hire remote workers, Filipino remote staff, remote team, offshore hiring guide, virtual assistant Philippines, remote staffing cost">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.lisbom-ltd.com/blog/" />
   <title>Remote Hiring Guides - Cut Costs & Scale Smart | LisBom Blog</title>
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="LisBom Blog — Remote Hiring Insights for Growing Businesses">
-  <meta property="og:description" content="Honest guides on hiring Filipino remote talent, cutting staff costs, and scaling your business with a managed remote team.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.lisbom-ltd.com/blog/">
-
+  <meta property="og:title" content="LisBom Blog - Remote Hiring Insights for Growing Businesses" />
+  <meta property="og:description" content="Honest guides on hiring Filipino remote talent, cutting staff costs, and scaling your business with a managed remote team." />
+  <meta property="og:url" content="https://www.lisbom-ltd.com/blog/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.lisbom-ltd.com/lisbom_og_image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LisBom Blog - Remote Hiring Insights" />
+  <meta name="twitter:description" content="Practical guides on remote hiring, Filipino talent, and cutting your biggest overhead." />
+  <meta name="twitter:image" content="https://www.lisbom-ltd.com/lisbom_og_image.jpg" />
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/favicon.ico">
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-
+  <link rel="icon" href="/favicon.ico">
   <style>
-    /* ── BLOG INDEX STYLES ── */
-    .blog-hero {
-      padding: 160px 0 80px;
-      background: linear-gradient(160deg, var(--ink) 0%, #2D2620 100%);
-      position: relative; overflow: hidden;
-    }
-    .blog-hero::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 80% 30%, rgba(99,102,241,0.15) 0%, transparent 55%),
-        radial-gradient(ellipse at 15% 75%, rgba(232,93,63,0.12) 0%, transparent 50%);
-    }
-    .blog-hero-inner { position: relative; z-index: 2; }
-    .blog-hero .eyebrow { color: var(--coral2); }
-    .blog-hero .eyebrow::before { background: var(--coral2); }
-    .blog-hero h1 { color: var(--white); margin-bottom: 20px; max-width: 700px; }
-    .blog-hero p { font-size: 18px; color: rgba(255,255,255,0.60); max-width: 560px; line-height: 1.7; }
-
-    /* Featured post */
-    .blog-featured { background: var(--white); padding: 80px 0 0; }
-    .featured-card {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-      background: var(--cream); border-radius: 24px; overflow: hidden;
-      border: 1px solid var(--border); box-shadow: var(--shadow-md);
-      transition: transform 0.3s var(--ease), box-shadow 0.3s;
-    }
-    .featured-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .featured-img {
-      background: linear-gradient(135deg, var(--indigo) 0%, #312E81 100%);
-      min-height: 360px; position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .featured-img::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 60% 40%, rgba(232,93,63,0.25) 0%, transparent 60%);
-    }
-    .featured-img-graphic {
-      position: relative; z-index: 2;
-      font-family: var(--display); font-size: 80px; font-weight: 700;
-      color: rgba(255,255,255,0.08); line-height: 1; text-align: center;
-      letter-spacing: -0.05em;
-    }
-    .featured-cost-visual {
-      position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%,-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-    }
-    .fcv-row {
-      background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 12px; padding: 14px 22px; backdrop-filter: blur(8px);
-      display: flex; align-items: center; gap: 16px; width: 260px;
-    }
-    .fcv-label { font-size: 12px; color: rgba(255,255,255,0.55); flex: 1; }
-    .fcv-val { font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--white); }
-    .fcv-val.green { color: #6EE7B7; }
-    .fcv-arrow { text-align: center; font-size: 22px; color: var(--coral2); }
-    .featured-body { padding: 48px 48px 48px; display: flex; flex-direction: column; justify-content: center; }
-    .featured-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-    .featured-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; background: #FEF0EC; color: var(--coral); }
-    .featured-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-    .featured-body h2 { font-size: clamp(22px, 2.8vw, 34px); margin-bottom: 16px; line-height: 1.25; }
-    .featured-body h2 a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
-    .featured-body h2 a:hover { color: var(--indigo); }
-    .featured-body p { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
-    .featured-body .read-more { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--indigo); text-decoration: none; transition: gap 0.2s, color 0.2s; }
-    .featured-body .read-more:hover { gap: 12px; color: var(--coral); }
-
-    /* Posts grid */
-    .blog-posts { background: var(--white); padding: 60px 0 100px; }
-    .posts-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 16px; }
-    .posts-header h3 { font-family: var(--body); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-    .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-
-    .post-card {
-      background: var(--cream); border: 1px solid var(--border);
-      border-radius: 20px; overflow: hidden;
-      transition: transform 0.3s var(--ease), box-shadow 0.3s, background 0.3s;
-      display: flex; flex-direction: column;
-    }
-    .post-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); background: var(--white); }
-    .post-card-thumb {
-      height: 180px; position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .post-card-thumb.t-indigo { background: linear-gradient(135deg, #4338CA 0%, #6366F1 100%); }
-    .post-card-thumb.t-coral  { background: linear-gradient(135deg, #E85D3F 0%, #FF7A5C 100%); }
-    .post-card-thumb.t-green  { background: linear-gradient(135deg, #2D9B6F 0%, #34D399 100%); }
-    .post-card-thumb.t-gold   { background: linear-gradient(135deg, #C9992A 0%, #F59E0B 100%); }
-    .post-card-thumb.t-ink    { background: linear-gradient(135deg, #1A1714 0%, #3D3830 100%); }
-    .post-thumb-icon { font-size: 48px; opacity: 0.85; position: relative; z-index: 2; }
-    .post-thumb-pattern {
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
-      background-size: 20px 20px;
-    }
-    .post-card-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
-    .post-card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-    .post-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
-    .post-tag.t-indigo { background: #EEF2FF; color: var(--indigo); }
-    .post-tag.t-coral  { background: #FEF0EC; color: var(--coral); }
-    .post-tag.t-green  { background: #ECFDF5; color: var(--green); }
-    .post-tag.t-gold   { background: #FEF9EC; color: var(--gold); }
-    .post-read-time { font-size: 11px; color: var(--muted); }
-    .post-card-body h4 { font-size: 18px; line-height: 1.35; margin-bottom: 10px; }
-    .post-card-body h4 a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
-    .post-card-body h4 a:hover { color: var(--indigo); }
-    .post-card-body p { font-size: 13px; color: var(--muted); line-height: 1.7; flex: 1; margin-bottom: 20px; }
-    .post-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-    .post-date { font-size: 12px; color: var(--muted); }
-    .post-arrow { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--indigo); text-decoration: none; transition: gap 0.2s, color 0.2s; }
-    .post-arrow:hover { gap: 8px; color: var(--coral); }
-
-    /* Coming soon card */
-    .post-card.coming-soon { opacity: 0.5; pointer-events: none; }
-    .post-card.coming-soon .post-thumb-icon { filter: grayscale(1); }
-    .coming-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; background: var(--cream2); color: var(--muted); }
-
-    /* Newsletter strip */
-    .blog-newsletter {
-      background: linear-gradient(135deg, var(--indigo) 0%, #312E81 100%);
-      padding: 72px 0; position: relative; overflow: hidden;
-    }
-    .blog-newsletter::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 80% 50%, rgba(232,93,63,0.18) 0%, transparent 55%);
-    }
-    .newsletter-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .newsletter-left h2 { color: var(--white); margin-bottom: 12px; }
-    .newsletter-left p { font-size: 16px; color: rgba(255,255,255,0.60); line-height: 1.7; }
-    .newsletter-form { display: flex; gap: 12px; flex-wrap: wrap; }
-    .newsletter-input {
-      flex: 1; min-width: 220px;
-      font-family: var(--body); font-size: 15px;
-      background: rgba(255,255,255,0.10); border: 1.5px solid rgba(255,255,255,0.20);
-      color: var(--white); border-radius: 8px; padding: 14px 18px; outline: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .newsletter-input::placeholder { color: rgba(255,255,255,0.40); }
-    .newsletter-input:focus { border-color: var(--coral2); background: rgba(255,255,255,0.15); }
-    .newsletter-note { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 10px; }
-
-    /* Topics sidebar */
-    .blog-topics { background: var(--cream); padding: 60px 0; border-top: 1px solid var(--border); }
-    .topics-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-    .topics-label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-    .topic-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; font-weight: 500; color: var(--ink2);
-      background: var(--white); border: 1px solid var(--border);
-      padding: 8px 16px; border-radius: 100px;
-      text-decoration: none; transition: all 0.2s;
-    }
-    .topic-pill:hover { background: var(--indigo); color: var(--white); border-color: var(--indigo); transform: translateY(-1px); }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .featured-card { grid-template-columns: 1fr; }
-      .featured-img { min-height: 240px; }
-      .posts-grid { grid-template-columns: repeat(2, 1fr); }
-      .newsletter-inner { grid-template-columns: 1fr; gap: 36px; }
-    }
-    @media (max-width: 600px) {
-      .posts-grid { grid-template-columns: 1fr; }
-      .featured-body { padding: 32px 24px; }
-    }
+    .blog-hero{padding:140px 0 72px;background:linear-gradient(160deg,var(--ink) 0%,#2D2620 100%);position:relative;overflow:hidden;text-align:center}
+    .blog-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(99,102,241,0.15) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(232,93,63,0.12) 0%,transparent 50%)}
+    .blog-hero-inner{position:relative;z-index:2}
+    .blog-hero h1{color:var(--white);margin-bottom:16px}
+    .blog-hero p{font-size:18px;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto}
+    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+    .blog-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s;display:flex;flex-direction:column}
+    .blog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .blog-card-body{padding:28px;flex:1;display:flex;flex-direction:column}
+    .blog-cat{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--coral);margin-bottom:12px}
+    .blog-card h3{font-size:20px;margin-bottom:10px;line-height:1.3}
+    .blog-card h3 a{color:var(--ink);text-decoration:none;transition:color .2s}
+    .blog-card h3 a:hover{color:var(--indigo)}
+    .blog-card p{font-size:14px;color:var(--muted);line-height:1.7;flex:1;margin-bottom:20px}
+    .blog-card-footer{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);padding-top:16px;border-top:1px solid var(--border);margin-top:auto}
+    .blog-card-badge{display:inline-flex;align-items:center;gap:6px;background:var(--cream2);color:var(--indigo);font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px}
+    .coming-card{opacity:0.55;pointer-events:none}
+    .coming-label{display:inline-block;background:var(--cream2);color:var(--muted);font-size:11px;font-weight:600;letter-spacing:0.08em;padding:4px 12px;border-radius:100px;margin-bottom:12px}
+    @media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.blog-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-    <nav id="navbar">
+  <nav id="navbar">
     <div class="nav-inner">
       <a href="/" class="nav-logo">LisBom<span>.</span></a>
-      <ul class="nav-links">
-        <li><a href="/how-it-works/">How It Works</a></li>
-        <li><a href="/roles/">Solutions</a></li>
-        <li><a href="/calculator/">Cost Calculator</a></li>
-        <li><a href="/careers/">For Talent</a></li>
-        <li><a href="/blog/" class="active">Blog</a></li>
-        <li><a href="/contact/">Contact</a></li>
-      </ul>
+      <div class="nav-links">
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/roles/">Solutions</a>
+        <a href="/calculator/">Cost Calculator</a>
+        <a href="/careers/">For Talent</a>
+        <a href="/blog/" class="active">Blog</a>
+        <a href="/contact/">Contact</a>
+      </div>
       <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="nav-cta">Get a Free Audit</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="/how-it-works/" class="mob-link">How It Works</a>
@@ -224,180 +75,90 @@
   <section class="blog-hero">
     <div class="container">
       <div class="blog-hero-inner">
-        <div class="eyebrow reveal">LisBom Blog</div>
-        <h1 class="reveal reveal-d1">Honest insights for<br><em>businesses growing smarter</em></h1>
-        <p class="reveal reveal-d2">No filler, no fluff. Practical guides on remote hiring, Filipino talent, and cutting your biggest overhead — your team costs.</p>
+        <div class="eyebrow" style="color:var(--coral2);justify-content:center">LisBom Blog</div>
+        <h1>Honest insights for <em>businesses growing smarter</em></h1>
+        <p>No filler, no fluff. Practical guides on remote hiring, Filipino talent, and cutting your biggest overhead.</p>
       </div>
     </div>
   </section>
 
-  <!-- FEATURED POST -->
-  <section class="blog-featured">
+  <!-- ARTICLES -->
+  <section style="background:var(--cream)">
     <div class="container">
-      <div class="featured-card reveal">
-        <div class="featured-img">
-          <div class="featured-img-graphic">£££</div>
-          <div class="featured-cost-visual">
-            <div class="fcv-row">
-              <span class="fcv-label">Executive Assistant</span>
-              <span class="fcv-val">£3,500<small style="font-size:12px;font-weight:400;color:rgba(255,255,255,0.5)">/mo</small></span>
-            </div>
-            <div class="fcv-arrow">↓</div>
-            <div class="fcv-row">
-              <span class="fcv-label">LisBom Remote EA</span>
-              <span class="fcv-val green">£1,200<small style="font-size:12px;font-weight:400;color:rgba(255,255,255,0.4)">/mo</small></span>
-            </div>
-            <div style="background:rgba(110,231,183,0.12);border:1px solid rgba(110,231,183,0.25);border-radius:8px;padding:8px 16px;text-align:center;">
-              <span style="font-size:12px;font-weight:700;color:#6EE7B7;">Save ~£27,600 per year</span>
+      <div class="blog-grid">
+
+        <div class="blog-card reveal">
+          <div class="blog-card-body">
+            <div class="blog-cat">Hiring Costs</div>
+            <h3><a href="/blog/how-much-does-it-cost-to-hire-a-remote-worker/">How Much Does It Really Cost to Hire a Remote Worker?</a></h3>
+            <p>The honest cost breakdown growing businesses have been looking for - real numbers, no agency spin, full comparison vs local hiring costs.</p>
+            <div class="blog-card-footer">
+              <span>May 2026 &middot; 5 min read</span>
+              <span class="blog-card-badge">Read &rarr;</span>
             </div>
           </div>
         </div>
-        <div class="featured-body">
-          <div class="featured-meta">
-            <span class="featured-tag">Featured</span>
-            <span class="tag tag-coral">Hiring Costs</span>
-            <span class="featured-label">· 5 min read</span>
+
+        <div class="blog-card reveal reveal-d1">
+          <div class="blog-card-body">
+            <div class="blog-cat">Filipino Talent</div>
+            <h3><a href="/blog/why-filipino-professionals-are-the-best-kept-secret/">Why Filipino Professionals Are the World's Best-Kept Secret for Remote Hiring</a></h3>
+            <p>Beyond cost savings - why English fluency, culture and work ethic make the Philippines the world's top remote staffing destination.</p>
+            <div class="blog-card-footer">
+              <span>June 2026 &middot; 6 min read</span>
+              <span class="blog-card-badge">Read &rarr;</span>
+            </div>
           </div>
-          <h2><a href="/blog/how-much-does-it-cost-to-hire-a-remote-worker/">How Much Does It Really Cost to Hire a Remote Worker? <em>The Honest Answer Growing Businesses Need</em></a></h2>
-          <p>You've Googled it. You've hit vague estimates and agency pages that hide the numbers. So we're fixing that — real costs, real trade-offs, and everything you need to make a confident decision about hiring remotely through the Philippines.</p>
-          <a href="/blog/how-much-does-it-cost-to-hire-a-remote-worker/" class="read-more">Read the full guide <span>→</span></a>
         </div>
+
+        <div class="blog-card reveal reveal-d2">
+          <div class="blog-card-body">
+            <div class="blog-cat">Hiring Costs</div>
+            <h3><a href="/blog/va-vs-full-time-employee-real-cost-comparison/">VA vs Full-Time Employee: The Real Cost Comparison for UK Businesses</a></h3>
+            <p>Employer NI, pension, sick pay, recruitment fees - the true all-in cost of a local hire vs a remote professional. With a full breakdown.</p>
+            <div class="blog-card-footer">
+              <span>June 2026 &middot; 5 min read</span>
+              <span class="blog-card-badge">Read &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card coming-card reveal">
+          <div class="blog-card-body">
+            <div class="coming-label">Coming Soon</div>
+            <div class="blog-cat">Onboarding</div>
+            <h3><a href="#">The 90-Day Remote Onboarding Blueprint That Actually Works</a></h3>
+            <p>Why most remote hires fail in the first three months - and the structured process we use at LisBom to make sure yours does not.</p>
+            <div class="blog-card-footer"><span>Publishing soon &middot; 7 min read</span></div>
+          </div>
+        </div>
+
+        <div class="blog-card coming-card reveal reveal-d1">
+          <div class="blog-card-body">
+            <div class="coming-label">Coming Soon</div>
+            <div class="blog-cat">Scaling</div>
+            <h3><a href="#">5 Signs Your Ecommerce Business Is Ready for a Remote Team</a></h3>
+            <p>If you recognise any of these signals in your business, you are probably leaving significant growth on the table.</p>
+            <div class="blog-card-footer"><span>Publishing soon &middot; 6 min read</span></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- TOPIC PILLS -->
-  <div class="blog-topics">
-    <div class="container">
-      <div class="topics-inner">
-        <span class="topics-label">Browse by topic</span>
-        <a href="#" class="topic-pill">💰 Hiring Costs</a>
-        <a href="#" class="topic-pill">🇵🇭 Filipino Talent</a>
-        <a href="#" class="topic-pill">⚙️ Remote Management</a>
-        <a href="#" class="topic-pill">📈 Scaling Your Business</a>
-        <a href="#" class="topic-pill">🏢 Business Growth Guides</a>
-        <a href="#" class="topic-pill">✅ Onboarding</a>
+  <!-- CTA -->
+  <section style="background:var(--white)">
+    <div class="container" style="max-width:700px;text-align:center">
+      <div class="eyebrow reveal" style="justify-content:center">No Commitment</div>
+      <h2 class="reveal">Ready to build your <em>remote team?</em></h2>
+      <p class="reveal" style="font-size:17px;color:var(--muted);margin-bottom:36px">Book a free discovery call. No pitch, no commitment - just a clear conversation about what you need and how we can help.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap" class="reveal">
+        <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral">Book a Discovery Call &rarr;</a>
+        <a href="/calculator/" class="btn btn-outline">See Your Savings</a>
       </div>
     </div>
-  </div>
-
-  <!-- POSTS GRID -->
-  <section class="blog-posts">
-    <div class="container">
-      <div class="posts-header">
-        <h3>All Articles</h3>
-      </div>
-      <div class="posts-grid">
-
-        <!-- Post 1 — Published -->
-        <div class="post-card reveal">
-          <div class="post-card-thumb t-indigo">
-            <div class="post-thumb-pattern"></div>
-            <span class="post-thumb-icon">💷</span>
-          </div>
-          <div class="post-card-body">
-            <div class="post-card-meta">
-              <span class="post-tag t-coral">Hiring Costs</span>
-              <span class="post-read-time">5 min read</span>
-            </div>
-            <h4><a href="/blog/how-much-does-it-cost-to-hire-a-remote-worker/">How Much Does It Really Cost to Hire a Remote Worker?</a></h4>
-            <p>The honest cost breakdown growing businesses have been looking for — real numbers, no agency spin, full comparison vs local hiring costs.</p>
-            <div class="post-card-footer">
-              <span class="post-date">May 2025</span>
-              <a href="/blog/how-much-does-it-cost-to-hire-a-remote-worker/" class="post-arrow">Read <span>→</span></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Posts 2-5 — Teaser cards (no coming soon badge, just unlinkable previews) -->
-        <div class="post-card reveal reveal-d1" style="opacity:0.72;">
-          <div class="post-card-thumb t-coral">
-            <div class="post-thumb-pattern"></div>
-            <span class="post-thumb-icon">🇵🇭</span>
-          </div>
-          <div class="post-card-body">
-            <div class="post-card-meta">
-              <span class="post-tag t-indigo">Filipino Talent</span>
-              <span class="post-read-time">6 min read</span>
-            </div>
-            <h4>Why Filipino Professionals Are the UK's Best-Kept Secret for Remote Hiring</h4>
-            <p>Beyond cost savings — why English fluency, culture, and work ethic make the Philippines the world's top remote staffing destination.</p>
-            <div class="post-card-footer">
-              <span class="post-date" style="color:var(--coral);font-weight:600;font-size:12px;">Publishing soon</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="post-card reveal" style="opacity:0.72;">
-          <div class="post-card-thumb t-green">
-            <div class="post-thumb-pattern"></div>
-            <span class="post-thumb-icon">✅</span>
-          </div>
-          <div class="post-card-body">
-            <div class="post-card-meta">
-              <span class="post-tag t-green">Onboarding</span>
-              <span class="post-read-time">7 min read</span>
-            </div>
-            <h4>The 90-Day Remote Onboarding Blueprint That Actually Works</h4>
-            <p>Why most remote hires fail in the first three months — and the structured process we use at LisBom to make sure yours doesn't.</p>
-            <div class="post-card-footer">
-              <span class="post-date" style="color:var(--coral);font-weight:600;font-size:12px;">Publishing soon</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="post-card reveal reveal-d1" style="opacity:0.72;">
-          <div class="post-card-thumb t-ink">
-            <div class="post-thumb-pattern"></div>
-            <span class="post-thumb-icon">📊</span>
-          </div>
-          <div class="post-card-body">
-            <div class="post-card-meta">
-              <span class="post-tag t-indigo">Business Growth Guides</span>
-              <span class="post-read-time">5 min read</span>
-            </div>
-            <h4>VA vs Full-Time Employee: The Real Cost Comparison for Growing Businesses</h4>
-            <p>Employer taxes, pension, sick pay, equipment, recruitment fees — the true all-in cost of a local hire vs a remote professional. With a full breakdown.</p>
-            <div class="post-card-footer">
-              <span class="post-date" style="color:var(--coral);font-weight:600;font-size:12px;">Publishing soon</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="post-card reveal" style="opacity:0.72;">
-          <div class="post-card-thumb t-gold">
-            <div class="post-thumb-pattern"></div>
-            <span class="post-thumb-icon">🛒</span>
-          </div>
-          <div class="post-card-body">
-            <div class="post-card-meta">
-              <span class="post-tag t-coral">Scaling</span>
-              <span class="post-read-time">6 min read</span>
-            </div>
-            <h4>5 Signs Your Ecommerce Business Is Ready for a Remote Team</h4>
-            <p>If you recognise any of these signals in your business, you're probably leaving significant growth on the table by not hiring remotely.</p>
-            <div class="post-card-footer">
-              <span class="post-date" style="color:var(--coral);font-weight:600;font-size:12px;">Publishing soon</span>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /posts-grid -->
-
-      <!-- Newsletter signup -->
-      <div class="stay-loop-section reveal" style="margin-top:72px;text-align:center;">
-        <h3 style="font-size:clamp(22px,3vw,32px);margin-bottom:12px;">Get new guides as they land.</h3>
-        <p style="color:var(--muted);font-size:16px;max-width:440px;margin:0 auto 28px;line-height:1.6;">No filler, no pitch. Just practical guides on remote hiring and scaling smarter — straight to your inbox.</p>
-        <form style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:480px;margin:0 auto;" onsubmit="handleNewsletterSubmit(event)">
-          <input type="email" placeholder="your@email.com" required
-            style="flex:1;min-width:220px;font-family:var(--body);font-size:15px;color:var(--ink);background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:12px 16px;outline:none;">
-          <button type="submit" class="btn btn-coral" style="padding:12px 24px;font-size:15px;white-space:nowrap;">Notify me &rarr;</button>
-        </form>
-        <p id="nl-thanks" style="display:none;margin-top:14px;font-size:14px;color:var(--green);font-weight:600;">&#10003; You're on the list — we'll be in touch.</p>
-      </div>
-
-    </div><!-- /container -->
-  </section><!-- /posts section -->
+  </section>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -408,51 +169,35 @@
           <p class="footer-tagline">More leads. Less admin. Lower costs. Filipino talent for UK, US &amp; Australian businesses.</p>
         </div>
         <div class="footer-col">
-          <h5>Company</h5>
+          <h5>For Businesses</h5>
           <a href="/how-it-works/">How It Works</a>
-          <a href="/roles/">Roles We Fill</a>
+          <a href="/roles/">Solutions &amp; Roles</a>
           <a href="/calculator/">Cost Calculator</a>
+          <a href="/blog/">Blog</a>
         </div>
         <div class="footer-col">
-          <h5>Industries</h5>
-          <a href="#">Ecommerce &amp; DTC</a>
-          <a href="#">Recruitment</a>
-          <a href="#">Real Estate</a>
-          <a href="#">Accounting</a>
+          <h5>Top Roles</h5>
+          <a href="/roles/virtual-assistant/">Virtual Assistant</a>
+          <a href="/roles/executive-assistant/">Executive Assistant</a>
+          <a href="/roles/customer-support-agent/">Customer Support</a>
+          <a href="/roles/seo-specialist/">SEO Specialist</a>
+          <a href="/roles/bookkeeper/">Bookkeeper</a>
         </div>
         <div class="footer-col">
-          <h5>Free Audits</h5>
-          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">AI Workflow Audit</a>
-          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Conversion Audit</a>
-          <a href="/contact/">Contact Diven</a>
+          <h5>Get Started</h5>
+          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Free Audit</a>
+          <a href="/contact/">Contact Us</a>
+          <a href="/careers/">For Filipino Talent</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 LisBom Limited. Registered in England &amp; Wales. <a href="/privacy-policy/" style="color:rgba(255,255,255,0.4);margin-left:12px;">Privacy Policy</a> &middot; <a href="/terms/" style="color:rgba(255,255,255,0.4);">Terms &amp; Conditions</a></p>
-        <p>UK · US · AU &middot; Premium Filipino Talent &middot; Results-First</p>
+        <p>&copy; 2026 LisBom Limited. Registered in England &amp; Wales.</p>
+        <p><a href="/privacy-policy/" style="color:rgba(255,255,255,0.35);text-decoration:none">Privacy Policy</a> &middot; <a href="/terms/" style="color:rgba(255,255,255,0.35);text-decoration:none">Terms</a></p>
       </div>
     </div>
   </footer>
 
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script src="/js/main.js"></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-  <script>
-    function handleNewsletterSubmit(e) {
-      e.preventDefault();
-      document.getElementById('nl-thanks').style.display = 'block';
-      e.target.style.display = 'none';
-    }
-  </script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('consent','default',{analytics_storage:'denied',functionality_storage:'denied'});
-    var savedConsent = localStorage.getItem('lisbom_cookie_consent');
-    var banner = document.getElementById('cookie-banner');
-    if (savedConsent) { gtag('consent','update',{analytics_storage:savedConsent,functionality_storage:savedConsent}); }
-    else { banner.style.display = 'flex'; }
-    function setCookieConsent(v) { localStorage.setItem('lisbom_cookie_consent',v); gtag('consent','update',{analytics_storage:v,functionality_storage:v}); banner.style.display='none'; }
-    function openCookieSettings() { banner.style.display='flex'; }
-  </script>
 </body>
 </html>
