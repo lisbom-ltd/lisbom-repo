@@ -80,10 +80,30 @@ if (form && formSuccess) {
     }
     const btn = form.querySelector('button[type="submit"]');
     if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
-    setTimeout(() => {
-      form.style.display = 'none';
-      formSuccess.classList.add('show');
-    }, 900);
+    const formData = {
+      name: fname + ' ' + lname,
+      email: email,
+      company: document.getElementById('company')?.value || '',
+      industry: document.getElementById('industry')?.value || '',
+      challenge: document.getElementById('challenge')?.value || '',
+      message: document.getElementById('message')?.value || ''
+    };
+    fetch('https://formspree.io/f/mgodbdoz', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    }).then(res => {
+      if (res.ok) {
+        form.style.display = 'none';
+        formSuccess.classList.add('show');
+      } else {
+        if (btn) { btn.textContent = 'Send My Request →'; btn.disabled = false; }
+        alert('Something went wrong. Please try again.');
+      }
+    }).catch(() => {
+      if (btn) { btn.textContent = 'Send My Request →'; btn.disabled = false; }
+      alert('Something went wrong. Please try again.');
+    });
   });
 
   const emailEl = document.getElementById('email');

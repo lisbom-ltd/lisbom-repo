@@ -391,10 +391,34 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
     document.getElementById('hireForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      if (!document.getElementById('hFname').value || !document.getElementById('hEmail').value) return;
+      const fname = document.getElementById('hFname').value.trim();
+      const email = document.getElementById('hEmail').value.trim();
+      if (!fname || !email) return;
       const btn = this.querySelector('button[type="submit"]');
       btn.textContent = 'Sending…'; btn.disabled = true;
-      setTimeout(() => { document.getElementById('hireModalForm').style.display = 'none'; document.getElementById('hireModalSuccess').style.display = 'block'; }, 800);
+      const formData = {
+        name: fname + ' ' + (document.getElementById('hLname')?.value || ''),
+        email: email,
+        company: document.getElementById('hCompany')?.value || '',
+        role: document.getElementById('hRole')?.value || '',
+        outcome: document.getElementById('hOutcome')?.value || ''
+      };
+      fetch('https://formspree.io/f/mgodbdoz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      }).then(res => {
+        if (res.ok) {
+          document.getElementById('hireModalForm').style.display = 'none';
+          document.getElementById('hireModalSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Send Enquiry →'; btn.disabled = false;
+          alert('Something went wrong. Please try again.');
+        }
+      }).catch(() => {
+        btn.textContent = 'Send Enquiry →'; btn.disabled = false;
+        alert('Something went wrong. Please try again.');
+      });
     });
     function openCookieSettings() {}
   </script>
