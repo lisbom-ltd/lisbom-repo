@@ -1,1 +1,377 @@
-Host not in allowlist
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WQQ9BH17FJ"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WQQ9BH17FJ');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate how much you could save by hiring a remote Filipino professional vs a local UK, US or Australian employee. Instant side-by-side cost comparison - no sign-up required.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.lisbom-ltd.com/calculator/" />
+  <title>Remote Staff Cost Calculator - See Your Monthly Savings | LisBom</title>
+  <meta property="og:title" content="Remote Staff Cost Calculator | LisBom" />
+  <meta property="og:description" content="See how much you save hiring Filipino remote staff vs a local employee. Instant comparison." />
+  <meta property="og:url" content="https://www.lisbom-ltd.com/calculator/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.lisbom-ltd.com/lisbom_og_image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Remote Staff Cost Calculator | LisBom" />
+  <meta name="twitter:description" content="See how much you save hiring Filipino remote staff vs a local employee." />
+  <meta name="twitter:image" content="https://www.lisbom-ltd.com/lisbom_og_image.jpg" />
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    .calc-hero{padding:140px 0 60px;background:linear-gradient(160deg,var(--ink) 0%,#2D2620 100%);position:relative;overflow:hidden;text-align:center}
+    .calc-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(99,102,241,0.15) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(232,93,63,0.12) 0%,transparent 50%)}
+    .calc-hero-inner{position:relative;z-index:2}
+    .calc-hero h1{color:var(--white);margin-bottom:12px}
+    .calc-hero p{font-size:17px;color:rgba(255,255,255,0.6);max-width:580px;margin:0 auto}
+    .calc-section{background:var(--cream);padding:80px 0}
+    .calc-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+    .calc-config{background:var(--white);border-radius:20px;padding:36px;border:1px solid var(--border)}
+    .calc-config h3{font-size:18px;margin-bottom:24px;font-family:var(--body);font-weight:700}
+    .calc-results{display:flex;flex-direction:column;gap:20px}
+    .result-card{background:var(--white);border-radius:16px;padding:28px;border:1px solid var(--border)}
+    .result-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .result-flag{font-size:24px}
+    .result-header h4{font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    .result-total{font-family:var(--display);font-size:42px;font-weight:700;color:var(--ink);margin-bottom:16px;line-height:1}
+    .result-line{display:flex;justify-content:space-between;font-size:14px;color:var(--ink2);padding:6px 0;border-bottom:1px solid var(--border)}
+    .result-line:last-child{border-bottom:none;font-weight:600;color:var(--ink)}
+    .vs-badge{text-align:center;font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.1em}
+    .saving-card{background:linear-gradient(135deg,var(--green) 0%,#34D399 100%);border-radius:16px;padding:28px;text-align:center}
+    .saving-card .saving-label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+    .saving-card .saving-num{font-family:var(--display);font-size:52px;font-weight:700;color:var(--white);line-height:1}
+    .saving-card .saving-sub{font-size:14px;color:rgba(255,255,255,0.8);margin-top:8px}
+    .saving-years{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+    .saving-year{background:rgba(255,255,255,0.15);border-radius:10px;padding:14px;text-align:center}
+    .saving-year .sy-num{font-family:var(--display);font-size:22px;font-weight:700;color:var(--white)}
+    .saving-year .sy-label{font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px}
+    .model-options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .model-opt{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .2s,background .2s}
+    .model-opt:hover,.model-opt.selected{border-color:var(--indigo);background:#EEF2FF}
+    .model-opt input{margin-top:2px;accent-color:var(--indigo)}
+    .model-opt-text strong{display:block;font-size:14px;font-weight:600;color:var(--ink)}
+    .model-opt-text span{font-size:12px;color:var(--muted);line-height:1.5}
+    .popular-badge{display:inline-block;background:var(--coral);color:var(--white);font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+    .why-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px}
+    .why-icon{font-size:28px;margin-bottom:12px}
+    .why-card h4{margin-bottom:8px;font-size:17px}
+    .why-card p{font-size:14px;color:var(--muted);line-height:1.65}
+    @media(max-width:900px){.calc-layout{grid-template-columns:1fr}.why-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">LisBom<span>.</span></a>
+      <div class="nav-links">
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/roles/">Solutions</a>
+        <a href="/calculator/" class="active">Cost Calculator</a>
+        <a href="/careers/">For Talent</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="nav-cta">Get a Free Audit</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/how-it-works/" class="mob-link">How It Works</a>
+      <a href="/roles/" class="mob-link">Solutions</a>
+      <a href="/calculator/" class="mob-link">Cost Calculator</a>
+      <a href="/careers/" class="mob-link">For Talent</a>
+      <a href="/blog/" class="mob-link">Blog</a>
+      <a href="/contact/" class="mob-link">Contact</a>
+      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="mob-link mob-cta">Get a Free Audit</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="calc-hero">
+    <div class="container">
+      <div class="calc-hero-inner">
+        <div class="eyebrow" style="color:var(--coral2);justify-content:center">Cost Calculator</div>
+        <h1>See your monthly cost <em>vs hiring locally</em></h1>
+        <p>Select your country, role and seniority to get an instant side-by-side cost comparison.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-layout">
+
+        <!-- CONFIG -->
+        <div class="calc-config reveal">
+          <h3>Configure your hire</h3>
+
+          <div class="form-group">
+            <label>Your Country</label>
+            <div class="select-wrap">
+              <select id="calcCountry">
+                <optgroup label="Europe">
+                  <option value="UK" selected>🇬🇧 United Kingdom</option>
+                  <option value="DE">🇩🇪 Germany</option>
+                  <option value="NL">🇳🇱 Netherlands</option>
+                  <option value="FR">🇫🇷 France</option>
+                  <option value="IE">🇮🇪 Ireland</option>
+                </optgroup>
+                <optgroup label="Americas">
+                  <option value="US">🇺🇸 United States</option>
+                  <option value="CA">🇨🇦 Canada</option>
+                </optgroup>
+                <optgroup label="Asia Pacific">
+                  <option value="AU">🇦🇺 Australia</option>
+                  <option value="NZ">🇳🇿 New Zealand</option>
+                  <option value="SG">🇸🇬 Singapore</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Role Type</label>
+            <div class="select-wrap">
+              <select id="calcRole">
+                <optgroup label="Admin &amp; Operations">
+                  <option value="va" selected>Executive / Virtual Assistant</option>
+                  <option value="ops">Operations Coordinator</option>
+                  <option value="proj">Project Coordinator</option>
+                </optgroup>
+                <optgroup label="Customer Support">
+                  <option value="cs">Customer Support Agent</option>
+                  <option value="csm">Customer Success Manager</option>
+                  <option value="tech">Technical Support Specialist</option>
+                </optgroup>
+                <optgroup label="Finance">
+                  <option value="book">Bookkeeper</option>
+                  <option value="fa">Financial Analyst</option>
+                  <option value="pay">Payroll Administrator</option>
+                </optgroup>
+                <optgroup label="Marketing">
+                  <option value="smm">Social Media Manager</option>
+                  <option value="seo">SEO / Content Specialist</option>
+                  <option value="gd">Graphic Designer</option>
+                </optgroup>
+                <optgroup label="Technology">
+                  <option value="dev">Web Developer</option>
+                  <option value="da">Data Analyst</option>
+                  <option value="it">IT Support Specialist</option>
+                  <option value="ai">AI &amp; Automation Specialist</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Seniority Level</label>
+            <div class="select-wrap">
+              <select id="calcSeniority">
+                <option value="junior">Junior</option>
+                <option value="mid" selected>Mid-level</option>
+                <option value="senior">Senior</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Hiring Model</label>
+            <div class="model-options">
+              <label class="model-opt selected">
+                <input type="radio" name="model" value="eor" checked>
+                <div class="model-opt-text">
+                  <strong>Dedicated employee via EOR <span class="popular-badge">Most popular</span></strong>
+                  <span>LisBom manages full legal employment - SSS, PhilHealth, Pag-IBIG, 13th month pay all covered.</span>
+                </div>
+              </label>
+              <label class="model-opt">
+                <input type="radio" name="model" value="contractor">
+                <div class="model-opt-text">
+                  <strong>Independent contractor</strong>
+                  <span>Worker invoices directly - manages their own contributions. Lower cost, ideal for flexible engagements.</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral btn-full" style="margin-top:24px">Get Your Exact Quote &rarr;</a>
+          <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:10px">Figures are illustrative estimates. Your exact fee is confirmed on your discovery call.</p>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="calc-results reveal reveal-d1">
+          <div class="result-card">
+            <div class="result-header"><span class="result-flag" id="localFlag">🇬🇧</span><h4>Local Hire - Monthly all-in cost</h4></div>
+            <div class="result-total" id="localTotal">£3,510</div>
+            <div class="result-line"><span>Base salary</span><span id="localSalary">£3,000</span></div>
+            <div class="result-line"><span>Employer tax &amp; NI</span><span id="localTax">£360</span></div>
+            <div class="result-line"><span>Benefits &amp; pension</span><span id="localBenefits">£150</span></div>
+            <div class="result-line"><span><strong>Total per month</strong></span><span><strong id="localTotalLine">£3,510</strong></span></div>
+          </div>
+
+          <div class="vs-badge">VS</div>
+
+          <div class="result-card">
+            <div class="result-header"><span class="result-flag">🇵🇭</span><h4>LisBom Monthly Fee - All-inclusive</h4></div>
+            <div class="result-total" id="lisbomTotal">£1,260</div>
+            <div class="result-line"><span>Staff compensation</span><span id="lisbomComp">£800</span></div>
+            <div class="result-line"><span>Benefits &amp; compliance</span><span id="lisbomBenefits">£110</span></div>
+            <div class="result-line" id="eorLine"><span>EOR arrangement fee</span><span id="lisbomEor">£160</span></div>
+            <div class="result-line"><span>LisBom management fee</span><span id="lisbomMgmt">£190</span></div>
+            <div class="result-line"><span><strong>Total per month</strong></span><span><strong id="lisbomTotalLine">£1,260</strong></span></div>
+          </div>
+
+          <div class="saving-card">
+            <div class="saving-label">Your Monthly Saving</div>
+            <div class="saving-num" id="savingNum">£2,250</div>
+            <div class="saving-sub" id="savingPct">64% less than a local hire</div>
+            <div class="saving-years">
+              <div class="saving-year"><div class="sy-num" id="yr1">£27k</div><div class="sy-label">Year 1 saving</div></div>
+              <div class="saving-year"><div class="sy-num" id="yr3">£81k</div><div class="sy-label">3-year saving</div></div>
+              <div class="saving-year"><div class="sy-num" id="yr5">£135k</div><div class="sy-label">5-year saving</div></div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;" class="btn btn-coral" style="flex:1;justify-content:center">Get your personalised quote &rarr;</a>
+            <a href="/roles/" class="btn btn-outline" style="flex:1;justify-content:center">Browse all roles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section style="background:var(--white)">
+    <div class="container">
+      <div class="eyebrow reveal" style="justify-content:center">Why The Numbers Stack Up</div>
+      <h2 class="reveal" style="text-align:center">The saving is real. <em>Here's why.</em></h2>
+      <div class="why-grid">
+        <div class="why-card reveal"><div class="why-icon">💰</div><h4>Cost of living, not skill level</h4><p>The Philippines has significantly lower costs of living than Western markets. A Filipino professional earning £10,000/year lives very comfortably. The same skill set costs 3-5x more in the UK, US, or Australia.</p></div>
+        <div class="why-card reveal reveal-d1"><div class="why-icon">🎓</div><h4>World-class education system</h4><p>The Philippines produces 500,000+ graduates annually. English is a co-official language and the medium of university instruction. The IT-BPM sector hit $40B+ in revenue - this is a mature, proven professional market.</p></div>
+        <div class="why-card reveal reveal-d2"><div class="why-icon">✅</div><h4>All-in, no surprises</h4><p>Our fee covers everything: staff compensation, statutory benefits, EOR compliance where needed, and LisBom management and onboarding support. No hidden fees, no agency markups, no surprise invoices.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="footer-logo">LisBom<span>.</span></a>
+          <p class="footer-tagline">More leads. Less admin. Lower costs. Filipino talent for UK, US &amp; Australian businesses.</p>
+        </div>
+        <div class="footer-col">
+          <h5>For Businesses</h5>
+          <a href="/how-it-works/">How It Works</a>
+          <a href="/roles/">Solutions &amp; Roles</a>
+          <a href="/calculator/">Cost Calculator</a>
+          <a href="/blog/">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h5>Top Roles</h5>
+          <a href="/roles/virtual-assistant/">Virtual Assistant</a>
+          <a href="/roles/executive-assistant/">Executive Assistant</a>
+          <a href="/roles/customer-support-agent/">Customer Support</a>
+          <a href="/roles/seo-specialist/">SEO Specialist</a>
+          <a href="/roles/bookkeeper/">Bookkeeper</a>
+        </div>
+        <div class="footer-col">
+          <h5>Get Started</h5>
+          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/lisbom-ltd-sales/discovery-call?hide_gdpr_banner=1&primary_color=e85d3f'});return false;">Free Audit</a>
+          <a href="/contact/">Contact Us</a>
+          <a href="/careers/">For Filipino Talent</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 LisBom Limited. Registered in England &amp; Wales.</p>
+        <p><a href="/privacy-policy/" style="color:rgba(255,255,255,0.35);text-decoration:none">Privacy Policy</a> &middot; <a href="/terms/" style="color:rgba(255,255,255,0.35);text-decoration:none">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/js/main.js"></script>
+  <script>
+  // Calculator logic
+  const DATA = {
+    UK:  { currency:'£', flag:'🇬🇧', salaries:{ va:{junior:2200,mid:3000,senior:3800}, cs:{junior:1900,mid:2600,senior:3200}, csm:{junior:2400,mid:3200,senior:4000}, tech:{junior:2200,mid:3000,senior:3800}, ops:{junior:2100,mid:2800,senior:3500}, proj:{junior:2200,mid:3000,senior:3700}, book:{junior:2200,mid:2900,senior:3600}, fa:{junior:2600,mid:3400,senior:4200}, pay:{junior:2000,mid:2700,senior:3400}, smm:{junior:1900,mid:2600,senior:3300}, seo:{junior:1900,mid:2600,senior:3300}, gd:{junior:1800,mid:2400,senior:3200}, dev:{junior:2800,mid:3800,senior:5000}, da:{junior:2600,mid:3500,senior:4500}, it:{junior:2300,mid:3100,senior:4000}, ai:{junior:3000,mid:4000,senior:5200} }, taxRate:0.138, benefits:0.05 },
+    US:  { currency:'$', flag:'🇺🇸', salaries:{ va:{junior:2800,mid:3800,senior:5000}, cs:{junior:2400,mid:3200,senior:4200}, csm:{junior:3000,mid:4200,senior:5500}, tech:{junior:2800,mid:3800,senior:5000}, ops:{junior:2600,mid:3500,senior:4500}, proj:{junior:2800,mid:3800,senior:5000}, book:{junior:2600,mid:3500,senior:4500}, fa:{junior:3200,mid:4400,senior:5800}, pay:{junior:2400,mid:3200,senior:4200}, smm:{junior:2400,mid:3200,senior:4200}, seo:{junior:2400,mid:3200,senior:4200}, gd:{junior:2200,mid:3000,senior:4000}, dev:{junior:3500,mid:5000,senior:7000}, da:{junior:3200,mid:4500,senior:6000}, it:{junior:2800,mid:3800,senior:5000}, ai:{junior:3800,mid:5200,senior:7000} }, taxRate:0.0765, benefits:0.12 },
+    AU:  { currency:'A$', flag:'🇦🇺', salaries:{ va:{junior:2600,mid:3600,senior:4600}, cs:{junior:2200,mid:3000,senior:4000}, csm:{junior:2800,mid:3800,senior:5000}, tech:{junior:2600,mid:3600,senior:4600}, ops:{junior:2400,mid:3300,senior:4200}, proj:{junior:2600,mid:3600,senior:4600}, book:{junior:2400,mid:3300,senior:4200}, fa:{junior:3000,mid:4000,senior:5200}, pay:{junior:2200,mid:3000,senior:4000}, smm:{junior:2200,mid:3000,senior:4000}, seo:{junior:2200,mid:3000,senior:4000}, gd:{junior:2000,mid:2800,senior:3800}, dev:{junior:3200,mid:4500,senior:6200}, da:{junior:3000,mid:4200,senior:5600}, it:{junior:2600,mid:3600,senior:4800}, ai:{junior:3500,mid:4800,senior:6500} }, taxRate:0.095, benefits:0.05 },
+    DE:  { currency:'€', flag:'🇩🇪', salaries:{ va:{junior:2400,mid:3200,senior:4200}, cs:{junior:2000,mid:2800,senior:3600}, csm:{junior:2600,mid:3500,senior:4500}, tech:{junior:2400,mid:3200,senior:4200}, ops:{junior:2200,mid:3000,senior:3900}, proj:{junior:2300,mid:3100,senior:4000}, book:{junior:2200,mid:3000,senior:3900}, fa:{junior:2800,mid:3800,senior:5000}, pay:{junior:2000,mid:2800,senior:3600}, smm:{junior:2000,mid:2800,senior:3600}, seo:{junior:2000,mid:2800,senior:3600}, gd:{junior:1900,mid:2600,senior:3400}, dev:{junior:3000,mid:4200,senior:5600}, da:{junior:2800,mid:3900,senior:5200}, it:{junior:2400,mid:3300,senior:4400}, ai:{junior:3200,mid:4400,senior:5800} }, taxRate:0.21, benefits:0.06 },
+    NL:  { currency:'€', flag:'🇳🇱', salaries:{ va:{junior:2300,mid:3100,senior:4000}, cs:{junior:1900,mid:2700,senior:3500}, csm:{junior:2500,mid:3400,senior:4400}, tech:{junior:2300,mid:3100,senior:4000}, ops:{junior:2100,mid:2900,senior:3800}, proj:{junior:2200,mid:3000,senior:3900}, book:{junior:2100,mid:2900,senior:3800}, fa:{junior:2700,mid:3700,senior:4900}, pay:{junior:1900,mid:2700,senior:3500}, smm:{junior:1900,mid:2700,senior:3500}, seo:{junior:1900,mid:2700,senior:3500}, gd:{junior:1800,mid:2500,senior:3300}, dev:{junior:2900,mid:4100,senior:5500}, da:{junior:2700,mid:3800,senior:5100}, it:{junior:2300,mid:3200,senior:4300}, ai:{junior:3100,mid:4300,senior:5700} }, taxRate:0.17, benefits:0.065 },
+    FR:  { currency:'€', flag:'🇫🇷', salaries:{ va:{junior:2100,mid:2900,senior:3700}, cs:{junior:1800,mid:2500,senior:3200}, csm:{junior:2300,mid:3100,senior:4100}, tech:{junior:2100,mid:2900,senior:3700}, ops:{junior:1900,mid:2700,senior:3500}, proj:{junior:2000,mid:2800,senior:3600}, book:{junior:1900,mid:2700,senior:3500}, fa:{junior:2500,mid:3400,senior:4500}, pay:{junior:1800,mid:2500,senior:3200}, smm:{junior:1800,mid:2500,senior:3200}, seo:{junior:1800,mid:2500,senior:3200}, gd:{junior:1700,mid:2300,senior:3100}, dev:{junior:2700,mid:3800,senior:5100}, da:{junior:2500,mid:3500,senior:4700}, it:{junior:2100,mid:3000,senior:4000}, ai:{junior:2900,mid:4100,senior:5400} }, taxRate:0.45, benefits:0.07 },
+    IE:  { currency:'€', flag:'🇮🇪', salaries:{ va:{junior:2200,mid:3000,senior:3900}, cs:{junior:1900,mid:2600,senior:3400}, csm:{junior:2400,mid:3300,senior:4300}, tech:{junior:2200,mid:3000,senior:3900}, ops:{junior:2000,mid:2800,senior:3600}, proj:{junior:2100,mid:2900,senior:3800}, book:{junior:2000,mid:2800,senior:3600}, fa:{junior:2600,mid:3600,senior:4700}, pay:{junior:1900,mid:2600,senior:3400}, smm:{junior:1900,mid:2600,senior:3400}, seo:{junior:1900,mid:2600,senior:3400}, gd:{junior:1800,mid:2400,senior:3200}, dev:{junior:2800,mid:4000,senior:5300}, da:{junior:2600,mid:3700,senior:4900}, it:{junior:2200,mid:3100,senior:4100}, ai:{junior:3000,mid:4200,senior:5600} }, taxRate:0.111, benefits:0.05 },
+    CA:  { currency:'C$', flag:'🇨🇦', salaries:{ va:{junior:2500,mid:3400,senior:4400}, cs:{junior:2100,mid:2900,senior:3800}, csm:{junior:2700,mid:3700,senior:4900}, tech:{junior:2500,mid:3400,senior:4400}, ops:{junior:2300,mid:3100,senior:4100}, proj:{junior:2400,mid:3300,senior:4300}, book:{junior:2300,mid:3100,senior:4100}, fa:{junior:2900,mid:4000,senior:5200}, pay:{junior:2100,mid:2900,senior:3800}, smm:{junior:2100,mid:2900,senior:3800}, seo:{junior:2100,mid:2900,senior:3800}, gd:{junior:1900,mid:2700,senior:3600}, dev:{junior:3200,mid:4500,senior:6000}, da:{junior:3000,mid:4200,senior:5600}, it:{junior:2500,mid:3500,senior:4700}, ai:{junior:3400,mid:4700,senior:6300} }, taxRate:0.0775, benefits:0.09 },
+    NZ:  { currency:'NZ$', flag:'🇳🇿', salaries:{ va:{junior:2200,mid:3000,senior:3900}, cs:{junior:1900,mid:2600,senior:3400}, csm:{junior:2400,mid:3300,senior:4300}, tech:{junior:2200,mid:3000,senior:3900}, ops:{junior:2000,mid:2800,senior:3600}, proj:{junior:2100,mid:2900,senior:3800}, book:{junior:2000,mid:2800,senior:3600}, fa:{junior:2600,mid:3600,senior:4700}, pay:{junior:1900,mid:2600,senior:3400}, smm:{junior:1900,mid:2600,senior:3400}, seo:{junior:1900,mid:2600,senior:3400}, gd:{junior:1800,mid:2400,senior:3200}, dev:{junior:2800,mid:4000,senior:5300}, da:{junior:2600,mid:3700,senior:4900}, it:{junior:2200,mid:3100,senior:4100}, ai:{junior:3000,mid:4200,senior:5600} }, taxRate:0.0, benefits:0.03 },
+    SG:  { currency:'S$', flag:'🇸🇬', salaries:{ va:{junior:2600,mid:3600,senior:4600}, cs:{junior:2200,mid:3000,senior:4000}, csm:{junior:2800,mid:3800,senior:5000}, tech:{junior:2600,mid:3600,senior:4600}, ops:{junior:2400,mid:3300,senior:4200}, proj:{junior:2500,mid:3500,senior:4500}, book:{junior:2400,mid:3300,senior:4200}, fa:{junior:3000,mid:4100,senior:5400}, pay:{junior:2100,mid:2900,senior:3900}, smm:{junior:2100,mid:2900,senior:3800}, seo:{junior:2100,mid:2900,senior:3800}, gd:{junior:1900,mid:2700,senior:3600}, dev:{junior:3300,mid:4600,senior:6200}, da:{junior:3100,mid:4300,senior:5800}, it:{junior:2600,mid:3700,senior:4900}, ai:{junior:3600,mid:5000,senior:6700} }, taxRate:0.17, benefits:0.045 }
+  };
+
+  // LisBom fees (in GBP equivalent - roughly)
+  const LISBOM = {
+    eor:{ va:{junior:{comp:700,ben:90,eor:160,mgmt:160},mid:{comp:900,ben:110,eor:160,mgmt:190},senior:{comp:1150,ben:140,eor:160,mgmt:220}}, cs:{junior:{comp:650,ben:80,eor:160,mgmt:150},mid:{comp:850,ben:100,eor:160,mgmt:180},senior:{comp:1050,ben:130,eor:160,mgmt:210}}, csm:{junior:{comp:800,ben:100,eor:160,mgmt:180},mid:{comp:1000,ben:120,eor:160,mgmt:200},senior:{comp:1300,ben:160,eor:160,mgmt:230}}, tech:{junior:{comp:700,ben:90,eor:160,mgmt:160},mid:{comp:950,ben:110,eor:160,mgmt:190},senior:{comp:1200,ben:150,eor:160,mgmt:220}}, ops:{junior:{comp:680,ben:85,eor:160,mgmt:155},mid:{comp:880,ben:105,eor:160,mgmt:185},senior:{comp:1100,ben:135,eor:160,mgmt:215}}, proj:{junior:{comp:700,ben:90,eor:160,mgmt:160},mid:{comp:900,ben:110,eor:160,mgmt:190},senior:{comp:1150,ben:140,eor:160,mgmt:220}}, book:{junior:{comp:700,ben:90,eor:160,mgmt:160},mid:{comp:900,ben:110,eor:160,mgmt:190},senior:{comp:1150,ben:140,eor:160,mgmt:220}}, fa:{junior:{comp:800,ben:100,eor:160,mgmt:180},mid:{comp:1050,ben:130,eor:160,mgmt:210},senior:{comp:1350,ben:170,eor:160,mgmt:240}}, pay:{junior:{comp:650,ben:80,eor:160,mgmt:150},mid:{comp:850,ben:100,eor:160,mgmt:180},senior:{comp:1050,ben:130,eor:160,mgmt:210}}, smm:{junior:{comp:650,ben:80,eor:160,mgmt:150},mid:{comp:850,ben:100,eor:160,mgmt:180},senior:{comp:1100,ben:135,eor:160,mgmt:210}}, seo:{junior:{comp:650,ben:80,eor:160,mgmt:150},mid:{comp:850,ben:100,eor:160,mgmt:180},senior:{comp:1100,ben:135,eor:160,mgmt:210}}, gd:{junior:{comp:600,ben:75,eor:160,mgmt:145},mid:{comp:800,ben:95,eor:160,mgmt:175},senior:{comp:1000,ben:125,eor:160,mgmt:205}}, dev:{junior:{comp:900,ben:110,eor:160,mgmt:200},mid:{comp:1200,ben:150,eor:160,mgmt:240},senior:{comp:1600,ben:200,eor:160,mgmt:290}}, da:{junior:{comp:850,ben:105,eor:160,mgmt:195},mid:{comp:1100,ben:140,eor:160,mgmt:230},senior:{comp:1450,ben:180,eor:160,mgmt:270}}, it:{junior:{comp:750,ben:95,eor:160,mgmt:175},mid:{comp:1000,ben:125,eor:160,mgmt:205},senior:{comp:1300,ben:160,eor:160,mgmt:240}}, ai:{junior:{comp:950,ben:120,eor:160,mgmt:210},mid:{comp:1250,ben:155,eor:160,mgmt:250},senior:{comp:1650,ben:205,eor:160,mgmt:300}} },
+    contractor:{ va:{junior:{comp:680,ben:0,eor:0,mgmt:150},mid:{comp:880,ben:0,eor:0,mgmt:180},senior:{comp:1120,ben:0,eor:0,mgmt:210}}, cs:{junior:{comp:630,ben:0,eor:0,mgmt:140},mid:{comp:830,ben:0,eor:0,mgmt:170},senior:{comp:1020,ben:0,eor:0,mgmt:200}}, csm:{junior:{comp:780,ben:0,eor:0,mgmt:170},mid:{comp:980,ben:0,eor:0,mgmt:190},senior:{comp:1280,ben:0,eor:0,mgmt:220}}, tech:{junior:{comp:680,ben:0,eor:0,mgmt:150},mid:{comp:930,ben:0,eor:0,mgmt:180},senior:{comp:1180,ben:0,eor:0,mgmt:210}}, ops:{junior:{comp:660,ben:0,eor:0,mgmt:145},mid:{comp:860,ben:0,eor:0,mgmt:175},senior:{comp:1080,ben:0,eor:0,mgmt:205}}, proj:{junior:{comp:680,ben:0,eor:0,mgmt:150},mid:{comp:880,ben:0,eor:0,mgmt:180},senior:{comp:1130,ben:0,eor:0,mgmt:210}}, book:{junior:{comp:680,ben:0,eor:0,mgmt:150},mid:{comp:880,ben:0,eor:0,mgmt:180},senior:{comp:1130,ben:0,eor:0,mgmt:210}}, fa:{junior:{comp:780,ben:0,eor:0,mgmt:170},mid:{comp:1030,ben:0,eor:0,mgmt:200},senior:{comp:1330,ben:0,eor:0,mgmt:230}}, pay:{junior:{comp:630,ben:0,eor:0,mgmt:140},mid:{comp:830,ben:0,eor:0,mgmt:170},senior:{comp:1030,ben:0,eor:0,mgmt:200}}, smm:{junior:{comp:630,ben:0,eor:0,mgmt:140},mid:{comp:830,ben:0,eor:0,mgmt:170},senior:{comp:1080,ben:0,eor:0,mgmt:200}}, seo:{junior:{comp:630,ben:0,eor:0,mgmt:140},mid:{comp:830,ben:0,eor:0,mgmt:170},senior:{comp:1080,ben:0,eor:0,mgmt:200}}, gd:{junior:{comp:580,ben:0,eor:0,mgmt:135},mid:{comp:780,ben:0,eor:0,mgmt:165},senior:{comp:980,ben:0,eor:0,mgmt:195}}, dev:{junior:{comp:880,ben:0,eor:0,mgmt:190},mid:{comp:1180,ben:0,eor:0,mgmt:230},senior:{comp:1580,ben:0,eor:0,mgmt:280}}, da:{junior:{comp:830,ben:0,eor:0,mgmt:185},mid:{comp:1080,ben:0,eor:0,mgmt:220},senior:{comp:1430,ben:0,eor:0,mgmt:260}}, it:{junior:{comp:730,ben:0,eor:0,mgmt:165},mid:{comp:980,ben:0,eor:0,mgmt:195},senior:{comp:1280,ben:0,eor:0,mgmt:230}}, ai:{junior:{comp:930,ben:0,eor:0,mgmt:200},mid:{comp:1230,ben:0,eor:0,mgmt:240},senior:{comp:1630,ben:0,eor:0,mgmt:290}} }
+  };
+
+  function fmt(n, currency) { return currency + n.toLocaleString(); }
+  function fmtK(n, currency) { return currency + Math.round(n/1000) + 'k'; }
+
+  function updateCalc() {
+    const country = document.getElementById('calcCountry').value;
+    const role = document.getElementById('calcRole').value;
+    const seniority = document.getElementById('calcSeniority').value;
+    const model = document.querySelector('input[name="model"]:checked').value;
+    const d = DATA[country] || DATA.UK;
+    const cur = d.currency;
+
+    const salary = (d.salaries[role] || d.salaries.va)[seniority];
+    const tax = Math.round(salary * d.taxRate);
+    const benefits = Math.round(salary * d.benefits);
+    const localTotal = salary + tax + benefits;
+
+    const lb = (LISBOM[model][role] || LISBOM[model].va)[seniority];
+    const lisbomTotal = lb.comp + lb.ben + lb.eor + lb.mgmt;
+    const saving = localTotal - lisbomTotal;
+    const pct = Math.round((saving / localTotal) * 100);
+
+    document.getElementById('localFlag').textContent = d.flag;
+    document.getElementById('localSalary').textContent = fmt(salary, cur);
+    document.getElementById('localTax').textContent = fmt(tax, cur);
+    document.getElementById('localBenefits').textContent = fmt(benefits, cur);
+    document.getElementById('localTotal').textContent = fmt(localTotal, cur);
+    document.getElementById('localTotalLine').textContent = fmt(localTotal, cur);
+    document.getElementById('lisbomComp').textContent = fmt(lb.comp, cur);
+    document.getElementById('lisbomBenefits').textContent = fmt(lb.ben, cur);
+    document.getElementById('lisbomEor').textContent = fmt(lb.eor, cur);
+    document.getElementById('lisbomMgmt').textContent = fmt(lb.mgmt, cur);
+    document.getElementById('lisbomTotal').textContent = fmt(lisbomTotal, cur);
+    document.getElementById('lisbomTotalLine').textContent = fmt(lisbomTotal, cur);
+    document.getElementById('savingNum').textContent = fmt(saving, cur);
+    document.getElementById('savingPct').textContent = pct + '% less than a local hire';
+    document.getElementById('yr1').textContent = fmtK(saving * 12, cur);
+    document.getElementById('yr3').textContent = fmtK(saving * 36, cur);
+    document.getElementById('yr5').textContent = fmtK(saving * 60, cur);
+
+    const eorLine = document.getElementById('eorLine');
+    if (eorLine) eorLine.style.display = model === 'contractor' ? 'none' : 'flex';
+  }
+
+  document.getElementById('calcCountry').addEventListener('change', updateCalc);
+  document.getElementById('calcRole').addEventListener('change', updateCalc);
+  document.getElementById('calcSeniority').addEventListener('change', updateCalc);
+  document.querySelectorAll('input[name="model"]').forEach(r => {
+    r.addEventListener('change', function() {
+      document.querySelectorAll('.model-opt').forEach(o => o.classList.remove('selected'));
+      this.closest('.model-opt').classList.add('selected');
+      updateCalc();
+    });
+  });
+  </script>
+</body>
+</html>
