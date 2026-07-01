@@ -1,6 +1,21 @@
 User-agent: *
 Allow: /
-
 Disallow: /compliance/
 
-Sitemap: https://www.lisbom-ltd.com/sitemap.xml
+# AI / generative engine crawlers (explicitly welcomed for GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://lisbom-ltd.com/sitemap.xml
