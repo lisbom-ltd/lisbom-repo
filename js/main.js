@@ -115,8 +115,14 @@ if (form && formSuccess) {
   var COOKIE_KEY = 'lisbom_cookie_consent';
 
   function getCookie(name) {
-    var v = document.cookie.match('(^|;)\s*' + name + '\s*=\s*([^;]+)');
-    return v ? v.pop() : null;
+    var parts = document.cookie ? document.cookie.split(';') : [];
+    for (var i = 0; i < parts.length; i++) {
+      var pair = parts[i].split('=');
+      if (pair[0].trim() === name) {
+        return decodeURIComponent((pair[1] || '').trim());
+      }
+    }
+    return null;
   }
   function setCookie(name, val, days) {
     var d = new Date(); d.setTime(d.getTime() + days * 864e5);
